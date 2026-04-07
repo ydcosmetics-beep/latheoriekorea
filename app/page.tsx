@@ -172,7 +172,8 @@ export default function Home() {
       <header className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-sm' : 'bg-transparent border-transparent'}`}>
         <div className="max-w-7xl mx-auto px-6 py-4 md:px-10 md:py-5 flex justify-between items-center h-[70px] md:h-[80px]">
           <button className="md:hidden p-2 -ml-2 text-gray-900 bg-transparent border-none outline-none focus:outline-none" onClick={() => setIsMenuOpen(true)}><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path strokeLinecap="round" d="M4 6h16M4 12h16M4 18h16" /></svg></button>
-          <div className="md:hidden font-belleza text-lg text-gray-950 tracking-wide absolute left-1/2 -translate-x-1/2">La Théorie</div>
+          {/* 💡 모바일 폰트 크기 확대: text-lg -> text-2xl */}
+          <div className="md:hidden font-belleza text-2xl text-gray-950 tracking-wide absolute left-1/2 -translate-x-1/2">La Théorie</div>
           <nav className="hidden md:flex gap-8 items-center flex-1">
             {["Philosophy", "Products", "Reviews", "Exhibition", "Contact"].map((item) => (
               <a key={item} href={`#${item.toLowerCase()}`} className="text-[11px] text-gray-700 hover:text-black tracking-[0.08em] uppercase transition-colors font-medium">{item === "Philosophy" ? "About" : item}</a>
@@ -207,32 +208,40 @@ export default function Home() {
         <div className="md:hidden w-[1px] h-16 bg-gray-200 mb-2"></div>
         <div className="flex-1 max-w-lg">
           <h3 className="font-belleza text-xs text-gray-400 mb-4 tracking-wider">Ingredients proven by Medical Theory</h3>
-          <h1 className="font-belleza text-[24px] md:text-[28px] text-gray-900 leading-[1.4] tracking-wide">"Solution begins with<br className="hidden md:block"/> understanding the cause"</h1>
+          <h1 className="font-belleza text-[24px] md:text-[28px] text-gray-900 leading-[1.4] tracking-wide">Solution begins with<br className="hidden md:block"/> understanding the cause</h1>
         </div>
         <div className="flex-1 max-w-xl md:pl-12 md:border-l border-gray-200">
           <p className="text-xs md:text-[13px] text-gray-600 leading-[2.2] md:leading-[2.4]">We analyze over 1,000 types of skin microbiome, mathematically defining the relationship between cosmetics, skin troubles, and microorganisms. By analyzing the cause, we can change the results.<br/><br/>We cannot promise miraculous skin changes, but we will strive to provide you with calmer skin than today, making small but non-stopping changes every day.</p>
         </div>
       </section>
 
-      <section id="products" className="py-16 md:py-24 bg-white px-8 md:px-10 max-w-7xl mx-auto">
+      {/* 💡 모바일 양옆 여백 축소: 전체 Section의 패딩을 PC(md)에만 적용하고 모바일은 최소화 */}
+      <section id="products" className="py-16 md:py-24 bg-white md:px-10 max-w-7xl mx-auto">
         <div className="text-center mb-12 md:mb-16 px-6">
-          <h2 className="font-belleza text-xl md:text-2xl tracking-[0.14em] uppercase text-gray-900">Bestsellers</h2>
+          <h2 className="font-belleza text-xl md:text-2xl tracking-[0.14em] uppercase text-gray-900">Best sellers</h2>
         </div>
-        <div className="grid grid-cols-2 gap-4 px-5 md:hidden">
+        
+        {/* 💡 모바일 전용 그리드 (여백 px-3으로 최소화, gap 조정) */}
+        <div className="grid grid-cols-2 gap-3 px-4 md:hidden">
           {products.slice(0, 6).map((item) => (
-            <div key={item.id} className="flex flex-col items-center gap-2 mb-6">
-              <div className="w-full aspect-[3/4] bg-[#f2f1ec] relative border border-gray-100 flex items-center justify-center">
+            <div key={item.id} className="flex flex-col items-center gap-1 mb-8">
+              <div className="w-full aspect-[3/4] bg-[#f2f1ec] relative border border-gray-100 flex items-center justify-center shadow-sm">
                 {item.badge && <span className={`absolute text-[9px] px-1.5 py-0.5 bg-white border ${item.isSoldOut ? 'border-red-600 text-red-600 bottom-2 left-2' : 'border-gray-300 text-gray-500 top-2 left-2'}`}>{item.badge}</span>}
                 <div className="w-1/2 h-3/5 bg-[#d8d5ce] rounded-sm opacity-50"></div>
               </div>
-              <h4 className="font-belleza text-[12px] text-gray-900 mt-2 tracking-wide">{item.name}</h4>
-              <div className="flex gap-1.5 text-[11px]">{item.pct && <span className="text-red-600 font-medium">{item.pct}</span>}<span className={`font-medium ${item.isSoldOut ? 'text-gray-400' : 'text-gray-900'}`}>{item.price}</span></div>
+              <div className="text-center px-1 mt-2">
+                <h4 className="font-belleza text-[13px] text-gray-900 tracking-wide">{item.name}</h4>
+                {/* 💡 모바일 설명 텍스트 부활 */}
+                <p className="text-[10px] text-gray-400 mt-1 mb-1.5 leading-snug break-keep">{item.desc}</p>
+                <div className="flex justify-center gap-1.5 text-[11px]">{item.pct && <span className="text-red-600 font-medium">{item.pct}</span>}<span className={`font-medium ${item.isSoldOut ? 'text-gray-400' : 'text-gray-900'}`}>{item.price}</span></div>
+              </div>
             </div>
           ))}
         </div>
         
+        {/* PC 전용 슬라이더 (모바일 여백을 뺐으므로 PC에서는 다시 px-10 추가) */}
         <div 
-          className={`hidden md:block w-full overflow-hidden relative cursor-grab ${isDragging ? 'cursor-grabbing' : ''}`}
+          className={`hidden md:block w-full px-10 overflow-hidden relative cursor-grab ${isDragging ? 'cursor-grabbing' : ''}`}
           onTouchStart={onDragStart} onTouchMove={onDragMove} onTouchEnd={onProdDragEnd}
           onMouseDown={onDragStart} onMouseMove={onDragMove} onMouseUp={onProdDragEnd} onMouseLeave={() => setIsDragging(false)}
         >
@@ -261,7 +270,7 @@ export default function Home() {
       <section id="reviews" className="py-16 md:py-32 bg-white overflow-hidden">
         <div className="max-w-7xl mx-auto relative px-8 md:px-10">
           <div className="text-center mb-12 md:mb-16">
-            <h2 className="font-belleza text-xl md:text-2xl tracking-[0.14em] uppercase text-gray-900">Shorts Pick</h2>
+            <h2 className="font-belleza text-xl md:text-2xl tracking-[0.14em] uppercase text-gray-900">Reviews</h2>
           </div>
           
           <div 
