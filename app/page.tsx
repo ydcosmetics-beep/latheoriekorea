@@ -21,7 +21,7 @@ const products = [
 const shorts = [
   { id: 1, brand: "La Théorie", title: "지방산 0% 수분크림", bg: "linear-gradient(160deg,#c8c5be,#9a978f)" },
   { id: 2, brand: "La Théorie", title: "트러블 진정 루틴", bg: "linear-gradient(160deg,#bab6ae,#8e8b84)" },
-  { id: 3, brand: "La Théorie", title: "신개념 클렌징 젤", bg: "linear-gradient(160deg,#d0cdc6,#a09890)" },
+  { id: 3, brand: "La Théorie", title: "무자극 클렌징 젤", bg: "linear-gradient(160deg,#d0cdc6,#a09890)" },
   { id: 4, brand: "La Théorie", title: "피부 상재균의 비밀", bg: "linear-gradient(160deg,#c4c0b8,#968f88)" },
   { id: 5, brand: "La Théorie", title: "선크림 발림성 테스트", bg: "linear-gradient(160deg,#ccc9c2,#9c9890)" },
   { id: 6, brand: "La Théorie", title: "리얼 고객 리뷰", bg: "linear-gradient(160deg,#b8b5ae,#888580)" },
