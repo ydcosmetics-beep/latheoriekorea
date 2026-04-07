@@ -192,17 +192,25 @@ export default function Home() {
         </div>
       )}
 
-      <section id="hero" className="relative w-full min-h-[90vh] md:min-h-[800px] bg-white flex items-center md:items-end overflow-hidden pb-16 md:pb-20 pt-[80px]">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#f0efed] via-[#e4e2de] to-[#dcdbd7] opacity-70"></div>
-        <svg className="absolute inset-0 w-full h-full opacity-[0.05]" viewBox="0 0 800 800" preserveAspectRatio="xMidYMid slice">
-          <circle cx="550" cy="300" r="250" fill="none" stroke="#000" strokeWidth="0.5"/><circle cx="550" cy="300" r="180" fill="none" stroke="#000" strokeWidth="0.3"/><circle cx="550" cy="300" r="100" fill="none" stroke="#000" strokeWidth="0.2"/><line x1="300" y1="300" x2="800" y2="300" stroke="#000" strokeWidth="0.3"/>
-        </svg>
-        <div className="relative z-10 px-8 md:px-10 w-full max-w-7xl mx-auto">
-          <h2 className="font-belleza text-4xl md:text-[42px] leading-[1.15] text-gray-950 mb-3 md:mb-4 tracking-wide">Managing Skin<br/>Microbiome</h2>
-          <p className="text-[11px] md:text-[12px] text-gray-600 mb-8 md:mb-10 tracking-[0.05em]">#FattyAcidsFree &nbsp; #Skinmicrobiome &nbsp; #TroubledSkin</p>
-          <a href="#philosophy"><button className="border border-gray-900 bg-transparent text-gray-900 px-9 py-3.5 md:py-3 transition hover:bg-gray-50"><span className="font-belleza text-[13px] md:text-[12px] tracking-widest uppercase">About Us</span></button></a>
-        </div>
-      </section>
+      {/* --- 💡 히어로 배너 Section (단일 이미지 적용) --- */}
+<section id="hero" className="relative w-full min-h-[90vh] md:min-h-[800px] bg-white flex items-end md:items-end overflow-hidden pb-16 md:pb-20 pt-[70px] md:pt-[80px]">
+  
+  {/* 💡 준비하신 사진 1장이 PC와 모바일 화면 비율에 맞춰 알아서 꽉 차게 들어갑니다 (object-cover) */}
+  <img 
+    src="/hero-bg.jpg" 
+    alt="La Théorie Banner" 
+    className="absolute inset-0 w-full h-full object-cover" 
+  />
+
+  {/* (선택사항) 사진 위에 글씨가 잘 보이도록 아주 옅은 어두운 막을 하나 깔아줍니다 */}
+  <div className="absolute inset-0 bg-black/10"></div>
+  
+  <div className="relative z-10 px-8 md:px-10 w-full max-w-7xl mx-auto">
+    <h2 className="font-belleza text-2xl md:text-[42px] leading-[1.15] text-white mb-3 md:mb-4 tracking-wide drop-shadow-md">Managing Skin<br/>Microbiome</h2>
+    <p className="text-[11px] md:text-[12px] text-white/90 mb-8 md:mb-10 tracking-[0.05em] drop-shadow-md">#FattyAcidsFree &nbsp; #Skinmicrobiome &nbsp; #TroubledSkin</p>
+    <a href="#philosophy"><button className="border border-white bg-transparent text-white px-9 py-3.5 md:py-3 transition hover:bg-white hover:text-black shadow-sm"><span className="font-belleza text-[13px] md:text-[12px] tracking-widest uppercase">About Us</span></button></a>
+  </div>
+</section>
 
       <section id="philosophy" className="py-20 md:py-32 px-8 md:px-10 bg-white flex flex-col md:flex-row gap-10 md:gap-16 items-center md:items-start text-center md:text-left justify-center max-w-7xl mx-auto">
         <div className="md:hidden w-[1px] h-16 bg-gray-200 mb-2"></div>
