@@ -207,16 +207,16 @@ export default function Home() {
   {/*<div className="absolute inset-0 bg-black/10"></div> */}
   
   <div className="relative z-10 px-8 md:px-10 w-full max-w-7xl mx-auto">
-    <h2 className="font-belleza text-2xl md:text-[42px] leading-[1.15] text-white mb-3 md:mb-4 tracking-wide drop-shadow-md">Managing Skin<br/>Microbiome</h2>
-    <p className="text-[11px] md:text-[12px] text-white/90 mb-8 md:mb-10 tracking-[0.05em] drop-shadow-md">#FattyAcidsFree &nbsp; #Skinmicrobiome &nbsp; #TroubledSkin</p>
-    <a href="#philosophy"><button className="border border-white bg-transparent text-white px-9 py-3.5 md:py-3 transition hover:bg-white hover:text-black shadow-sm"><span className="font-belleza text-[13px] md:text-[12px] tracking-widest uppercase">About Us</span></button></a>
+    <h2 className="font-belleza text-2xl md:text-[42px] leading-[1.15] text-black mb-3 md:mb-4 tracking-wide drop-shadow-md">Managing Skin<br/>Microbiome</h2>
+    <p className="text-[11px] md:text-[12px] text-black/90 mb-8 md:mb-10 tracking-[0.05em] drop-shadow-md">#FattyAcidsFree &nbsp; #Skinmicrobiome &nbsp; #TroubledSkin</p>
+    <a href="#philosophy"><button className="border border-black bg-transparent text-black px-9 py-3.5 md:py-3 transition hover:bg-black hover:text-white shadow-sm"><span className="font-belleza text-[13px] md:text-[12px] tracking-widest uppercase">About Us</span></button></a>
   </div>
 </section>
 
       <section id="philosophy" className="py-20 md:py-32 px-8 md:px-10 bg-white flex flex-col md:flex-row gap-10 md:gap-16 items-center md:items-start text-center md:text-left justify-center max-w-7xl mx-auto">
         <div className="md:hidden w-[1px] h-16 bg-gray-200 mb-2"></div>
         <div className="flex-1 max-w-lg">
-          <h3 className="font-belleza text-xs text-gray-400 mb-4 tracking-wider">Ingredients proven by Medical Theory</h3>
+          <h3 className="font-belleza text-s text-gray-400 mb-4 tracking-wider">Ingredients proven by Medical Theory</h3>
           <h1 className="font-belleza text-[24px] md:text-[28px] text-gray-900 leading-[1.4] tracking-wide">Solution begins with<br className="hidden md:block"/> understanding the cause</h1>
         </div>
         <div className="flex-1 max-w-xl md:pl-12 md:border-l border-gray-200">
@@ -262,7 +262,7 @@ export default function Home() {
               <div key={item.id} style={{ width: `${prodItemWidth}%` }} className="flex-shrink-0 flex flex-col items-center gap-4">
                 <div className="w-full aspect-[3/4] bg-[#f2f1ec] relative border border-gray-100 flex items-center justify-center transition-colors hover:border-gray-200">
                   {item.badge && <span className={`absolute text-[9px] px-2 py-1 bg-white border ${item.isSoldOut ? 'border-red-600 text-red-600 bottom-3 left-3' : 'border-gray-300 text-gray-500 top-3 left-3'}`}>{item.badge}</span>}
-                  <div className="w-1/2 h-3/5 bg-[#d8d5ce] rounded-sm opacity-50"></div>
+                  <img src={item.img} alt={item.name} className="w-full h-full object-cover" />
                 </div>
                 <div className="text-center px-2">
                   <h4 className="font-belleza text-[15px] text-gray-900 mb-1 tracking-wide">{item.name}</h4>
