@@ -1,11 +1,7 @@
 "use client";
 
 import { useState, useEffect, FormEvent, TouchEvent, MouseEvent, useMemo } from "react";
-import Head from "next/head";
 
-// ==========================================
-// 💡 Web3Forms Access Key
-// ==========================================
 const ACCESS_KEY = "ad515025-1b36-4a08-bc8f-6f22569d17cd"; 
 
 const products = [
@@ -21,7 +17,7 @@ const products = [
 const shorts = [
   { id: 1, brand: "La Théorie", title: "지방산 0% 수분크림", bg: "linear-gradient(160deg,#c8c5be,#9a978f)" },
   { id: 2, brand: "La Théorie", title: "트러블 진정 루틴", bg: "linear-gradient(160deg,#bab6ae,#8e8b84)" },
-  { id: 3, brand: "La Théorie", title: "무자극 클렌징 젤", bg: "linear-gradient(160deg,#d0cdc6,#a09890)" },
+  { id: 3, brand: "La Théorie", title: "신개념 클렌징 젤", bg: "linear-gradient(160deg,#d0cdc6,#a09890)" },
   { id: 4, brand: "La Théorie", title: "피부 상재균의 비밀", bg: "linear-gradient(160deg,#c4c0b8,#968f88)" },
   { id: 5, brand: "La Théorie", title: "선크림 발림성 테스트", bg: "linear-gradient(160deg,#ccc9c2,#9c9890)" },
   { id: 6, brand: "La Théorie", title: "리얼 고객 리뷰", bg: "linear-gradient(160deg,#b8b5ae,#888580)" },
@@ -43,7 +39,6 @@ export default function Home() {
   const [touchEnd, setTouchEnd] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
 
-  // 💡 [수정] PC 제품 캐러셀: 3.4개 보이도록 조정 (우측 제품이 훨씬 잘 보이게 노출)
   const prodVisibleItems = 3.4; 
   const prodItemWidth = useMemo(() => 100 / prodVisibleItems, [prodVisibleItems]);
 
@@ -99,11 +94,10 @@ export default function Home() {
     if (distance < -50) setProdIdx(prev => Math.max(0, prev - 1));
   };
 
-  // --- 💡 미리 form 객체를 담아두어 에러를 방지하는 폼 발송 로직 ---
   const submitForm = async (e: FormEvent<HTMLFormElement>, type: "contact" | "meeting") => {
     e.preventDefault();
     
-    const formElement = e.currentTarget; // 비동기 작업 전에 안전하게 저장
+    const formElement = e.currentTarget; 
     const setStatus = type === "contact" ? setContactStatus : setMeetingStatus;
     setStatus("loading");
 
@@ -120,7 +114,7 @@ export default function Home() {
 
       if (response.ok && data.success) {
         setStatus("success");
-        formElement.reset(); // 미리 저장해둔 요소 초기화 (에러 완벽 차단)
+        formElement.reset(); 
         if (type === "meeting") {
             setTimeout(() => { setIsMeetingModalOpen(false); setMeetingStatus("idle"); }, 2000);
         }
@@ -136,9 +130,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-white text-gray-900 font-sans overflow-x-hidden">
-      <Head><title>La Théorie</title></Head>
-
-      {/* --- 미팅 예약 팝업 --- */}
+      {/* 미팅 예약 팝업 */}
       {isMeetingModalOpen && (
         <div className="fixed inset-0 z-[200] flex items-center justify-center bg-black/60 p-4 animate-in fade-in duration-200">
           <div className="bg-white w-full max-w-lg p-8 relative shadow-2xl">
@@ -151,6 +143,7 @@ export default function Home() {
               <input type="hidden" name="access_key" defaultValue={ACCESS_KEY} />
               <input type="hidden" name="subject" defaultValue="🤝 [La Théorie] 전시회 미팅 예약 접수" />
               <input type="hidden" name="from_name" defaultValue="La Théorie Web" />
+              
               <input type="text" name="Company" required placeholder="Company Name *" className="p-3 border border-gray-200 text-xs focus:outline-none focus:border-gray-400" />
               <div className="grid grid-cols-2 gap-4">
                 <input type="text" name="Name" required placeholder="Contact Person *" className="p-3 border border-gray-200 text-xs focus:outline-none focus:border-gray-400" />
@@ -167,13 +160,11 @@ export default function Home() {
         </div>
       )}
 
-      {/* --- 스타일 정의 (💡 쇼츠 크기 대폭 상향 및 CSS 변수 재설정) --- */}
       <style dangerouslySetInnerHTML={{ __html: `
         @import url('https://fonts.googleapis.com/css2?family=Belleza&family=Noto+Sans:wght@300;400;500;600;700&display=swap');
         html { scroll-behavior: smooth; }
         body { font-family: 'Noto Sans', sans-serif; background-color: #ffffff; }
         h1, h2, h3, .font-belleza { font-family: 'Belleza', sans-serif; }
-        /* 💡 모바일 너비: 220 + 20(마진), PC 너비: 320 + 20(마진) */
         :root { --item-w: 240px; --item-half: 120px; }
         @media (min-width: 768px) { :root { --item-w: 340px; --item-half: 170px; } }
       `}} />
@@ -267,7 +258,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* --- 💡 REVIEWS (쇼츠 비율 및 크기 대폭 확장) --- */}
       <section id="reviews" className="py-16 md:py-32 bg-white overflow-hidden">
         <div className="max-w-7xl mx-auto relative px-8 md:px-10">
           <div className="text-center mb-12 md:mb-16">
@@ -279,13 +269,11 @@ export default function Home() {
             onTouchStart={onDragStart} onTouchMove={onDragMove} onTouchEnd={onShortsDragEnd}
             onMouseDown={onDragStart} onMouseMove={onDragMove} onMouseUp={onShortsDragEnd} onMouseLeave={() => setIsDragging(false)}
           >
-            {/* 💡 컨테이너 높이도 충분히 키워줌 */}
             <div className="relative w-full h-[500px] md:h-[680px] pointer-events-none">
               <div className={`absolute top-0 left-1/2 h-full flex items-center ${isTransitioning ? 'transition-transform duration-500 ease-out' : ''}`} style={{ transform: `translateX(calc(-1 * var(--item-half) - ${shortIdx} * var(--item-w)))` }}>
                 {extendedShorts.map((item, idx) => {
                   const isActive = idx === shortIdx;
                   return (
-                    /* 💡 aspect-[9/16] 추가로 16:9의 세로비율 강제 유지, 너비 320px 적용 */
                     <div key={idx} className={`w-[220px] md:w-[320px] aspect-[9/16] mx-[10px] flex-shrink-0 rounded-[20px] overflow-hidden transition-all duration-500 relative ${isActive ? 'scale-110 z-10 opacity-100 shadow-2xl' : 'scale-90 opacity-60'}`} style={{ background: item.bg }}>
                       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
                       <div className={`absolute bottom-6 left-6 right-6 transition-opacity duration-300 ${isActive ? 'opacity-100' : 'opacity-0'}`}>
