@@ -5,13 +5,14 @@ import { useState, useEffect, FormEvent, TouchEvent, MouseEvent, useMemo } from 
 const ACCESS_KEY = "ad515025-1b36-4a08-bc8f-6f22569d17cd"; 
 
 const products = [
-  { id: 1, name: "Sunscreen Set", desc: "Sunscreen set for hydrating improvement", price: "34,800", oldPrice: "39,600", pct: "12%", badge: "12% Off", isSoldOut: false },
-  { id: 2, name: "Enhancer", desc: "Barrier Protection + Relief Essence", price: "21,900", oldPrice: null, pct: null, badge: null, isSoldOut: false },
-  { id: 3, name: "Suncare Set", desc: "Suncare set for barrier protection", price: "38,900", oldPrice: "44,700", pct: "13%", badge: "13% Off", isSoldOut: false },
-  { id: 4, name: "Cleanser", desc: "Cleaning gel for barrier and moisture", price: "16,900", oldPrice: null, pct: null, badge: "Sold Out", isSoldOut: true },
-  { id: 5, name: "Barrier Serum", desc: "Intensive repair for troubled skin", price: "29,900", oldPrice: null, pct: null, badge: null, isSoldOut: false },
-  { id: 6, name: "Mist Toner", desc: "Soothing hydration mist", price: "18,900", oldPrice: "20,900", pct: "10%", badge: "10% Off", isSoldOut: false },
-  { id: 7, name: "Relief Ampoule", desc: "Targeted treatment for microbiome", price: "34,900", oldPrice: null, pct: null, badge: null, isSoldOut: false },
+  { id: 1, name: "Cream :: Hydrating Ingredients", desc: "0% Fatty Acid Gel Cream for Folliculitis Care", price: "24,900", oldPrice: null, pct: null, badge: "Best Seller", isSoldOut: false, img: "/prod1.jpg" },
+  { id: 2, name: "Cleanser :: Clearing Gel", desc: "Barrier-Protecting Cleanser with Gentle Surfactants", price: "16,900", oldPrice: null, pct: null, badge: "Steady Seller", isSoldOut: false, img: "/prod2.jpg"  },
+  { id: 3, name: "Toner :: Soothing Treatment", desc: "Microbiome-Balancing Toner for Folliculitis", price: "16,900", oldPrice: "44,700", pct: null, badge: null, isSoldOut: false, img: "/prod3.jpg"  },
+  { id: 4, name: "Enhancer :: Moisturizing Essence", desc: "Lightweight Oil Essence for Oil-Water Balance", price: "19,500", oldPrice: null, pct: null, badge: "Sold Out", isSoldOut: true, img: "/prod4.jpg"  },
+  { id: 5, name: "Enhancer :: Dual Effect Essence", desc: "Intensive Cream for Barrier Repair & Blemish Relief", price: "21,900", oldPrice: null, pct: null, badge: null, isSoldOut: false, img: "/prod5.jpg"  },
+  { id: 6, name: "Sunscreen :: Protection Factor", desc: "Fatty-Acid-Free Sunscreen for Troubled Skin", price: "19,800", oldPrice: null, pct: null, badge: null, isSoldOut: false, img: "/prod6.jpg"  },
+  { id: 7, name: "BB Cream :: Blemish Balm", desc: "Specialized BB Cream for Problematic Skin", price: "18,900", oldPrice: "21,900", pct: null, badge: null, isSoldOut: false, img: "/prod7.jpg"  },
+  { id: 8, name: "Shampoo :: Scalp Balance", desc: "Soothing Shampoo for Seborrheic Dermatitis & Forehead Breakouts", price: "unfixed", oldPrice: null, pct: null, badge: "Planned", isSoldOut: false, img: "/prod8.jpg"  },
 ];
 
 const shorts = [
@@ -203,7 +204,7 @@ export default function Home() {
   />
 
   {/* (선택사항) 사진 위에 글씨가 잘 보이도록 아주 옅은 어두운 막을 하나 깔아줍니다 */}
-  <div className="absolute inset-0 bg-black/10"></div>
+  {/*<div className="absolute inset-0 bg-black/10"></div> */}
   
   <div className="relative z-10 px-8 md:px-10 w-full max-w-7xl mx-auto">
     <h2 className="font-belleza text-2xl md:text-[42px] leading-[1.15] text-white mb-3 md:mb-4 tracking-wide drop-shadow-md">Managing Skin<br/>Microbiome</h2>
@@ -231,11 +232,14 @@ export default function Home() {
         
         {/* 💡 모바일 전용 그리드 (여백 px-3으로 최소화, gap 조정) */}
         <div className="grid grid-cols-2 gap-3 px-4 md:hidden">
-          {products.slice(0, 6).map((item) => (
+          {products.map((item) => (
             <div key={item.id} className="flex flex-col items-center gap-1 mb-8">
-              <div className="w-full aspect-[3/4] bg-[#f2f1ec] relative border border-gray-100 flex items-center justify-center shadow-sm">
-                {item.badge && <span className={`absolute text-[9px] px-1.5 py-0.5 bg-white border ${item.isSoldOut ? 'border-red-600 text-red-600 bottom-2 left-2' : 'border-gray-300 text-gray-500 top-2 left-2'}`}>{item.badge}</span>}
-                <div className="w-1/2 h-3/5 bg-[#d8d5ce] rounded-sm opacity-50"></div>
+              <div className="w-full aspect-[3/4] bg-[#f2f1ec] relative border border-gray-100 flex items-center justify-center shadow-sm overflow-hidden">
+                {/* 뱃지가 사진에 가려지지 않게 z-10을 추가했습니다 */}
+                {item.badge && <span className={`absolute z-10 text-[9px] px-1.5 py-0.5 bg-white border ${item.isSoldOut ? 'border-red-600 text-red-600 bottom-2 left-2' : 'border-gray-300 text-gray-500 top-2 left-2'}`}>{item.badge}</span>}
+ 
+                {/* 💡 회색 박스 대신 진짜 제품 사진이 들어갑니다! */}
+                <img src={item.img} alt={item.name} className="w-full h-full object-cover" />
               </div>
               <div className="text-center px-1 mt-2">
                 <h4 className="font-belleza text-[13px] text-gray-900 tracking-wide">{item.name}</h4>
