@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, FormEvent, TouchEvent, MouseEvent, useMemo } from "react";
+import Link from "next/link";
 
 const ACCESS_KEY = "ad515025-1b36-4a08-bc8f-6f22569d17cd"; 
 
@@ -25,28 +26,40 @@ const shorts = [
 ];
 const extendedShorts = [...shorts, ...shorts, ...shorts];
 
+const exhImages = ["/exh1.jpg", "/exh2.jpg"];
+const extendedExh = [...exhImages, ...exhImages, ...exhImages];
+
+const distLogos = ["/logo1.png", "/logo1.png", "/logo1.png", "/logo1.png", "/logo1.png", "/logo1.png"];
+
 export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [prodIdx, setProdIdx] = useState(0);
   const [shortIdx, setShortIdx] = useState(shorts.length + 2);
+  const [exhIdx, setExhIdx] = useState(exhImages.length);
   const [isTransitioning, setIsTransitioning] = useState(true);
+  const [isExhTransitioning, setIsExhTransitioning] = useState(true);
   const [isScrolled, setIsScrolled] = useState(false);
 
   const [isMeetingModalOpen, setIsMeetingModalOpen] = useState(false);
-  const [contactStatus, setContactStatus] = useState("idle"); 
-  const [meetingStatus, setMeetingStatus] = useState("idle");
+  const [isPartnerModalOpen, setIsPartnerModalOpen] = useState(false);
+  const [contactStatus, setContactStatus] = useState("idle");
+  const [partnerStatus, setPartnerStatus] = useState("idle");
 
   const [touchStart, setTouchStart] = useState(0);
   const [touchEnd, setTouchEnd] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
 
-  const prodVisibleItems = 3.4; 
+  const [exhTouchStart, setExhTouchStart] = useState(0);
+  const [exhTouchEnd, setExhTouchEnd] = useState(0);
+  const [isExhDragging, setIsExhDragging] = useState(false);
+
+  const prodVisibleItems = 3.4;
   const prodItemWidth = useMemo(() => 100 / prodVisibleItems, [prodVisibleItems]);
 
   useEffect(() => {
-    if (isMenuOpen || isMeetingModalOpen) document.body.style.overflow = "hidden";
+    if (isMenuOpen || isMeetingModalOpen || isPartnerModalOpen) document.body.style.overflow = "hidden";
     else document.body.style.overflow = "auto";
-  }, [isMenuOpen, isMeetingModalOpen]);
+  }, [isMenuOpen, isMeetingModalOpen, isPartnerModalOpen]);
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 10);
@@ -65,6 +78,18 @@ export default function Home() {
       return () => clearTimeout(timer);
     }
   }, [shortIdx]);
+
+  useEffect(() => {
+    if (exhIdx >= exhImages.length * 2 || exhIdx < exhImages.length) {
+      const timer = setTimeout(() => {
+        setIsExhTransitioning(false);
+        if (exhIdx >= exhImages.length * 2) setExhIdx(exhIdx - exhImages.length);
+        else if (exhIdx < exhImages.length) setExhIdx(exhIdx + exhImages.length);
+        setTimeout(() => setIsExhTransitioning(true), 50);
+      }, 500);
+      return () => clearTimeout(timer);
+    }
+  }, [exhIdx]);
 
   const onDragStart = (e: TouchEvent | MouseEvent) => {
     setIsDragging(true);
@@ -95,11 +120,32 @@ export default function Home() {
     if (distance < -50) setProdIdx(prev => Math.max(0, prev - 1));
   };
 
-  const submitForm = async (e: FormEvent<HTMLFormElement>, type: "contact" | "meeting") => {
+  const onExhDragStart = (e: TouchEvent | MouseEvent) => {
+    setIsExhDragging(true);
+    setExhTouchEnd(0);
+    const clientX = 'touches' in e ? e.touches[0].clientX : (e as MouseEvent).clientX;
+    setExhTouchStart(clientX);
+  };
+
+  const onExhDragMove = (e: TouchEvent | MouseEvent) => {
+    if (!isExhDragging) return;
+    const clientX = 'touches' in e ? e.touches[0].clientX : (e as MouseEvent).clientX;
+    setExhTouchEnd(clientX);
+  };
+
+  const onExhDragEnd = () => {
+    setIsExhDragging(false);
+    if (!exhTouchStart || !exhTouchEnd) return;
+    const distance = exhTouchStart - exhTouchEnd;
+    if (distance > 50) setExhIdx(prev => prev + 1);
+    if (distance < -50) setExhIdx(prev => prev - 1);
+  };
+
+  const submitForm = async (e: FormEvent<HTMLFormElement>, type: "contact" | "partner") => {
     e.preventDefault();
-    
-    const formElement = e.currentTarget; 
-    const setStatus = type === "contact" ? setContactStatus : setMeetingStatus;
+
+    const formElement = e.currentTarget;
+    const setStatus = type === "contact" ? setContactStatus : setPartnerStatus;
     setStatus("loading");
 
     const formData = new FormData(formElement);
@@ -115,9 +161,9 @@ export default function Home() {
 
       if (response.ok && data.success) {
         setStatus("success");
-        formElement.reset(); 
-        if (type === "meeting") {
-            setTimeout(() => { setIsMeetingModalOpen(false); setMeetingStatus("idle"); }, 2000);
+        formElement.reset();
+        if (type === "partner") {
+            setTimeout(() => { setIsPartnerModalOpen(false); setPartnerStatus("idle"); }, 2000);
         }
       } else {
         console.error("Web3Forms Response Error:", data);
@@ -134,28 +180,49 @@ export default function Home() {
       {/* 미팅 예약 팝업 */}
       {isMeetingModalOpen && (
         <div className="fixed inset-0 z-[200] flex items-center justify-center bg-black/60 p-4 animate-in fade-in duration-200">
+          <div className="bg-white w-full max-w-2xl relative shadow-2xl" style={{ height: '680px' }}>
+            <button onClick={() => setIsMeetingModalOpen(false)} className="absolute top-4 right-4 z-10 text-gray-400 hover:text-black transition bg-white rounded-full p-1">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+            </button>
+            {/* ↓ Cal.com 계정 생성 후 아래 URL을 본인 링크로 교체하세요 */}
+            {/* 예: https://cal.com/YOUR_USERNAME/exhibition-meeting */}
+            <iframe
+              src="https://cal.com/latheorie/exhibition-meeting-30min?embed=true&embedType=inline&theme=light&hideEventTypeDetails=false"
+              width="100%"
+              height="100%"
+              frameBorder="0"
+              title="Book a Meeting"
+              style={{ display: 'block' }}
+            />
+          </div>
+        </div>
+      )}
+
+      {/* 파트너 문의 팝업 */}
+      {isPartnerModalOpen && (
+        <div className="fixed inset-0 z-[200] flex items-center justify-center bg-black/60 p-4 animate-in fade-in duration-200">
           <div className="bg-white w-full max-w-lg p-8 relative shadow-2xl">
-            <button onClick={() => setIsMeetingModalOpen(false)} className="absolute top-5 right-5 text-gray-400 hover:text-black transition">
+            <button onClick={() => setIsPartnerModalOpen(false)} className="absolute top-5 right-5 text-gray-400 hover:text-black transition">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
             </button>
-            <h3 className="font-belleza text-2xl mb-2 text-center tracking-wide">Book a Meeting</h3>
-            <p className="text-center text-xs text-gray-500 mb-8">26 Vietnam Exhibition 미팅 일정을 남겨주세요.</p>
-            <form onSubmit={(e) => submitForm(e, "meeting")} className="flex flex-col gap-4 font-noto-sans">
+            <h3 className="font-belleza text-2xl mb-2 text-center tracking-wide">Become a Partner</h3>
+            <p className="text-center text-xs text-gray-500 mb-8">파트너십 문의 내용을 남겨주시면 담당자가 회신드리겠습니다.</p>
+            <form onSubmit={(e) => submitForm(e, "partner")} className="flex flex-col gap-4 font-noto-sans">
               <input type="hidden" name="access_key" defaultValue={ACCESS_KEY} />
-              <input type="hidden" name="subject" defaultValue="🤝 [La Théorie] 전시회 미팅 예약 접수" />
+              <input type="hidden" name="subject" defaultValue="🌐 [La Théorie] 파트너십 문의 접수" />
               <input type="hidden" name="from_name" defaultValue="La Théorie Web" />
-              
+
               <input type="text" name="Company" required placeholder="Company Name *" className="p-3 border border-gray-200 text-xs focus:outline-none focus:border-gray-400" />
               <div className="grid grid-cols-2 gap-4">
                 <input type="text" name="Name" required placeholder="Contact Person *" className="p-3 border border-gray-200 text-xs focus:outline-none focus:border-gray-400" />
                 <input type="email" name="Email" required placeholder="Email Address *" className="p-3 border border-gray-200 text-xs focus:outline-none focus:border-gray-400" />
               </div>
-              <input type="text" name="Date_Preference" placeholder="Preferred Date & Time (e.g., Oct 26, 2PM)" className="p-3 border border-gray-200 text-xs focus:outline-none focus:border-gray-400" />
-              <textarea name="Message" placeholder="Additional Notes" className="p-3 border border-gray-200 text-xs focus:outline-none focus:border-gray-400 h-24 resize-none"></textarea>
-              <button type="submit" disabled={meetingStatus === "loading" || meetingStatus === "success"} className="w-full bg-[#0a1118] text-white p-4 mt-2 hover:bg-black transition shadow-sm disabled:bg-gray-400">
-                <span className="font-belleza text-[13px] tracking-widest uppercase font-medium">{meetingStatus === "loading" ? "Sending..." : meetingStatus === "success" ? "Sent Successfully ✔" : "Confirm Booking"}</span>
+              <input type="text" name="Country" placeholder="Country / Region" className="p-3 border border-gray-200 text-xs focus:outline-none focus:border-gray-400" />
+              <textarea name="Message" required placeholder="Tell us about your partnership interest" className="p-3 border border-gray-200 text-xs focus:outline-none focus:border-gray-400 h-24 resize-none"></textarea>
+              <button type="submit" disabled={partnerStatus === "loading" || partnerStatus === "success"} className="w-full bg-[#0a1118] text-white p-4 mt-2 hover:bg-black transition shadow-sm disabled:bg-gray-400">
+                <span className="font-belleza text-[13px] tracking-widest uppercase font-medium">{partnerStatus === "loading" ? "Sending..." : partnerStatus === "success" ? "Sent Successfully ✔" : "Send Inquiry"}</span>
               </button>
-              {meetingStatus === "error" && <p className="text-red-500 text-xs text-center mt-2">일시적인 네트워크 오류가 발생했습니다. 잠시 후 시도해주세요.</p>}
+              {partnerStatus === "error" && <p className="text-red-500 text-xs text-center mt-2">일시적인 네트워크 오류가 발생했습니다. 잠시 후 시도해주세요.</p>}
             </form>
           </div>
         </div>
@@ -168,12 +235,22 @@ export default function Home() {
         h1, h2, h3, .font-belleza { font-family: 'Belleza', sans-serif; }
         :root { --item-w: 240px; --item-half: 120px; }
         @media (min-width: 768px) { :root { --item-w: 340px; --item-half: 170px; } }
+
+        @keyframes marquee-left {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+        @keyframes marquee-right {
+          0% { transform: translateX(-50%); }
+          100% { transform: translateX(0); }
+        }
+        .marquee-track-left { animation: marquee-left 30s linear infinite; }
+        .marquee-track-right { animation: marquee-right 35s linear infinite; }
       `}} />
 
       <header className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-sm' : 'bg-transparent border-transparent'}`}>
         <div className="max-w-7xl mx-auto px-6 py-4 md:px-10 md:py-5 flex justify-between items-center h-[70px] md:h-[80px]">
           <button className="md:hidden p-2 -ml-2 text-gray-900 bg-transparent border-none outline-none focus:outline-none" onClick={() => setIsMenuOpen(true)}><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path strokeLinecap="round" d="M4 6h16M4 12h16M4 18h16" /></svg></button>
-          {/* 💡 모바일 폰트 크기 확대: text-lg -> text-2xl */}
           <div className="md:hidden font-belleza text-2xl text-gray-950 tracking-wide absolute left-1/2 -translate-x-1/2">La Théorie</div>
           <nav className="hidden md:flex gap-8 items-center flex-1">
             {["Philosophy", "Products", "Reviews", "Exhibition", "Contact"].map((item) => (
@@ -193,25 +270,18 @@ export default function Home() {
         </div>
       )}
 
-      {/* --- 💡 히어로 배너 Section (단일 이미지 적용) --- */}
-<section id="hero" className="relative w-full min-h-[90vh] md:min-h-[800px] bg-white flex items-end md:items-end overflow-hidden pb-16 md:pb-20 pt-[70px] md:pt-[80px]">
-  
-  {/* 💡 준비하신 사진 1장이 PC와 모바일 화면 비율에 맞춰 알아서 꽉 차게 들어갑니다 (object-cover) */}
-  <img 
-    src="/hero-bg.jpg" 
-    alt="La Théorie Banner" 
-    className="absolute inset-0 w-full h-full object-cover" 
-  />
-
-  {/* (선택사항) 사진 위에 글씨가 잘 보이도록 아주 옅은 어두운 막을 하나 깔아줍니다 */}
-  {/*<div className="absolute inset-0 bg-black/10"></div> */}
-  
-  <div className="relative z-10 px-8 md:px-10 w-full max-w-7xl mx-auto">
-    <h2 className="font-belleza text-2xl md:text-[42px] leading-[1.15] text-black mb-3 md:mb-4 tracking-wide drop-shadow-md">Managing Skin<br/>Microbiome</h2>
-    <p className="text-[11px] md:text-[12px] text-black/90 mb-8 md:mb-10 tracking-[0.05em] drop-shadow-md">#FattyAcidsFree &nbsp; #Skinmicrobiome &nbsp; #TroubledSkin</p>
-    <a href="#philosophy"><button className="border border-black bg-transparent text-black px-9 py-3.5 md:py-3 transition hover:bg-black hover:text-white shadow-sm"><span className="font-belleza text-[13px] md:text-[12px] tracking-widest uppercase">About Us</span></button></a>
-  </div>
-</section>
+      <section id="hero" className="relative w-full min-h-[90vh] md:min-h-[800px] bg-white flex items-end md:items-end overflow-hidden pb-16 md:pb-20 pt-[70px] md:pt-[80px]">
+        <img
+          src="/hero-bg.jpg"
+          alt="La Théorie Banner"
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+        <div className="relative z-10 px-8 md:px-10 w-full max-w-7xl mx-auto">
+          <h2 className="font-belleza text-2xl md:text-[42px] leading-[1.15] text-black mb-3 md:mb-4 tracking-wide drop-shadow-md">Managing Skin<br/>Microbiome</h2>
+          <p className="text-[11px] md:text-[12px] text-black/90 mb-8 md:mb-10 tracking-[0.05em] drop-shadow-md">#FattyAcidsFree &nbsp; #Skinmicrobiome &nbsp; #TroubledSkin</p>
+          <a href="#philosophy"><button className="border border-black bg-transparent text-black px-9 py-3.5 md:py-3 transition hover:bg-black hover:text-white shadow-sm"><span className="font-belleza text-[13px] md:text-[12px] tracking-widest uppercase">About Us</span></button></a>
+        </div>
+      </section>
 
       <section id="philosophy" className="py-20 md:py-32 px-8 md:px-10 bg-white flex flex-col md:flex-row gap-10 md:gap-16 items-center md:items-start text-center md:text-left justify-center max-w-7xl mx-auto">
         <div className="md:hidden w-[1px] h-16 bg-gray-200 mb-2"></div>
@@ -221,38 +291,33 @@ export default function Home() {
         </div>
         <div className="flex-1 max-w-xl md:pl-12 md:border-l border-gray-200">
           <p className="text-xs md:text-[13px] text-gray-600 leading-[2.2] md:leading-[2.4]">We analyze over 1,000 types of skin microbiome, mathematically defining the relationship between cosmetics, skin troubles, and microorganisms. By analyzing the cause, we can change the results.<br/><br/>We cannot promise miraculous skin changes, but we will strive to provide you with calmer skin than today, making small but non-stopping changes every day.</p>
+          <div className="mt-10 flex justify-center md:justify-start">
+            <Link href="/about" className="border border-black bg-transparent text-black px-9 py-3.5 transition hover:bg-black hover:text-white uppercase tracking-widest font-belleza text-[12px]">About Us</Link>
+          </div>
         </div>
       </section>
 
-      {/* 💡 모바일 양옆 여백 축소: 전체 Section의 패딩을 PC(md)에만 적용하고 모바일은 최소화 */}
       <section id="products" className="py-16 md:py-24 bg-white md:px-10 max-w-7xl mx-auto">
         <div className="text-center mb-12 md:mb-16 px-6">
           <h2 className="font-belleza text-xl md:text-2xl tracking-[0.14em] uppercase text-gray-900">Best sellers</h2>
         </div>
         
-        {/* 💡 모바일 전용 그리드 (여백 px-3으로 최소화, gap 조정) */}
         <div className="grid grid-cols-2 gap-3 px-4 md:hidden">
           {products.map((item) => (
             <div key={item.id} className="flex flex-col items-center gap-1 mb-8">
               <div className="w-full aspect-[3/4] bg-[#f2f1ec] relative border border-gray-100 flex items-center justify-center shadow-sm overflow-hidden">
-                {/* 뱃지가 사진에 가려지지 않게 z-10을 추가했습니다 */}
                 {item.badge && <span className={`absolute z-10 text-[9px] px-1.5 py-0.5 bg-white border ${item.isSoldOut ? 'border-red-600 text-red-600 bottom-2 left-2' : 'border-gray-300 text-gray-500 top-2 left-2'}`}>{item.badge}</span>}
- 
-                {/* 💡 회색 박스 대신 진짜 제품 사진이 들어갑니다! */}
                 <img src={item.img} alt={item.name} className="w-full h-full object-cover" />
               </div>
               <div className="text-center px-1 mt-2">
                 <h4 className="font-belleza text-[13px] text-gray-900 tracking-wide">{item.name}</h4>
-                {/* 💡 모바일 설명 텍스트 부활 */}
                 <p className="text-[10px] text-gray-400 mt-1 mb-1.5 leading-snug break-keep">{item.desc}</p>
-                <div className="flex justify-center gap-1.5 text-[11px]">{item.pct && <span className="text-red-600 font-medium">{item.pct}</span>}<span className={`font-medium ${item.isSoldOut ? 'text-gray-400' : 'text-gray-900'}`}>{item.price}</span></div>
               </div>
             </div>
           ))}
         </div>
         
-        {/* PC 전용 슬라이더 (모바일 여백을 뺐으므로 PC에서는 다시 px-10 추가) */}
-        <div 
+        <div
           className={`hidden md:block w-full px-10 overflow-hidden relative cursor-grab ${isDragging ? 'cursor-grabbing' : ''}`}
           onTouchStart={onDragStart} onTouchMove={onDragMove} onTouchEnd={onProdDragEnd}
           onMouseDown={onDragStart} onMouseMove={onDragMove} onMouseUp={onProdDragEnd} onMouseLeave={() => setIsDragging(false)}
@@ -267,7 +332,6 @@ export default function Home() {
                 <div className="text-center px-2">
                   <h4 className="font-belleza text-[15px] text-gray-900 mb-1 tracking-wide">{item.name}</h4>
                   <p className="text-[11px] text-gray-400 mt-1 h-8 leading-relaxed">{item.desc}</p>
-                  <div className="flex justify-center gap-2 text-[13px] mt-2">{item.pct && <span className="text-red-600 font-medium">{item.pct}</span>}<span className={`font-medium ${item.isSoldOut ? 'text-gray-400' : 'text-gray-900'}`}>{item.price}</span>{item.oldPrice && <span className="text-gray-300 line-through">{item.oldPrice}</span>}</div>
                 </div>
               </div>
             ))}
@@ -295,7 +359,7 @@ export default function Home() {
                 {extendedShorts.map((item, idx) => {
                   const isActive = idx === shortIdx;
                   return (
-                    <div key={idx} className={`w-[220px] md:w-[320px] aspect-[9/16] mx-[10px] flex-shrink-0 rounded-[20px] overflow-hidden transition-all duration-500 relative ${isActive ? 'scale-110 z-10 opacity-100 shadow-2xl' : 'scale-90 opacity-60'}`} style={{ background: item.bg }}>
+                    <div key={idx} className={`w-[220px] md:w-[320px] aspect-[9/16] mx-[10px] flex-shrink-0 rounded-[20px] overflow-hidden transition-all duration-500 relative ${isActive ? 'scale-110 z-10 opacity-100' : 'scale-90 opacity-60'}`} style={{ background: item.bg }}>
                       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
                       <div className={`absolute bottom-6 left-6 right-6 transition-opacity duration-300 ${isActive ? 'opacity-100' : 'opacity-0'}`}>
                         <p className="text-[11px] md:text-[12px] text-white/80 mb-2 tracking-wide">{item.brand}</p>
@@ -307,15 +371,66 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <button onClick={() => setShortIdx(shortIdx - 1)} className="absolute left-8 md:left-10 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/95 shadow-lg border border-gray-100 rounded-full flex items-center justify-center z-20 text-gray-600 hover:bg-gray-50 hover:text-black transition">←</button>
-          <button onClick={() => setShortIdx(shortIdx + 1)} className="absolute right-8 md:right-10 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/95 shadow-lg border border-gray-100 rounded-full flex items-center justify-center z-20 text-gray-600 hover:bg-gray-50 hover:text-black transition">→</button>
+          <button onClick={() => setShortIdx(shortIdx - 1)} className="absolute left-8 md:left-10 top-1/2 -translate-y-1/2 w-10 h-10 bg-white border border-gray-200 rounded-full flex items-center justify-center z-20 text-gray-600 hover:bg-gray-50 hover:text-black transition">←</button>
+          <button onClick={() => setShortIdx(shortIdx + 1)} className="absolute right-8 md:right-10 top-1/2 -translate-y-1/2 w-10 h-10 bg-white border border-gray-200 rounded-full flex items-center justify-center z-20 text-gray-600 hover:bg-gray-50 hover:text-black transition">→</button>
+
+          <div className="flex justify-center mt-12 md:mt-16">
+            <Link href="/reviews" className="border border-black bg-transparent text-black px-9 py-3.5 transition hover:bg-black hover:text-white uppercase tracking-widest font-belleza text-[12px]">View More</Link>
+          </div>
+        </div>
+      </section>
+
+      <section id="distribution" className="py-16 md:py-28 px-8 md:px-10 bg-white border-t border-gray-100">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-10 md:gap-20 items-center">
+          <div className="w-full md:w-3/5 aspect-[4/3] bg-[#f5f4ef] border border-gray-100 overflow-hidden flex flex-col gap-3 p-3 order-first md:order-last">
+            <div className="flex-1 overflow-hidden relative">
+              <div className="marquee-track-left flex gap-3 h-full" style={{ width: "max-content" }}>
+                {[...Array(2)].map((_, dup) => (
+                  <div key={dup} className="flex gap-3 h-full">
+                    {distLogos.map((src, i) => (
+                      <img key={`${dup}-${i}`} src={src} alt={`Partner ${i + 1}`} className="h-full aspect-square rounded-sm flex-shrink-0 object-contain bg-white" />
+                    ))}
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="flex-1 overflow-hidden relative">
+              <div className="marquee-track-right flex gap-3 h-full" style={{ width: "max-content" }}>
+                {[...Array(2)].map((_, dup) => (
+                  <div key={dup} className="flex gap-3 h-full">
+                    {distLogos.map((src, i) => (
+                      <img key={`${dup}-${i}`} src={src} alt={`Partner ${i + 1}`} className="h-full aspect-square rounded-sm flex-shrink-0 object-contain bg-white" />
+                    ))}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+          <div className="w-full md:w-2/5 flex flex-col text-center md:text-left items-center md:items-start max-w-lg">
+            <h2 className="font-belleza text-xl md:text-2xl tracking-[0.1em] uppercase text-gray-900 mb-3">Global Distribution</h2>
+            <h3 className="text-xs md:text-[13px] text-gray-500 mb-5 leading-relaxed">Sales Channels Worldwide</h3>
+            <p className="text-xs md:text-[13px] text-gray-600 leading-[2.2] mb-10">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            <button onClick={() => setIsPartnerModalOpen(true)} className="border border-gray-900 text-gray-900 px-10 py-3.5 hover:bg-black/5 transition"><span className="font-belleza text-[12px] tracking-widest uppercase">Become a Partner</span></button>
+          </div>
         </div>
       </section>
 
       <section id="exhibition" className="py-16 md:py-28 px-8 md:px-10 bg-white border-t border-gray-100">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-10 md:gap-20 items-center">
-          <div className="w-full md:w-3/5 aspect-[4/3] bg-[#f5f4ef] border border-gray-100 flex items-center justify-center order-first md:order-last">
-            <div className="flex gap-5 opacity-20 transform -rotate-3"><div className="w-14 h-28 bg-gray-400 rounded-sm"></div><div className="w-14 h-28 bg-gray-500 rounded-sm mt-5"></div><div className="w-14 h-28 bg-gray-400 rounded-sm"></div></div>
+          <div
+            className={`w-full md:w-3/5 relative aspect-[4/3] bg-[#f5f4ef] border border-gray-100 overflow-hidden cursor-grab ${isExhDragging ? 'cursor-grabbing' : ''}`}
+            onTouchStart={onExhDragStart} onTouchMove={onExhDragMove} onTouchEnd={onExhDragEnd}
+            onMouseDown={onExhDragStart} onMouseMove={onExhDragMove} onMouseUp={onExhDragEnd} onMouseLeave={() => setIsExhDragging(false)}
+          >
+            <div className={`flex w-full h-full ${isExhTransitioning ? 'transition-transform duration-500 ease-out' : ''}`} style={{ transform: `translateX(-${exhIdx * 100}%)` }}>
+              {extendedExh.map((src, i) => (
+                <div key={i} className="min-w-full h-full flex-shrink-0">
+                  <img src={src} alt={`Exhibition ${(i % exhImages.length) + 1}`} className="pointer-events-none object-cover w-full h-full" />
+                </div>
+              ))}
+            </div>
+            <button onClick={() => setExhIdx(prev => prev - 1)} className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white border border-gray-200 rounded-full flex items-center justify-center z-10 text-gray-600 hover:bg-gray-50 hover:text-black transition">←</button>
+            <button onClick={() => setExhIdx(prev => prev + 1)} className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white border border-gray-200 rounded-full flex items-center justify-center z-10 text-gray-600 hover:bg-gray-50 hover:text-black transition">→</button>
           </div>
           <div className="w-full md:w-2/5 flex flex-col text-center md:text-left items-center md:items-start max-w-lg">
             <h2 className="font-belleza text-xl md:text-2xl tracking-[0.1em] uppercase text-gray-900 mb-3">Exhibition</h2>
@@ -340,11 +455,16 @@ export default function Home() {
           <input type="tel" name="Mobile" placeholder="Mobile Number (Optional)" className="p-4 border border-gray-200 text-xs focus:outline-none focus:border-gray-400 bg-white transition-colors"/>
           <textarea name="Message" required placeholder="How can we help you?" className="p-4 border border-gray-200 text-xs focus:outline-none focus:border-gray-400 bg-white h-32 md:h-36 resize-none transition-colors"></textarea>
           
-          <button type="submit" disabled={contactStatus === "loading" || contactStatus === "success"} className="w-full bg-[#0a1118] text-white p-5 mt-2 hover:bg-black transition shadow-sm disabled:bg-gray-400">
+          <button type="submit" disabled={contactStatus === "loading" || contactStatus === "success"} className="w-full bg-black text-white border border-black p-5 mt-2 transition shadow-sm hover:bg-white hover:text-black disabled:opacity-50">
             <span className="font-belleza text-[13px] tracking-widest uppercase font-medium">{contactStatus === "loading" ? "Sending..." : contactStatus === "success" ? "Sent Successfully ✔" : "Send Message"}</span>
           </button>
           {contactStatus === "error" && <p className="text-red-500 text-xs text-center mt-2">일시적인 네트워크 오류가 발생했습니다. 잠시 후 시도해주세요.</p>}
         </form>
+
+        <div className="hidden md:flex w-full max-w-xl gap-5 mt-4">
+          <button className="flex-1 py-4 border border-black bg-transparent text-black transition hover:bg-black hover:text-white font-belleza text-[12px] tracking-widest uppercase">Brochure Download</button>
+          <button className="flex-1 py-4 border border-black bg-transparent text-black transition hover:bg-black hover:text-white font-belleza text-[12px] tracking-widest uppercase">Pricing Inquiry</button>
+        </div>
       </section>
 
       <footer className="border-t border-gray-100 px-8 md:px-10 pt-16 pb-10 bg-white max-w-7xl mx-auto">
@@ -363,6 +483,11 @@ export default function Home() {
         </div>
         <div className="text-center text-[10px] text-gray-300 border-t border-gray-100 mt-14 pt-8">&copy; 2026 La Théorie. All rights reserved.</div>
       </footer>
+
+      <div className="fixed bottom-6 right-6 md:bottom-10 md:right-10 z-[100] flex flex-col items-end gap-3 pointer-events-none">
+        <button className="pointer-events-auto bg-white/90 text-black border border-black px-6 md:px-7 py-3 md:py-3.5 rounded-full shadow-lg backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:scale-105 font-belleza uppercase text-[11px] md:text-[12px] tracking-widest">Brochure download</button>
+        <button className="pointer-events-auto bg-black text-white border border-black px-6 md:px-7 py-3 md:py-3.5 rounded-full shadow-lg backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:scale-105 font-belleza uppercase text-[11px] md:text-[12px] tracking-widest">Pricing Inquiry</button>
+      </div>
     </div>
   );
 }

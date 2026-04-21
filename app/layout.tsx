@@ -3,6 +3,9 @@ import "./globals.css"; // (글로벌 CSS 파일이 있다면 유지, 없다면 
 export const metadata = {
   title: "La Théorie",
   description: "La Théorie official website",
+  icons: {
+    icon: "/Favicon.jpg",
+  },
 };
 
 export default function RootLayout({
