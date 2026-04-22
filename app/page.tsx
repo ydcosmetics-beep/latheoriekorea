@@ -249,9 +249,9 @@ export default function Home() {
             <p className="text-center text-xs text-gray-500 mb-8">원하시는 언어의 브로셔를 다운로드하세요.</p>
             <ul className="flex flex-col gap-3">
               {[
-                { href: "/LaTheorie_EN.pdf", label: "La Théorie — English" },
-                { href: "/LaTheorie_VN.pdf", label: "La Théorie — Vietnamese" },
-                { href: "/LaTheorie_KO.pdf", label: "La Théorie — Korean" },
+                { href: "/La_Theorie_EN.pdf", label: "La Théorie — English" },
+                { href: "/La_Theorie_VN.pdf", label: "La Théorie — Vietnamese" },
+                { href: "/La_Theorie_KO.pdf", label: "La Théorie — Korean" },
               ].map((item) => (
                 <li key={item.href}>
                   <a
