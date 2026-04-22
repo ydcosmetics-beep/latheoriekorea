@@ -17,19 +17,16 @@ const products = [
 ];
 
 const shorts = [
-  { id: 1, brand: "La Théorie", title: "지방산 0% 수분크림", bg: "linear-gradient(160deg,#c8c5be,#9a978f)" },
-  { id: 2, brand: "La Théorie", title: "트러블 진정 루틴", bg: "linear-gradient(160deg,#bab6ae,#8e8b84)" },
-  { id: 3, brand: "La Théorie", title: "신개념 클렌징 젤", bg: "linear-gradient(160deg,#d0cdc6,#a09890)" },
-  { id: 4, brand: "La Théorie", title: "피부 상재균의 비밀", bg: "linear-gradient(160deg,#c4c0b8,#968f88)" },
-  { id: 5, brand: "La Théorie", title: "선크림 발림성 테스트", bg: "linear-gradient(160deg,#ccc9c2,#9c9890)" },
-  { id: 6, brand: "La Théorie", title: "리얼 고객 리뷰", bg: "linear-gradient(160deg,#b8b5ae,#888580)" },
+  { id: 1, youtubeId: "_ZrZYQvScIo", title: "주오르" },
+  { id: 2, youtubeId: "vVji-k1Vdf4", title: "전지적 피부시점" },
+  { id: 3, youtubeId: "4Jltq1IfNvM", title: "킴유 뷰티" },
 ];
 const extendedShorts = [...shorts, ...shorts, ...shorts];
 
 const exhImages = ["/exh1.jpg", "/exh2.jpg"];
 const extendedExh = [...exhImages, ...exhImages, ...exhImages];
 
-const distLogos = ["/logo1.png", "/logo1.png", "/logo1.png", "/logo1.png", "/logo1.png", "/logo1.png"];
+const distLogos = ["/logo1.png", "/logo2.png", "/logo3.png", "/logo4.png", "/logo5.png", "/logo6.png"];
 
 export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -39,9 +36,13 @@ export default function Home() {
   const [isTransitioning, setIsTransitioning] = useState(true);
   const [isExhTransitioning, setIsExhTransitioning] = useState(true);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [showFloatingButtons, setShowFloatingButtons] = useState(false);
 
   const [isMeetingModalOpen, setIsMeetingModalOpen] = useState(false);
   const [isPartnerModalOpen, setIsPartnerModalOpen] = useState(false);
+  const [isBrochureModalOpen, setIsBrochureModalOpen] = useState(false);
+  const [isPricingModalOpen, setIsPricingModalOpen] = useState(false);
+  const [pricingStatus, setPricingStatus] = useState("idle");
   const [contactStatus, setContactStatus] = useState("idle");
   const [partnerStatus, setPartnerStatus] = useState("idle");
 
@@ -57,13 +58,20 @@ export default function Home() {
   const prodItemWidth = useMemo(() => 100 / prodVisibleItems, [prodVisibleItems]);
 
   useEffect(() => {
-    if (isMenuOpen || isMeetingModalOpen || isPartnerModalOpen) document.body.style.overflow = "hidden";
+    if (isMenuOpen || isMeetingModalOpen || isPartnerModalOpen || isBrochureModalOpen || isPricingModalOpen) document.body.style.overflow = "hidden";
     else document.body.style.overflow = "auto";
-  }, [isMenuOpen, isMeetingModalOpen, isPartnerModalOpen]);
+  }, [isMenuOpen, isMeetingModalOpen, isPartnerModalOpen, isBrochureModalOpen, isPricingModalOpen]);
 
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 10);
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 10);
+      const productsEl = document.getElementById("products");
+      if (productsEl) {
+        setShowFloatingButtons(productsEl.getBoundingClientRect().bottom < window.innerHeight);
+      }
+    };
     window.addEventListener("scroll", handleScroll);
+    handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -141,11 +149,11 @@ export default function Home() {
     if (distance < -50) setExhIdx(prev => prev - 1);
   };
 
-  const submitForm = async (e: FormEvent<HTMLFormElement>, type: "contact" | "partner") => {
+  const submitForm = async (e: FormEvent<HTMLFormElement>, type: "contact" | "partner" | "pricing") => {
     e.preventDefault();
 
     const formElement = e.currentTarget;
-    const setStatus = type === "contact" ? setContactStatus : setPartnerStatus;
+    const setStatus = type === "contact" ? setContactStatus : type === "partner" ? setPartnerStatus : setPricingStatus;
     setStatus("loading");
 
     const formData = new FormData(formElement);
@@ -164,6 +172,8 @@ export default function Home() {
         formElement.reset();
         if (type === "partner") {
             setTimeout(() => { setIsPartnerModalOpen(false); setPartnerStatus("idle"); }, 2000);
+        } else if (type === "pricing") {
+            setTimeout(() => { setIsPricingModalOpen(false); setPricingStatus("idle"); }, 2000);
         }
       } else {
         console.error("Web3Forms Response Error:", data);
@@ -223,6 +233,68 @@ export default function Home() {
                 <span className="font-belleza text-[13px] tracking-widest uppercase font-medium">{partnerStatus === "loading" ? "Sending..." : partnerStatus === "success" ? "Sent Successfully ✔" : "Send Inquiry"}</span>
               </button>
               {partnerStatus === "error" && <p className="text-red-500 text-xs text-center mt-2">일시적인 네트워크 오류가 발생했습니다. 잠시 후 시도해주세요.</p>}
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* 브로셔 다운로드 팝업 */}
+      {isBrochureModalOpen && (
+        <div className="fixed inset-0 z-[200] flex items-center justify-center bg-black/60 p-4 animate-in fade-in duration-200">
+          <div className="bg-white w-full max-w-sm p-8 relative shadow-2xl">
+            <button onClick={() => setIsBrochureModalOpen(false)} className="absolute top-5 right-5 text-gray-400 hover:text-black transition">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+            </button>
+            <h3 className="font-belleza text-2xl mb-2 text-center tracking-wide">Brochure Download</h3>
+            <p className="text-center text-xs text-gray-500 mb-8">원하시는 언어의 브로셔를 다운로드하세요.</p>
+            <ul className="flex flex-col gap-3">
+              {[
+                { href: "/LaTheorie_EN.pdf", label: "La Théorie — English" },
+                { href: "/LaTheorie_VN.pdf", label: "La Théorie — Vietnamese" },
+                { href: "/LaTheorie_KO.pdf", label: "La Théorie — Korean" },
+              ].map((item) => (
+                <li key={item.href}>
+                  <a
+                    href={item.href}
+                    download
+                    className="group flex items-center justify-between px-5 py-4 border border-black bg-transparent text-black transition hover:bg-black hover:text-white font-belleza text-[12px] tracking-widest uppercase"
+                  >
+                    <span>{item.label}</span>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="flex-shrink-0">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5 5-5M12 15V3" />
+                    </svg>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      )}
+
+      {/* 가격문의 팝업 */}
+      {isPricingModalOpen && (
+        <div className="fixed inset-0 z-[200] flex items-center justify-center bg-black/60 p-4 animate-in fade-in duration-200">
+          <div className="bg-white w-full max-w-lg p-8 relative shadow-2xl">
+            <button onClick={() => setIsPricingModalOpen(false)} className="absolute top-5 right-5 text-gray-400 hover:text-black transition">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+            </button>
+            <h3 className="font-belleza text-2xl mb-2 text-center tracking-wide">Request a Quote</h3>
+            <p className="text-center text-xs text-gray-500 mb-8">담당자 정보를 남겨주시면 가격표를 보내드리겠습니다.</p>
+            <form onSubmit={(e) => submitForm(e, "pricing")} className="flex flex-col gap-4 font-noto-sans">
+              <input type="hidden" name="access_key" defaultValue={ACCESS_KEY} />
+              <input type="hidden" name="subject" defaultValue="🌐 [La Théorie] 가격문의 접수" />
+              <input type="hidden" name="from_name" defaultValue="La Théorie Web" />
+
+              <input type="text" name="Company" required placeholder="Company Name *" className="p-3 border border-gray-200 text-xs focus:outline-none focus:border-gray-400" />
+              <div className="grid grid-cols-2 gap-4">
+                <input type="text" name="Name" required placeholder="Contact Person *" className="p-3 border border-gray-200 text-xs focus:outline-none focus:border-gray-400" />
+                <input type="email" name="Email" required placeholder="Email Address *" className="p-3 border border-gray-200 text-xs focus:outline-none focus:border-gray-400" />
+              </div>
+              <input type="text" name="Country" placeholder="Country / Region" className="p-3 border border-gray-200 text-xs focus:outline-none focus:border-gray-400" />
+              <button type="submit" disabled={pricingStatus === "loading" || pricingStatus === "success"} className="w-full bg-[#0a1118] text-white p-4 mt-2 hover:bg-black transition shadow-sm disabled:bg-gray-400">
+                <span className="font-belleza text-[13px] tracking-widest uppercase font-medium">{pricingStatus === "loading" ? "Sending..." : pricingStatus === "success" ? "Sent Successfully ✔" : "Send Inquiry"}</span>
+              </button>
+              {pricingStatus === "error" && <p className="text-red-500 text-xs text-center mt-2">일시적인 네트워크 오류가 발생했습니다. 잠시 후 시도해주세요.</p>}
             </form>
           </div>
         </div>
@@ -359,12 +431,25 @@ export default function Home() {
                 {extendedShorts.map((item, idx) => {
                   const isActive = idx === shortIdx;
                   return (
-                    <div key={idx} className={`w-[220px] md:w-[320px] aspect-[9/16] mx-[10px] flex-shrink-0 rounded-[20px] overflow-hidden transition-all duration-500 relative ${isActive ? 'scale-110 z-10 opacity-100' : 'scale-90 opacity-60'}`} style={{ background: item.bg }}>
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
-                      <div className={`absolute bottom-6 left-6 right-6 transition-opacity duration-300 ${isActive ? 'opacity-100' : 'opacity-0'}`}>
-                        <p className="text-[11px] md:text-[12px] text-white/80 mb-2 tracking-wide">{item.brand}</p>
-                        <p className="text-[14px] md:text-[16px] font-semibold text-white leading-snug break-keep">{item.title}</p>
-                      </div>
+                    <div key={idx} className={`w-[220px] md:w-[320px] aspect-[9/16] mx-[10px] flex-shrink-0 rounded-[20px] overflow-hidden transition-all duration-500 relative bg-gray-900 ${isActive ? 'scale-110 z-10 opacity-100 pointer-events-auto' : 'scale-90 opacity-60'}`}>
+                      {isActive ? (
+                        <iframe
+                          src={`https://www.youtube.com/embed/${item.youtubeId}?autoplay=0&rel=0&modestbranding=1`}
+                          width="100%"
+                          height="100%"
+                          frameBorder="0"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                          allowFullScreen
+                          className="w-full h-full"
+                          title={item.title}
+                        />
+                      ) : (
+                        <img
+                          src={`https://img.youtube.com/vi/${item.youtubeId}/0.jpg`}
+                          alt={item.title}
+                          className="w-full h-full object-cover"
+                        />
+                      )}
                     </div>
                   );
                 })}
@@ -388,7 +473,7 @@ export default function Home() {
                 {[...Array(2)].map((_, dup) => (
                   <div key={dup} className="flex gap-3 h-full">
                     {distLogos.map((src, i) => (
-                      <img key={`${dup}-${i}`} src={src} alt={`Partner ${i + 1}`} className="h-full aspect-square rounded-sm flex-shrink-0 object-contain bg-white" />
+                      <img key={`${dup}-${i}`} src={src} alt={`Partner ${i + 1}`} className="h-full aspect-square rounded-sm flex-shrink-0 object-contain bg-white" onError={(e) => { (e.target as HTMLImageElement).style.visibility = 'hidden'; }} />
                     ))}
                   </div>
                 ))}
@@ -399,7 +484,7 @@ export default function Home() {
                 {[...Array(2)].map((_, dup) => (
                   <div key={dup} className="flex gap-3 h-full">
                     {distLogos.map((src, i) => (
-                      <img key={`${dup}-${i}`} src={src} alt={`Partner ${i + 1}`} className="h-full aspect-square rounded-sm flex-shrink-0 object-contain bg-white" />
+                      <img key={`${dup}-${i}`} src={src} alt={`Partner ${i + 1}`} className="h-full aspect-square rounded-sm flex-shrink-0 object-contain bg-white" onError={(e) => { (e.target as HTMLImageElement).style.visibility = 'hidden'; }} />
                     ))}
                   </div>
                 ))}
@@ -417,20 +502,24 @@ export default function Home() {
 
       <section id="exhibition" className="py-16 md:py-28 px-8 md:px-10 bg-white border-t border-gray-100">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-10 md:gap-20 items-center">
-          <div
-            className={`w-full md:w-3/5 relative aspect-[4/3] bg-[#f5f4ef] border border-gray-100 overflow-hidden cursor-grab ${isExhDragging ? 'cursor-grabbing' : ''}`}
-            onTouchStart={onExhDragStart} onTouchMove={onExhDragMove} onTouchEnd={onExhDragEnd}
-            onMouseDown={onExhDragStart} onMouseMove={onExhDragMove} onMouseUp={onExhDragEnd} onMouseLeave={() => setIsExhDragging(false)}
-          >
-            <div className={`flex w-full h-full ${isExhTransitioning ? 'transition-transform duration-500 ease-out' : ''}`} style={{ transform: `translateX(-${exhIdx * 100}%)` }}>
-              {extendedExh.map((src, i) => (
-                <div key={i} className="min-w-full h-full flex-shrink-0">
-                  <img src={src} alt={`Exhibition ${(i % exhImages.length) + 1}`} className="pointer-events-none object-cover w-full h-full" />
-                </div>
-              ))}
+          <div className="w-full md:w-3/5 flex flex-col">
+            <div
+              className={`relative w-full aspect-[4/3] bg-[#f5f4ef] border border-gray-100 overflow-hidden cursor-grab ${isExhDragging ? 'cursor-grabbing' : ''}`}
+              onTouchStart={onExhDragStart} onTouchMove={onExhDragMove} onTouchEnd={onExhDragEnd}
+              onMouseDown={onExhDragStart} onMouseMove={onExhDragMove} onMouseUp={onExhDragEnd} onMouseLeave={() => setIsExhDragging(false)}
+            >
+              <div className={`flex w-full h-full ${isExhTransitioning ? 'transition-transform duration-500 ease-out' : ''}`} style={{ transform: `translateX(-${exhIdx * 100}%)` }}>
+                {extendedExh.map((src, i) => (
+                  <div key={i} className="min-w-full h-full flex-shrink-0">
+                    <img src={src} alt={`Exhibition ${(i % exhImages.length) + 1}`} className="pointer-events-none object-cover w-full h-full" />
+                  </div>
+                ))}
+              </div>
             </div>
-            <button onClick={() => setExhIdx(prev => prev - 1)} className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white border border-gray-200 rounded-full flex items-center justify-center z-10 text-gray-600 hover:bg-gray-50 hover:text-black transition">←</button>
-            <button onClick={() => setExhIdx(prev => prev + 1)} className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white border border-gray-200 rounded-full flex items-center justify-center z-10 text-gray-600 hover:bg-gray-50 hover:text-black transition">→</button>
+            <div className="flex justify-center gap-4 mt-4">
+              <button onClick={() => setExhIdx(prev => prev - 1)} className="w-10 h-10 bg-white border border-gray-200 rounded-full flex items-center justify-center text-gray-600 hover:bg-gray-50 hover:text-black transition">←</button>
+              <button onClick={() => setExhIdx(prev => prev + 1)} className="w-10 h-10 bg-white border border-gray-200 rounded-full flex items-center justify-center text-gray-600 hover:bg-gray-50 hover:text-black transition">→</button>
+            </div>
           </div>
           <div className="w-full md:w-2/5 flex flex-col text-center md:text-left items-center md:items-start max-w-lg">
             <h2 className="font-belleza text-xl md:text-2xl tracking-[0.1em] uppercase text-gray-900 mb-3">Exhibition</h2>
@@ -462,8 +551,8 @@ export default function Home() {
         </form>
 
         <div className="hidden md:flex w-full max-w-xl gap-5 mt-4">
-          <button className="flex-1 py-4 border border-black bg-transparent text-black transition hover:bg-black hover:text-white font-belleza text-[12px] tracking-widest uppercase">Brochure Download</button>
-          <button className="flex-1 py-4 border border-black bg-transparent text-black transition hover:bg-black hover:text-white font-belleza text-[12px] tracking-widest uppercase">Pricing Inquiry</button>
+          <button onClick={() => setIsBrochureModalOpen(true)} className="flex-1 py-4 border border-black bg-transparent text-black transition hover:bg-black hover:text-white font-belleza text-[12px] tracking-widest uppercase">Brochure Download</button>
+          <button onClick={() => setIsPricingModalOpen(true)} className="flex-1 py-4 border border-black bg-transparent text-black transition hover:bg-black hover:text-white font-belleza text-[12px] tracking-widest uppercase">Get a Quote</button>
         </div>
       </section>
 
@@ -484,9 +573,9 @@ export default function Home() {
         <div className="text-center text-[10px] text-gray-300 border-t border-gray-100 mt-14 pt-8">&copy; 2026 La Théorie. All rights reserved.</div>
       </footer>
 
-      <div className="fixed bottom-6 right-6 md:bottom-10 md:right-10 z-[100] flex flex-col items-end gap-3 pointer-events-none">
-        <button className="pointer-events-auto bg-white/90 text-black border border-black px-6 md:px-7 py-3 md:py-3.5 rounded-full shadow-lg backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:scale-105 font-belleza uppercase text-[11px] md:text-[12px] tracking-widest">Brochure download</button>
-        <button className="pointer-events-auto bg-black text-white border border-black px-6 md:px-7 py-3 md:py-3.5 rounded-full shadow-lg backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:scale-105 font-belleza uppercase text-[11px] md:text-[12px] tracking-widest">Pricing Inquiry</button>
+      <div className={`fixed bottom-6 right-6 md:bottom-10 md:right-10 z-[100] flex flex-col items-end gap-3 transition-all duration-[600ms] ease-out ${showFloatingButtons ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 translate-y-4 pointer-events-none'} md:opacity-100 md:translate-y-0 md:pointer-events-none`}>
+        <button onClick={() => setIsBrochureModalOpen(true)} className="pointer-events-auto bg-white/90 text-black border border-black px-6 md:px-7 py-3 md:py-3.5 rounded-full shadow-lg backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:scale-105 font-belleza uppercase text-[11px] md:text-[12px] tracking-widest">Brochure download</button>
+        <button onClick={() => setIsPricingModalOpen(true)} className="pointer-events-auto bg-black text-white border border-black px-6 md:px-7 py-3 md:py-3.5 rounded-full shadow-lg backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:scale-105 font-belleza uppercase text-[11px] md:text-[12px] tracking-widest">Get a Quote</button>
       </div>
     </div>
   );
