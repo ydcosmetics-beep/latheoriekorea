@@ -16,24 +16,55 @@ const products = [
   { id: 8, name: "Shampoo :: Scalp Balance", desc: "Soothing Shampoo for Seborrheic Dermatitis & Forehead Breakouts", price: "unfixed", oldPrice: null, pct: null, badge: "Planned", isSoldOut: false, img: "/prod8.jpg"  },
 ];
 
-const shorts = [
-  { id: 1, youtubeId: "_ZrZYQvScIo", title: "주오르" },
-  { id: 2, youtubeId: "vVji-k1Vdf4", title: "전지적 피부시점" },
-  { id: 3, youtubeId: "4Jltq1IfNvM", title: "킴유 뷰티" },
-];
-const extendedShorts = [...shorts, ...shorts, ...shorts];
-
 const exhImages = ["/exh1.jpg", "/exh2.jpg"];
 const extendedExh = [...exhImages, ...exhImages, ...exhImages];
 
 const distLogos = ["/logo1.png", "/logo2.png", "/logo3.png", "/logo4.png", "/logo5.png", "/logo6.png"];
 
+type MediaVideo = {
+  id: number;
+  embedId: string | null;
+  start?: number;
+  link: string | null;
+  channel: string;
+  title: string;
+};
+
+const mediaVideos: MediaVideo[] = [
+  {
+    id: 1,
+    embedId: "s9pXU-7XJNw",
+    start: 328,
+    link: "https://youtu.be/s9pXU-7XJNw",
+    channel: "Dermatologist Channel · Medical Review",
+    title: "Trouble Care Cosmetics Used by Dermatologists",
+  },
+  {
+    id: 2,
+    embedId: "OuTpcad5L9w",
+    start: 64,
+    link: "https://youtu.be/OuTpcad5L9w",
+    channel: "Vogue Japan · K-Beauty Feature",
+    title: "Actress Min Hyo-rin's Favorite in Vogue Japan",
+  },
+  {
+    id: 3,
+    embedId: "EJpnOds_o-o",
+    start: 306,
+    link: "https://youtu.be/EJpnOds_o-o",
+    channel: "Hyerim · 270K subscribers",
+    title: "Beauty Creator (270K) Analyzes the Ingredients",
+  },
+  { id: 4, embedId: null, link: null, channel: "TBD", title: "TBA" },
+  { id: 5, embedId: null, link: null, channel: "TBD", title: "TBA" },
+  { id: 6, embedId: null, link: null, channel: "TBD", title: "TBA" },
+  { id: 7, embedId: null, link: null, channel: "TBD", title: "TBA" },
+];
+
 export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [prodIdx, setProdIdx] = useState(0);
-  const [shortIdx, setShortIdx] = useState(shorts.length + 2);
   const [exhIdx, setExhIdx] = useState(exhImages.length);
-  const [isTransitioning, setIsTransitioning] = useState(true);
   const [isExhTransitioning, setIsExhTransitioning] = useState(true);
   const [isScrolled, setIsScrolled] = useState(false);
   const [showFloatingButtons, setShowFloatingButtons] = useState(false);
@@ -53,6 +84,12 @@ export default function Home() {
   const [exhTouchStart, setExhTouchStart] = useState(0);
   const [exhTouchEnd, setExhTouchEnd] = useState(0);
   const [isExhDragging, setIsExhDragging] = useState(false);
+
+  const [mediaIdx, setMediaIdx] = useState(0);
+  const [mediaTouchStart, setMediaTouchStart] = useState(0);
+  const [mediaTouchEnd, setMediaTouchEnd] = useState(0);
+  const [isMediaDragging, setIsMediaDragging] = useState(false);
+  const [mediaMaxIdx, setMediaMaxIdx] = useState(2);
 
   const prodVisibleItems = 3.4;
   const prodItemWidth = useMemo(() => 100 / prodVisibleItems, [prodVisibleItems]);
@@ -76,16 +113,14 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    if (shortIdx >= shorts.length * 2 + 1 || shortIdx <= shorts.length - 1) {
-      const timer = setTimeout(() => {
-        setIsTransitioning(false);
-        if (shortIdx >= shorts.length * 2 + 1) setShortIdx(shorts.length + 1);
-        else if (shortIdx <= shorts.length - 1) setShortIdx(shorts.length * 2 - 1);
-        setTimeout(() => setIsTransitioning(true), 50);
-      }, 500);
-      return () => clearTimeout(timer);
-    }
-  }, [shortIdx]);
+    const calc = () => {
+      const visible = window.innerWidth < 768 ? 1 : 3;
+      setMediaMaxIdx(Math.max(0, mediaVideos.length - 2 - visible));
+    };
+    calc();
+    window.addEventListener("resize", calc);
+    return () => window.removeEventListener("resize", calc);
+  }, []);
 
   useEffect(() => {
     if (exhIdx >= exhImages.length * 2 || exhIdx < exhImages.length) {
@@ -110,14 +145,6 @@ export default function Home() {
     if (!isDragging) return;
     const clientX = 'touches' in e ? e.touches[0].clientX : (e as MouseEvent).clientX;
     setTouchEnd(clientX);
-  };
-
-  const onShortsDragEnd = () => {
-    setIsDragging(false);
-    if (!touchStart || !touchEnd) return;
-    const distance = touchStart - touchEnd;
-    if (distance > 50) setShortIdx(prev => prev + 1); 
-    if (distance < -50) setShortIdx(prev => prev - 1); 
   };
 
   const onProdDragEnd = () => {
@@ -147,6 +174,27 @@ export default function Home() {
     const distance = exhTouchStart - exhTouchEnd;
     if (distance > 50) setExhIdx(prev => prev + 1);
     if (distance < -50) setExhIdx(prev => prev - 1);
+  };
+
+  const onMediaDragStart = (e: TouchEvent | MouseEvent) => {
+    setIsMediaDragging(true);
+    setMediaTouchEnd(0);
+    const clientX = 'touches' in e ? e.touches[0].clientX : (e as MouseEvent).clientX;
+    setMediaTouchStart(clientX);
+  };
+
+  const onMediaDragMove = (e: TouchEvent | MouseEvent) => {
+    if (!isMediaDragging) return;
+    const clientX = 'touches' in e ? e.touches[0].clientX : (e as MouseEvent).clientX;
+    setMediaTouchEnd(clientX);
+  };
+
+  const onMediaDragEnd = () => {
+    setIsMediaDragging(false);
+    if (!mediaTouchStart || !mediaTouchEnd) return;
+    const distance = mediaTouchStart - mediaTouchEnd;
+    if (distance > 50) setMediaIdx(prev => Math.min(mediaMaxIdx, prev + 1));
+    if (distance < -50) setMediaIdx(prev => Math.max(0, prev - 1));
   };
 
   const submitForm = async (e: FormEvent<HTMLFormElement>, type: "contact" | "partner" | "pricing") => {
@@ -187,15 +235,15 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-white text-gray-900 font-sans overflow-x-hidden">
-      {/* 미팅 예약 팝업 */}
+      {/* Meeting modal */}
       {isMeetingModalOpen && (
         <div className="fixed inset-0 z-[200] flex items-center justify-center bg-black/60 p-4 animate-in fade-in duration-200">
           <div className="bg-white w-full max-w-2xl relative shadow-2xl" style={{ height: '680px' }}>
             <button onClick={() => setIsMeetingModalOpen(false)} className="absolute top-4 right-4 z-10 text-gray-400 hover:text-black transition bg-white rounded-full p-1">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
             </button>
-            {/* ↓ Cal.com 계정 생성 후 아래 URL을 본인 링크로 교체하세요 */}
-            {/* 예: https://cal.com/YOUR_USERNAME/exhibition-meeting */}
+            {/* ↓ Replace the URL below with your Cal.com link after creating an account */}
+            {/* e.g., https://cal.com/YOUR_USERNAME/exhibition-meeting */}
             <iframe
               src="https://cal.com/latheorie/exhibition-meeting-30min?embed=true&embedType=inline&theme=light&hideEventTypeDetails=false"
               width="100%"
@@ -208,7 +256,7 @@ export default function Home() {
         </div>
       )}
 
-      {/* 파트너 문의 팝업 */}
+      {/* Partner modal */}
       {isPartnerModalOpen && (
         <div className="fixed inset-0 z-[200] flex items-center justify-center bg-black/60 p-4 animate-in fade-in duration-200">
           <div className="bg-white w-full max-w-lg p-8 relative shadow-2xl">
@@ -216,10 +264,10 @@ export default function Home() {
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
             </button>
             <h3 className="font-belleza text-2xl mb-2 text-center tracking-wide">Become a Partner</h3>
-            <p className="text-center text-xs text-gray-500 mb-8">파트너십 문의 내용을 남겨주시면 담당자가 회신드리겠습니다.</p>
+            <p className="text-center text-xs text-gray-500 mb-8">Leave your details and our team will get back to you shortly.</p>
             <form onSubmit={(e) => submitForm(e, "partner")} className="flex flex-col gap-4 font-noto-sans">
               <input type="hidden" name="access_key" defaultValue={ACCESS_KEY} />
-              <input type="hidden" name="subject" defaultValue="🌐 [La Théorie] 파트너십 문의 접수" />
+              <input type="hidden" name="subject" defaultValue="🌐 [La Théorie] New Partnership Inquiry" />
               <input type="hidden" name="from_name" defaultValue="La Théorie Web" />
 
               <input type="text" name="Company" required placeholder="Company Name *" className="p-3 border border-gray-200 text-xs focus:outline-none focus:border-gray-400" />
@@ -232,13 +280,13 @@ export default function Home() {
               <button type="submit" disabled={partnerStatus === "loading" || partnerStatus === "success"} className="w-full bg-[#0a1118] text-white p-4 mt-2 hover:bg-black transition shadow-sm disabled:bg-gray-400">
                 <span className="font-belleza text-[13px] tracking-widest uppercase font-medium">{partnerStatus === "loading" ? "Sending..." : partnerStatus === "success" ? "Sent Successfully ✔" : "Send Inquiry"}</span>
               </button>
-              {partnerStatus === "error" && <p className="text-red-500 text-xs text-center mt-2">일시적인 네트워크 오류가 발생했습니다. 잠시 후 시도해주세요.</p>}
+              {partnerStatus === "error" && <p className="text-red-500 text-xs text-center mt-2">A temporary error occurred. Please try again later.</p>}
             </form>
           </div>
         </div>
       )}
 
-      {/* 브로셔 다운로드 팝업 */}
+      {/* Brochure modal */}
       {isBrochureModalOpen && (
         <div className="fixed inset-0 z-[200] flex items-center justify-center bg-black/60 p-4 animate-in fade-in duration-200">
           <div className="bg-white w-full max-w-sm p-8 relative shadow-2xl">
@@ -246,7 +294,7 @@ export default function Home() {
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
             </button>
             <h3 className="font-belleza text-2xl mb-2 text-center tracking-wide">Brochure Download</h3>
-            <p className="text-center text-xs text-gray-500 mb-8">원하시는 언어의 브로셔를 다운로드하세요.</p>
+            <p className="text-center text-xs text-gray-500 mb-8">Select a language to download the brochure.</p>
             <ul className="flex flex-col gap-3">
               {[
                 { href: "/La_Theorie_EN.pdf", label: "La Théorie — English" },
@@ -271,7 +319,7 @@ export default function Home() {
         </div>
       )}
 
-      {/* 가격문의 팝업 */}
+      {/* Pricing modal */}
       {isPricingModalOpen && (
         <div className="fixed inset-0 z-[200] flex items-center justify-center bg-black/60 p-4 animate-in fade-in duration-200">
           <div className="bg-white w-full max-w-lg p-8 relative shadow-2xl">
@@ -279,10 +327,10 @@ export default function Home() {
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
             </button>
             <h3 className="font-belleza text-2xl mb-2 text-center tracking-wide">Request a Quote</h3>
-            <p className="text-center text-xs text-gray-500 mb-8">담당자 정보를 남겨주시면 가격표를 보내드리겠습니다.</p>
+            <p className="text-center text-xs text-gray-500 mb-8">Leave your contact details and we&rsquo;ll send over our price list.</p>
             <form onSubmit={(e) => submitForm(e, "pricing")} className="flex flex-col gap-4 font-noto-sans">
               <input type="hidden" name="access_key" defaultValue={ACCESS_KEY} />
-              <input type="hidden" name="subject" defaultValue="🌐 [La Théorie] 가격문의 접수" />
+              <input type="hidden" name="subject" defaultValue="🌐 [La Théorie] New Quote Request" />
               <input type="hidden" name="from_name" defaultValue="La Théorie Web" />
 
               <input type="text" name="Company" required placeholder="Company Name *" className="p-3 border border-gray-200 text-xs focus:outline-none focus:border-gray-400" />
@@ -294,7 +342,7 @@ export default function Home() {
               <button type="submit" disabled={pricingStatus === "loading" || pricingStatus === "success"} className="w-full bg-[#0a1118] text-white p-4 mt-2 hover:bg-black transition shadow-sm disabled:bg-gray-400">
                 <span className="font-belleza text-[13px] tracking-widest uppercase font-medium">{pricingStatus === "loading" ? "Sending..." : pricingStatus === "success" ? "Sent Successfully ✔" : "Send Inquiry"}</span>
               </button>
-              {pricingStatus === "error" && <p className="text-red-500 text-xs text-center mt-2">일시적인 네트워크 오류가 발생했습니다. 잠시 후 시도해주세요.</p>}
+              {pricingStatus === "error" && <p className="text-red-500 text-xs text-center mt-2">A temporary error occurred. Please try again later.</p>}
             </form>
           </div>
         </div>
@@ -305,8 +353,8 @@ export default function Home() {
         html { scroll-behavior: smooth; }
         body { font-family: 'Noto Sans', sans-serif; background-color: #ffffff; }
         h1, h2, h3, .font-belleza { font-family: 'Belleza', sans-serif; }
-        :root { --item-w: 240px; --item-half: 120px; }
-        @media (min-width: 768px) { :root { --item-w: 340px; --item-half: 170px; } }
+        :root { --media-item-w: calc(100% / 1.5); }
+        @media (min-width: 768px) { :root { --media-item-w: calc(100% / 3.4); } }
 
         @keyframes marquee-left {
           0% { transform: translateX(0); }
@@ -415,52 +463,149 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="reviews" className="py-16 md:py-32 bg-white overflow-hidden">
-        <div className="max-w-7xl mx-auto relative px-8 md:px-10">
-          <div className="text-center mb-12 md:mb-16">
-            <h2 className="font-belleza text-xl md:text-2xl tracking-[0.14em] uppercase text-gray-900">Reviews</h2>
+      <section id="reviews" className="bg-white">
+        {/* PART 1: Interviews */}
+        <div className="py-16 md:py-28 px-8 md:px-10 max-w-5xl mx-auto">
+          <div className="text-center mb-14 md:mb-20">
+            <h2 className="font-belleza text-xl md:text-2xl tracking-[0.14em] uppercase text-gray-900 mb-3">Interviews</h2>
+            <p className="text-xs md:text-[13px] text-gray-500">Real experiences from medical professionals and skincare specialists</p>
           </div>
-          
-          <div 
-            className={`relative w-full overflow-hidden cursor-grab ${isDragging ? 'cursor-grabbing' : ''}`}
-            onTouchStart={onDragStart} onTouchMove={onDragMove} onTouchEnd={onShortsDragEnd}
-            onMouseDown={onDragStart} onMouseMove={onDragMove} onMouseUp={onShortsDragEnd} onMouseLeave={() => setIsDragging(false)}
-          >
-            <div className="relative w-full h-[500px] md:h-[680px] pointer-events-none">
-              <div className={`absolute top-0 left-1/2 h-full flex items-center ${isTransitioning ? 'transition-transform duration-500 ease-out' : ''}`} style={{ transform: `translateX(calc(-1 * var(--item-half) - ${shortIdx} * var(--item-w)))` }}>
-                {extendedShorts.map((item, idx) => {
-                  const isActive = idx === shortIdx;
-                  return (
-                    <div key={idx} className={`w-[220px] md:w-[320px] aspect-[9/16] mx-[10px] flex-shrink-0 rounded-[20px] overflow-hidden transition-all duration-500 relative bg-gray-900 ${isActive ? 'scale-110 z-10 opacity-100 pointer-events-auto' : 'scale-90 opacity-60'}`}>
-                      {isActive ? (
-                        <iframe
-                          src={`https://www.youtube.com/embed/${item.youtubeId}?autoplay=0&rel=0&modestbranding=1`}
-                          width="100%"
-                          height="100%"
-                          frameBorder="0"
-                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                          allowFullScreen
-                          className="w-full h-full"
-                          title={item.title}
-                        />
-                      ) : (
-                        <img
-                          src={`https://img.youtube.com/vi/${item.youtubeId}/0.jpg`}
-                          alt={item.title}
-                          className="w-full h-full object-cover"
-                        />
-                      )}
-                    </div>
-                  );
-                })}
+
+          {[
+            {
+              reverse: false,
+              image: "/char_1.png",
+              headline: "I cut the prescriptions, recommended a skincare product — and that became word of mouth.",
+              body: "Most acne patients leave with an antibiotic prescription after extraction. But many of them resist medication. Since placing La Théorie in our clinic, I've been able to give patients a real at-home routine to maintain their results. Fewer flare-ups meant fewer complaints — and satisfied patients started bringing in friends. Recommending a skincare product instead of another prescription actually built more trust. New patient referrals increased, return visits went up, and we now have a far more stable revenue structure than procedure-only treatment ever gave us.",
+              source: "Dr. Ji-Seung Jeon · Dermatologist, YourSkinClinics",
+            },
+            {
+              reverse: true,
+              image: undefined as string | undefined,
+              headline: "It turned out the skincare product was driving more return visits than the treatments.",
+              body: "No matter how well a treatment goes in the salon, if a client goes home and uses something irritating, they're back to square one. I came across La Théorie on YouTube — a skincare line built specifically for troubled skin — and decided to try it. Once clients had a proper home routine, the results from our treatments lasted much longer. That naturally led to more return visits and referrals. Now it's the first product I explain to every new client.",
+              source: "Director ○○○ · La Beauté Esthetic, Jamsil",
+            },
+          ].map((card, i) => (
+            <div
+              key={i}
+              className={`flex flex-col ${card.reverse ? "md:flex-row-reverse" : "md:flex-row"} gap-8 md:gap-14 items-center py-12 md:py-16 ${i > 0 ? "border-t border-gray-100" : ""}`}
+            >
+              <div className="w-full md:w-2/5 aspect-[3/4] bg-[#f5f4ef] border border-gray-100 flex-shrink-0 overflow-hidden">
+                {card.image && <img src={card.image} alt="" className="w-full h-full object-cover" />}
+              </div>
+              <div className="w-full md:w-3/5 flex flex-col">
+                <span className="font-belleza text-5xl md:text-6xl text-gray-300 leading-none mb-4">&ldquo;</span>
+                <h3 className="font-belleza text-[18px] md:text-[22px] text-gray-900 leading-[1.5] tracking-wide mb-6 break-keep">{card.headline}</h3>
+                <p className="text-xs leading-loose text-gray-600 mb-6 break-keep">{card.body}</p>
+                <p className="font-belleza text-[10px] tracking-widest uppercase text-gray-400">{card.source}</p>
               </div>
             </div>
-          </div>
-          <button onClick={() => setShortIdx(shortIdx - 1)} className="absolute left-8 md:left-10 top-1/2 -translate-y-1/2 w-10 h-10 bg-white border border-gray-200 rounded-full flex items-center justify-center z-20 text-gray-600 hover:bg-gray-50 hover:text-black transition">←</button>
-          <button onClick={() => setShortIdx(shortIdx + 1)} className="absolute right-8 md:right-10 top-1/2 -translate-y-1/2 w-10 h-10 bg-white border border-gray-200 rounded-full flex items-center justify-center z-20 text-gray-600 hover:bg-gray-50 hover:text-black transition">→</button>
+          ))}
+        </div>
 
-          <div className="flex justify-center mt-12 md:mt-16">
-            <Link href="/reviews" className="border border-black bg-transparent text-black px-9 py-3.5 transition hover:bg-black hover:text-white uppercase tracking-widest font-belleza text-[12px]">View More</Link>
+        {/* PART 2: Media Coverage */}
+        <div className="bg-[#f9f8f5] py-16 md:py-28 px-8 md:px-10 border-t border-gray-100">
+          <div className="max-w-7xl mx-auto">
+            <div className="text-center mb-12 md:mb-16">
+              <h2 className="font-belleza text-xl md:text-2xl tracking-[0.14em] uppercase text-gray-900 mb-3">Media</h2>
+              <p className="text-xs md:text-[13px] text-gray-500">Featured organically, without sponsorships</p>
+            </div>
+
+            {/* Top fixed 2-column grid (videos 1, 2) */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mb-10 md:mb-14">
+              {mediaVideos.slice(0, 2).map((v) => (
+                <div key={v.id} className="bg-white border border-gray-100 flex flex-col">
+                  <div className="aspect-video bg-gray-900">
+                    {v.embedId && (
+                      <iframe
+                        src={`https://www.youtube.com/embed/${v.embedId}?start=${v.start ?? 0}&rel=0&modestbranding=1`}
+                        className="w-full h-full"
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                        title={v.title}
+                      />
+                    )}
+                  </div>
+                  <div className="p-5 flex flex-col">
+                    <p className="font-belleza text-[9px] tracking-widest uppercase text-gray-400 mb-2">{v.channel}</p>
+                    <h4 className="font-belleza text-[13px] text-gray-900 leading-snug mb-2 break-keep">{v.title}</h4>
+                    {v.link && (
+                      <a href={v.link} target="_blank" rel="noopener noreferrer" className="border-t border-gray-100 pt-2 mt-2 font-belleza text-[10px] uppercase tracking-widest text-gray-500 hover:text-black transition">
+                        Watch on YouTube ↗
+                      </a>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Bottom carousel (videos 3~7) */}
+            <div
+              className={`relative w-full overflow-hidden cursor-grab ${isMediaDragging ? 'cursor-grabbing' : ''}`}
+              onTouchStart={onMediaDragStart} onTouchMove={onMediaDragMove} onTouchEnd={onMediaDragEnd}
+              onMouseDown={onMediaDragStart} onMouseMove={onMediaDragMove} onMouseUp={onMediaDragEnd} onMouseLeave={() => setIsMediaDragging(false)}
+            >
+              <div
+                className="flex transition-transform duration-500 ease-out"
+                style={{ transform: `translateX(calc(-${mediaIdx} * var(--media-item-w)))` }}
+              >
+                {mediaVideos.slice(2).map((v) => (
+                  <div
+                    key={v.id}
+                    className="pr-3 md:pr-4 flex-shrink-0"
+                    style={{ minWidth: 'var(--media-item-w)', width: 'var(--media-item-w)' }}
+                  >
+                    <div className="bg-white border border-gray-100 flex flex-col">
+                      {v.embedId ? (
+                        <div className="relative">
+                          <iframe
+                            src={`https://www.youtube.com/embed/${v.embedId}?start=${v.start ?? 0}&rel=0&modestbranding=1`}
+                            width="100%"
+                            style={{ aspectRatio: '16/9' }}
+                            frameBorder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
+                            title={v.title}
+                          />
+                          <div className={`absolute inset-0 ${isMediaDragging ? 'pointer-events-auto' : 'pointer-events-none'}`} />
+                        </div>
+                      ) : (
+                        <div className="bg-[#f0efea] flex items-center justify-center" style={{ aspectRatio: '16/9' }}>
+                          <span className="font-belleza text-[10px] uppercase tracking-widest text-gray-300">Coming Soon</span>
+                        </div>
+                      )}
+                      <div className="px-3 py-3 flex flex-col">
+                        <p className="font-belleza text-[9px] uppercase tracking-widest text-gray-400">{v.channel}</p>
+                        <h4 className="font-belleza text-[13px] text-gray-900 mt-1 break-keep">{v.title}</h4>
+                        {v.link && (
+                          <a href={v.link} target="_blank" rel="noopener noreferrer" className="border-t border-gray-100 mt-2 pt-2 font-belleza text-[10px] uppercase tracking-widest text-gray-400 hover:text-black transition">
+                            Watch on YouTube ↗
+                          </a>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Carousel arrows */}
+            <div className="flex justify-center gap-4 mt-8">
+              <button
+                onClick={() => setMediaIdx(prev => Math.max(0, prev - 1))}
+                className={`w-10 h-10 border border-gray-200 rounded-full flex items-center justify-center hover:bg-gray-50 transition text-gray-500 ${mediaIdx === 0 ? 'opacity-30 pointer-events-none' : ''}`}
+              >
+                ←
+              </button>
+              <button
+                onClick={() => setMediaIdx(prev => Math.min(mediaMaxIdx, prev + 1))}
+                className={`w-10 h-10 border border-gray-200 rounded-full flex items-center justify-center hover:bg-gray-50 transition text-gray-500 ${mediaIdx >= mediaMaxIdx ? 'opacity-30 pointer-events-none' : ''}`}
+              >
+                →
+              </button>
+            </div>
           </div>
         </div>
       </section>
@@ -492,9 +637,9 @@ export default function Home() {
             </div>
           </div>
           <div className="w-full md:w-2/5 flex flex-col text-center md:text-left items-center md:items-start max-w-lg">
-            <h2 className="font-belleza text-xl md:text-2xl tracking-[0.1em] uppercase text-gray-900 mb-3">Global Distribution</h2>
+            <h2 className="font-belleza text-xl md:text-2xl tracking-[0.1em] uppercase text-gray-900 mb-3">Distribution</h2>
             <h3 className="text-xs md:text-[13px] text-gray-500 mb-5 leading-relaxed">Sales Channels Worldwide</h3>
-            <p className="text-xs md:text-[13px] text-gray-600 leading-[2.2] mb-10">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            <p className="text-xs md:text-[13px] text-gray-600 leading-[2.2] mb-10">La Théorie began its journey through dermatology clinics and medical aesthetic salons — spaces where efficacy is non-negotiable and trust is everything. Recommended by doctors, chosen by patients, our products quietly became a staple in over 200 clinics across Seoul and Busan.<br/><br/>We have recently expanded into Chicor, one of Korea&rsquo;s leading premium beauty retailers, marking our first step beyond the clinic and into the broader consumer market. More patients. More skin. More stories.</p>
             <button onClick={() => setIsPartnerModalOpen(true)} className="border border-gray-900 text-gray-900 px-10 py-3.5 hover:bg-black/5 transition"><span className="font-belleza text-[12px] tracking-widest uppercase">Become a Partner</span></button>
           </div>
         </div>
@@ -502,29 +647,37 @@ export default function Home() {
 
       <section id="exhibition" className="py-16 md:py-28 px-8 md:px-10 bg-white border-t border-gray-100">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-10 md:gap-20 items-center">
-          <div className="w-full md:w-3/5 flex flex-col">
-            <div
-              className={`relative w-full aspect-[4/3] bg-[#f5f4ef] border border-gray-100 overflow-hidden cursor-grab ${isExhDragging ? 'cursor-grabbing' : ''}`}
-              onTouchStart={onExhDragStart} onTouchMove={onExhDragMove} onTouchEnd={onExhDragEnd}
-              onMouseDown={onExhDragStart} onMouseMove={onExhDragMove} onMouseUp={onExhDragEnd} onMouseLeave={() => setIsExhDragging(false)}
+          <div
+            className={`w-full md:w-3/5 relative aspect-[4/3] bg-[#f5f4ef] border border-gray-100 overflow-hidden cursor-grab ${isExhDragging ? 'cursor-grabbing' : ''}`}
+            onTouchStart={onExhDragStart} onTouchMove={onExhDragMove} onTouchEnd={onExhDragEnd}
+            onMouseDown={onExhDragStart} onMouseMove={onExhDragMove} onMouseUp={onExhDragEnd} onMouseLeave={() => setIsExhDragging(false)}
+          >
+            <div className={`flex w-full h-full ${isExhTransitioning ? 'transition-transform duration-500 ease-out' : ''}`} style={{ transform: `translateX(-${exhIdx * 100}%)` }}>
+              {extendedExh.map((src, i) => (
+                <div key={i} className="min-w-full h-full flex-shrink-0">
+                  <img src={src} alt={`Exhibition ${(i % exhImages.length) + 1}`} className="pointer-events-none object-cover w-full h-full" />
+                </div>
+              ))}
+            </div>
+            <button
+              onMouseDown={(e) => e.stopPropagation()}
+              onClick={(e) => { e.stopPropagation(); setExhIdx(prev => prev - 1); }}
+              className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white/70 backdrop-blur-sm rounded-none px-1.5 py-4 text-gray-800 hover:bg-white transition"
             >
-              <div className={`flex w-full h-full ${isExhTransitioning ? 'transition-transform duration-500 ease-out' : ''}`} style={{ transform: `translateX(-${exhIdx * 100}%)` }}>
-                {extendedExh.map((src, i) => (
-                  <div key={i} className="min-w-full h-full flex-shrink-0">
-                    <img src={src} alt={`Exhibition ${(i % exhImages.length) + 1}`} className="pointer-events-none object-cover w-full h-full" />
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div className="flex justify-center gap-4 mt-4">
-              <button onClick={() => setExhIdx(prev => prev - 1)} className="w-10 h-10 bg-white border border-gray-200 rounded-full flex items-center justify-center text-gray-600 hover:bg-gray-50 hover:text-black transition">←</button>
-              <button onClick={() => setExhIdx(prev => prev + 1)} className="w-10 h-10 bg-white border border-gray-200 rounded-full flex items-center justify-center text-gray-600 hover:bg-gray-50 hover:text-black transition">→</button>
-            </div>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-3 h-3"><path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" /></svg>
+            </button>
+            <button
+              onMouseDown={(e) => e.stopPropagation()}
+              onClick={(e) => { e.stopPropagation(); setExhIdx(prev => prev + 1); }}
+              className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white/70 backdrop-blur-sm rounded-none px-1.5 py-4 text-gray-800 hover:bg-white transition"
+            >
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-3 h-3"><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
+            </button>
           </div>
           <div className="w-full md:w-2/5 flex flex-col text-center md:text-left items-center md:items-start max-w-lg">
             <h2 className="font-belleza text-xl md:text-2xl tracking-[0.1em] uppercase text-gray-900 mb-3">Exhibition</h2>
             <h3 className="text-xs md:text-[13px] text-gray-500 mb-5 leading-relaxed">26 Vietnam Exhibition</h3>
-            <p className="text-xs md:text-[13px] text-gray-600 leading-[2.2] mb-10">Our booth information and details about the exhibition. Our booth number is 1004. You can check the details on the exhibition website.</p>
+            <p className="text-xs md:text-[13px] text-gray-600 leading-[2.2] mb-10">La Théorie is ready to meet its first global partners. We believe that the real character of this brand reveals itself in person — in the texture of the products, the clarity of the science, and the people behind it.<br/><br/>If you&rsquo;ve made it this far, we&rsquo;d love to put a face to the conversation. Come find us. We&rsquo;ll be waiting.</p>
             <button onClick={() => setIsMeetingModalOpen(true)} className="border border-gray-900 text-gray-900 px-10 py-3.5 hover:bg-black/5 transition"><span className="font-belleza text-[12px] tracking-widest uppercase">Book a Meeting</span></button>
           </div>
         </div>
@@ -534,7 +687,7 @@ export default function Home() {
         <h2 className="font-belleza text-[18px] md:text-2xl tracking-[0.14em] uppercase text-gray-900 mb-10 md:mb-14">Contact Us</h2>
         <form onSubmit={(e) => submitForm(e, "contact")} className="w-full max-w-xl flex flex-col gap-4 md:gap-5 font-noto-sans">
           <input type="hidden" name="access_key" defaultValue={ACCESS_KEY} />
-          <input type="hidden" name="subject" defaultValue="🌐 [La Théorie] 홈페이지 새로운 문의 접수" />
+          <input type="hidden" name="subject" defaultValue="🌐 [La Théorie] New Contact Form Submission" />
           <input type="hidden" name="from_name" defaultValue="La Théorie Web" />
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
@@ -547,7 +700,7 @@ export default function Home() {
           <button type="submit" disabled={contactStatus === "loading" || contactStatus === "success"} className="w-full bg-black text-white border border-black p-5 mt-2 transition shadow-sm hover:bg-white hover:text-black disabled:opacity-50">
             <span className="font-belleza text-[13px] tracking-widest uppercase font-medium">{contactStatus === "loading" ? "Sending..." : contactStatus === "success" ? "Sent Successfully ✔" : "Send Message"}</span>
           </button>
-          {contactStatus === "error" && <p className="text-red-500 text-xs text-center mt-2">일시적인 네트워크 오류가 발생했습니다. 잠시 후 시도해주세요.</p>}
+          {contactStatus === "error" && <p className="text-red-500 text-xs text-center mt-2">A temporary error occurred. Please try again later.</p>}
         </form>
 
         <div className="hidden md:flex w-full max-w-xl gap-5 mt-4">
