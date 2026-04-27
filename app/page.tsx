@@ -55,10 +55,38 @@ const mediaVideos: MediaVideo[] = [
     channel: "Hyerim · 270K subscribers",
     title: "Beauty Creator (270K) Analyzes the Ingredients",
   },
-  { id: 4, embedId: null, link: null, channel: "TBD", title: "TBA" },
-  { id: 5, embedId: null, link: null, channel: "TBD", title: "TBA" },
-  { id: 6, embedId: null, link: null, channel: "TBD", title: "TBA" },
-  { id: 7, embedId: null, link: null, channel: "TBD", title: "TBA" },
+  {
+    id: 4,
+    embedId: "B9TmoFvtFBo",
+    start: 465,
+    link: "https://youtu.be/B9TmoFvtFBo",
+    channel: "Esthetician Juore · 72K subscribers",
+    title: "A Special Skincare Routine by Esthetician Juore",
+  },
+  {
+    id: 5,
+    embedId: "K3RwASp7BH0",
+    start: 912,
+    link: "https://youtu.be/K3RwASp7BH0",
+    channel: "Acne YouTuber Miss In · 565K subscribers",
+    title: "Overcoming Closed Comedones and Folliculitis",
+  },
+  {
+    id: 6,
+    embedId: "muN0Uys3qkE",
+    start: 255,
+    link: "https://youtu.be/muN0Uys3qkE",
+    channel: "Sunny · 12K subscribers",
+    title: "How to Solve Unexplained Acne",
+  },
+  {
+    id: 7,
+    embedId: "l6xJf4_N_2w",
+    start: 403,
+    link: "https://youtu.be/l6xJf4_N_2w",
+    channel: "Dermatologist Channel · Medical Review",
+    title: "The Real Skincare a Doctor Recommends to His Wife",
+  },
 ];
 
 export default function Home() {
@@ -475,13 +503,15 @@ export default function Home() {
             {
               reverse: false,
               image: "/char_1.png",
+              imageAlt: "YourSkinClinics",
               headline: "I cut the prescriptions, recommended a skincare product — and that became word of mouth.",
               body: "Most acne patients leave with an antibiotic prescription after extraction. But many of them resist medication. Since placing La Théorie in our clinic, I've been able to give patients a real at-home routine to maintain their results. Fewer flare-ups meant fewer complaints — and satisfied patients started bringing in friends. Recommending a skincare product instead of another prescription actually built more trust. New patient referrals increased, return visits went up, and we now have a far more stable revenue structure than procedure-only treatment ever gave us.",
               source: "Dr. Ji-Seung Jeon · Dermatologist, YourSkinClinics",
             },
             {
               reverse: true,
-              image: undefined as string | undefined,
+              image: "/char_2.png",
+              imageAlt: "La Beauté Esthetic",
               headline: "It turned out the skincare product was driving more return visits than the treatments.",
               body: "No matter how well a treatment goes in the salon, if a client goes home and uses something irritating, they're back to square one. I came across La Théorie on YouTube — a skincare line built specifically for troubled skin — and decided to try it. Once clients had a proper home routine, the results from our treatments lasted much longer. That naturally led to more return visits and referrals. Now it's the first product I explain to every new client.",
               source: "Director ○○○ · La Beauté Esthetic, Jamsil",
@@ -492,7 +522,7 @@ export default function Home() {
               className={`flex flex-col ${card.reverse ? "md:flex-row-reverse" : "md:flex-row"} gap-8 md:gap-14 items-center py-12 md:py-16 ${i > 0 ? "border-t border-gray-100" : ""}`}
             >
               <div className="w-full md:w-2/5 aspect-[3/4] bg-[#f5f4ef] border border-gray-100 flex-shrink-0 overflow-hidden">
-                {card.image && <img src={card.image} alt="" className="w-full h-full object-cover" />}
+                {card.image && <img src={card.image} alt={card.imageAlt} className="w-full h-full object-cover object-center" />}
               </div>
               <div className="w-full md:w-3/5 flex flex-col">
                 <span className="font-belleza text-5xl md:text-6xl text-gray-300 leading-none mb-4">&ldquo;</span>

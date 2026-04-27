@@ -1,9 +1,33 @@
 "use client";
 
-import { useState, useEffect, FormEvent } from "react";
+import { useState, useEffect, useRef, FormEvent } from "react";
 import Link from "next/link";
+import { Chart, registerables } from "chart.js";
+import ChartDataLabels from "chartjs-plugin-datalabels";
 
 const ACCESS_KEY = "ad515025-1b36-4a08-bc8f-6f22569d17cd";
+
+const timelineEvents = [
+  { year: "2019", desc: "YD Cosmetics founded · 25,000 ingredients screened" },
+  { year: "2020", desc: "First dermatology clinic partnership — Seoul" },
+  { year: "2021", desc: "30,000 units sold · Expanded to Busan" },
+  { year: "2023", desc: "Featured in Vogue Japan · 60,000 units in a single year" },
+  { year: "2024–25", desc: "100,000 units in 2024 · 300,000+ cumulative · Chicor launch 2025", highlight: true },
+];
+
+const salesBars = [
+  { year: "2021", value: 30, label: "30K" },
+  { year: "2022", value: 70, label: "70K" },
+  { year: "2023", value: 130, label: "130K" },
+  { year: "2024", value: 230, label: "230K" },
+  { year: "2025", value: 300, label: "300,000+", highlight: true },
+];
+
+const noList = [
+  "No influencer deals",
+  "No celebrity endorsements",
+  "No distribution outside Korea",
+];
 
 export default function AboutPage() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -13,6 +37,8 @@ export default function AboutPage() {
   const [isPartnerModalOpen, setIsPartnerModalOpen] = useState(false);
   const [isBrochureModalOpen, setIsBrochureModalOpen] = useState(false);
   const [partnerStatus, setPartnerStatus] = useState("idle");
+
+  const chartRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -28,6 +54,102 @@ export default function AboutPage() {
     if (isMenuOpen || isPartnerModalOpen || isBrochureModalOpen) document.body.style.overflow = "hidden";
     else document.body.style.overflow = "auto";
   }, [isMenuOpen, isPartnerModalOpen, isBrochureModalOpen]);
+
+  useEffect(() => {
+    if (!chartRef.current) return;
+    Chart.register(...registerables, ChartDataLabels);
+
+    const chart = new Chart(chartRef.current, {
+      type: "line",
+      data: {
+        labels: ["2021", "2022", "2023", "2024"],
+        datasets: [
+          {
+            label: "General Skincare",
+            data: [4.2, 4.8, 5.1, 5.3],
+            borderColor: "#b8b5ac",
+            backgroundColor: "transparent",
+            borderWidth: 1.5,
+            pointRadius: 0,
+            pointHoverRadius: 0,
+            tension: 0.25,
+            datalabels: {
+              display: (ctx: { dataIndex: number }) => ctx.dataIndex === 3,
+              anchor: "end",
+              align: "right",
+              offset: 10,
+              color: "#b8b5ac",
+              font: { family: "Belleza", size: 11 },
+              formatter: () => ["Skincare", "5.3%"],
+            },
+          },
+          {
+            label: "K-Beauty",
+            data: [7.1, 8.4, 9.2, 10.1],
+            borderColor: "#6a8fa8",
+            backgroundColor: "transparent",
+            borderWidth: 1.5,
+            pointRadius: 0,
+            pointHoverRadius: 0,
+            tension: 0.25,
+            datalabels: {
+              display: (ctx: { dataIndex: number }) => ctx.dataIndex === 3,
+              anchor: "end",
+              align: "right",
+              offset: 10,
+              color: "#6a8fa8",
+              font: { family: "Belleza", size: 11 },
+              formatter: () => ["K-Beauty", "10.1%"],
+            },
+          },
+          {
+            label: "Clinical Derma",
+            data: [10.5, 11.8, 12.8, 13.9],
+            borderColor: "#2a2a28",
+            backgroundColor: "transparent",
+            borderWidth: 2.5,
+            pointRadius: 0,
+            pointHoverRadius: 0,
+            tension: 0.25,
+            datalabels: {
+              display: (ctx: { dataIndex: number }) => ctx.dataIndex === 3,
+              anchor: "end",
+              align: "right",
+              offset: 10,
+              color: "#2a2a28",
+              font: { family: "Belleza", size: 12, weight: "bold" },
+              formatter: () => ["Clinical Derma", "13.9%"],
+            },
+          },
+        ],
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      } as any,
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        layout: { padding: { right: 110 } },
+        plugins: {
+          legend: { display: false },
+          tooltip: { enabled: false },
+        },
+        scales: {
+          x: {
+            grid: { color: "rgba(0,0,0,0.05)" },
+            border: { display: false },
+            ticks: { color: "#9ca3af", font: { family: "Belleza", size: 10 } },
+          },
+          y: {
+            grid: { color: "rgba(0,0,0,0.05)" },
+            border: { display: false },
+            ticks: { color: "#9ca3af", font: { family: "Belleza", size: 10 } },
+          },
+        },
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      } as any,
+    });
+
+    return () => { chart.destroy(); };
+  }, []);
 
   const submitPartner = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -55,19 +177,12 @@ export default function AboutPage() {
     }
   };
 
-  const salesData = [
-    { year: "2021", units: "30,000 units", width: 30 },
-    { year: "2022", units: "40,000 units", width: 40 },
-    { year: "2023", units: "60,000 units", width: 60 },
-    { year: "2024", units: "100,000 units", width: 100 },
-  ];
-
-  const distRows = [
-    { region: "Seoul", desc: "Dermatology clinics · Aesthetic salons" },
-    { region: "Busan", desc: "Dermatology clinics · Aesthetic salons" },
-    { region: "Chicor", desc: "Premium beauty retail · Korea" },
-    { region: "Overseas", desc: "First partner opportunity — your market" },
-  ];
+  const arrow = (
+    <svg width="12" height="18" viewBox="0 0 12 18" className="flex-shrink-0">
+      <line x1="6" y1="0" x2="6" y2="12" stroke="#d1d5db" strokeWidth="0.5" />
+      <polyline points="2,10 6,16 10,10" fill="none" stroke="#d1d5db" strokeWidth="0.5" />
+    </svg>
+  );
 
   return (
     <div className="min-h-screen bg-white text-gray-900 font-sans overflow-x-hidden">
@@ -105,135 +220,285 @@ export default function AboutPage() {
       )}
 
       {/* HERO */}
-      <section className="bg-[#f9f8f5] pt-[80px]">
-        <div className="max-w-7xl mx-auto px-8 md:px-10 py-20 md:py-28">
-          <p className="font-belleza text-[11px] tracking-[0.2em] uppercase text-gray-400">About La Théorie</p>
-          <h1 className="font-belleza text-[32px] md:text-[44px] leading-[1.2] tracking-wide text-gray-900 mt-4 max-w-3xl">A Dermatologist&rsquo;s Prescription for Problematic Skin</h1>
-          <p className="text-[13px] text-gray-600 leading-[2.2] max-w-xl mt-6">
-            A skincare brand first chosen by patients and adopted by dermatologists. Founded in 2019, La Théorie was born from clinical experience — not a marketing brief.
+      <section className="relative pt-[80px] min-h-[560px] md:min-h-[640px] flex flex-col overflow-hidden">
+        <img src="/hero-bg.jpg" alt="" className="absolute inset-0 w-full h-full object-cover" />
+        <div className="absolute inset-0 bg-black/55" />
+        <div className="relative z-10 max-w-7xl mx-auto w-full px-8 md:px-16 lg:px-24 flex-1 flex flex-col justify-end pb-16 md:pb-24">
+          <p className="font-belleza text-[11px] tracking-[0.2em] uppercase text-white/50">About La Théorie</p>
+          <h1 className="font-belleza text-[36px] md:text-[52px] lg:text-[60px] leading-[1.15] text-white mt-4 max-w-4xl whitespace-pre-line drop-shadow-md">
+            {`A Dermatologist's Prescription for\nAcne & Folliculitis Skin`}
+          </h1>
+          <p className="text-[13px] text-white/75 font-light leading-[2] max-w-xl mt-6 drop-shadow-md">
+            Born in a clinic. Backed by peer-reviewed research. Built for skin that won&rsquo;t settle.
           </p>
-          <span className="inline-block border border-gray-300 font-belleza text-[10px] tracking-[0.16em] uppercase px-4 py-2 mt-8 text-gray-500">
+          <span className="inline-block self-start border border-white/40 font-belleza text-[10px] tracking-[0.16em] uppercase px-4 py-2 mt-8 text-white/70">
             0&permil; Fatty Acid Solution for Troubled Skin
           </span>
         </div>
       </section>
 
-      {/* OUR ORIGIN */}
-      <section className="border-t border-gray-100 py-20 md:py-28 bg-white">
-        <div className="max-w-7xl mx-auto px-8 md:px-10">
-          <p className="font-belleza text-[11px] tracking-[0.2em] uppercase text-gray-400">Our Origin</p>
-          <h2 className="font-belleza text-[24px] md:text-[32px] leading-[1.3] tracking-wide text-gray-900 mt-4 max-w-2xl">A skincare brand born in a dermatologist&rsquo;s office</h2>
-          <p className="text-[13px] text-gray-600 leading-[2.2] max-w-2xl mt-6">
-            Dermatologists saw what cosmetic brands couldn&rsquo;t — that most skincare products were quietly worsening their patients&rsquo; skin. La Théorie was built to fix that.
-          </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12">
-            <div className="border border-gray-100 p-6">
-              <p className="font-belleza text-[40px] text-gray-200 leading-none">2019</p>
-              <p className="font-belleza text-[11px] tracking-[0.16em] uppercase text-gray-900 mt-4">Founded</p>
-              <p className="text-[12px] text-gray-600 leading-[1.9] mt-3">YD Cosmetics established with a single mission: remove what harms, keep what heals.</p>
-            </div>
-            <div className="border border-gray-100 p-6">
-              <p className="font-belleza text-[40px] text-gray-200 leading-none">25K</p>
-              <p className="font-belleza text-[11px] tracking-[0.16em] uppercase text-gray-900 mt-4">Substances Reviewed</p>
-              <p className="text-[12px] text-gray-600 leading-[1.9] mt-3">Every ingredient screened against a database of 25,000 substances for safety.</p>
-            </div>
+      {/* OUR JOURNEY */}
+      <section className="bg-white border-t border-gray-100 py-24 md:py-32">
+        <div className="max-w-7xl mx-auto px-8 md:px-16 lg:px-24 grid grid-cols-1 md:grid-cols-2 gap-16">
+          <div className="max-w-sm">
+            <p className="font-belleza text-[11px] tracking-[0.2em] uppercase text-gray-400">Our Journey</p>
+            <h2 className="font-belleza text-[24px] md:text-[32px] leading-[1.3] tracking-wide text-gray-900 mt-4 whitespace-pre-line">
+              {`Founded in a dermatologist's office.\nGrown by patients.`}
+            </h2>
+            <p className="text-[13px] text-gray-600 leading-[2.2] mt-6">
+              Six years of quiet growth — clinic by clinic, patient by patient.
+            </p>
+          </div>
+
+          <div className="relative">
+            <div className="absolute left-1/2 top-0 bottom-0 w-px bg-gray-200 -translate-x-1/2" />
+            {timelineEvents.map((event, i) => {
+              const isLeft = i % 2 === 0;
+              return (
+                <div key={event.year} className="relative flex items-start mb-10 last:mb-0">
+                  <div className={`w-1/2 pr-6 text-right ${isLeft ? "" : "invisible"}`}>
+                    <p className="font-belleza text-[15px] text-gray-900 mb-1">{event.year}</p>
+                    <p className="text-[12px] text-gray-500 font-light leading-[1.7]">{event.desc}</p>
+                  </div>
+                  <div
+                    className={`absolute left-1/2 -translate-x-1/2 top-1.5 rounded-full bg-gray-900 ${
+                      event.highlight ? "w-4 h-4 ring-2 ring-offset-2 ring-gray-900" : "w-3 h-3"
+                    }`}
+                  />
+                  <div className={`w-1/2 pl-6 ${isLeft ? "invisible" : ""}`}>
+                    <p className="font-belleza text-[15px] text-gray-900 mb-1">{event.year}</p>
+                    <p className="text-[12px] text-gray-500 font-light leading-[1.7]">{event.desc}</p>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
 
-      {/* PHILOSOPHY */}
-      <section className="border-t border-gray-100 py-20 md:py-28 bg-white">
-        <div className="max-w-7xl mx-auto px-8 md:px-10">
-          <p className="font-belleza text-[11px] tracking-[0.2em] uppercase text-gray-400">Philosophy</p>
-          <h2 className="font-belleza text-[24px] md:text-[32px] leading-[1.3] tracking-wide text-gray-900 mt-4 max-w-2xl">We focused on &ldquo;taking out.&rdquo;</h2>
-
-          <div className="border-l-2 border-gray-200 pl-6 mt-8 max-w-2xl">
-            <p className="font-belleza text-[16px] md:text-[18px] text-gray-900 leading-[1.6] tracking-wide">
-              &ldquo;Anyone can add ingredients that seem good. But La Théorie is a brand that knows what shouldn&rsquo;t be included.&rdquo;
-            </p>
-            <p className="text-[13px] text-gray-600 leading-[2.2] mt-4">
-              For persistent skin issues — adult acne, folliculitis, dermatitis — what matters most is reducing adverse reactions caused by excessive formulation. We eliminated fatty acids, the hidden trigger behind most chronic skin conditions.
+      {/* MARKET OPPORTUNITY */}
+      <section className="bg-[#f9f8f5] border-t border-gray-100 py-24 md:py-32">
+        <div className="max-w-7xl mx-auto px-8 md:px-16 lg:px-24 grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
+          <div className="md:order-2">
+            <p className="font-belleza text-[11px] tracking-[0.2em] uppercase text-gray-400">Market Opportunity</p>
+            <h2 className="font-belleza text-[24px] md:text-[32px] leading-[1.3] tracking-wide text-gray-900 mt-4 whitespace-pre-line">
+              {`La Théorie sits at the intersection\nof two fast-growing waves.`}
+            </h2>
+            <p className="text-[13px] text-gray-600 leading-[2.2] mt-6">
+              K-Beauty and Clinical Derma are both outpacing the general skincare market. La Théorie carries both — the cultural momentum of K-Beauty and the credibility of dermatology science.
             </p>
           </div>
 
-          <div className="bg-[#f9f8f5] border border-gray-100 p-6 mt-8 max-w-2xl">
-            <p className="font-belleza text-[9px] uppercase tracking-widest text-gray-400">MDPI · August 2019 · Peer-Reviewed Research</p>
-            <p className="font-belleza text-[15px] text-gray-900 mt-2">&ldquo;Skin fungi feed on cosmetic ingredients.&rdquo;</p>
-            <p className="text-[12px] text-gray-600 leading-[2] mt-3">
-              Malassezia, the fungus responsible for folliculitis and fungal acne, proliferates when fed fatty acids commonly found in skincare. La Théorie is the only brand that systematically removes these triggers from its entire product line.
+          <div className="md:order-1">
+            <div className="h-[180px] md:h-[220px]">
+              <canvas ref={chartRef} />
+            </div>
+            <div className="flex flex-wrap items-center gap-x-6 gap-y-2 mt-6 justify-center md:justify-start">
+              <span className="flex items-center gap-2 text-[10px] text-gray-600 font-belleza tracking-wide">
+                <span className="block w-6 h-px bg-[#b8b5ac]" />
+                General Skincare
+              </span>
+              <span className="flex items-center gap-2 text-[10px] text-gray-600 font-belleza tracking-wide">
+                <span className="block w-6 h-px bg-[#6a8fa8]" />
+                K-Beauty
+              </span>
+              <span className="flex items-center gap-2 text-[10px] text-gray-900 font-belleza tracking-wide">
+                <span className="block w-6 h-[2px] bg-[#2a2a28]" />
+                Clinical Derma
+              </span>
+            </div>
+
+            <div className="bg-white border border-gray-200 p-5 mt-8">
+              <p className="font-belleza text-[10px] uppercase tracking-widest text-gray-400 mb-2">The fastest-growing sector in skincare</p>
+              <p className="font-belleza text-[14px] text-gray-900 leading-[1.6]">
+                Clinical Derma is growing at 2.6× the rate of general skincare — and La Théorie is built for exactly this market.
+              </p>
+            </div>
+
+            <p className="mt-4 text-[11px] text-gray-400 font-light leading-[1.8]">
+              Sources: Grand View Research Global Dermocosmetics Market Report 2024; Statista K-Beauty Global Market Size 2024; Euromonitor International Beauty &amp; Personal Care 2024.
             </p>
+          </div>
+        </div>
+      </section>
+
+      {/* THE SCIENCE */}
+      <section className="bg-white border-t border-gray-100 py-24 md:py-32">
+        <div className="max-w-7xl mx-auto px-8 md:px-16 lg:px-24 grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
+          <div>
+            <p className="font-belleza text-[11px] tracking-[0.2em] uppercase text-gray-400">The Science</p>
+            <h2 className="font-belleza text-[24px] md:text-[32px] leading-[1.3] tracking-wide text-gray-900 mt-4 whitespace-pre-line">
+              {`We focused on\n"taking out."`}
+            </h2>
+
+            <div className="border-l-2 border-gray-200 pl-6 mt-6 max-w-xl">
+              <p className="font-belleza text-[16px] md:text-[18px] text-gray-900 leading-[1.65] italic">
+                &ldquo;Anyone can add ingredients that seem good. But La Théorie is a brand that knows what shouldn&rsquo;t be included.&rdquo;
+              </p>
+              <p className="text-[13px] text-gray-600 leading-[2.2] mt-4">
+                For persistent skin issues — adult acne, folliculitis, dermatitis — what matters most is reducing adverse reactions caused by excessive formulation. We eliminated fatty acids, the hidden trigger behind most chronic skin conditions.
+              </p>
+            </div>
+          </div>
+
+          <div>
+            <div className="bg-[#f9f8f5] border border-gray-100 p-6">
+              <div className="flex justify-between items-start border-b border-gray-100 pb-4 mb-4 gap-4">
+                <div>
+                  <p className="font-belleza text-[9px] uppercase tracking-widest text-gray-400 mb-1">Peer-Reviewed Research</p>
+                  <p className="font-belleza text-[11px] text-gray-900 leading-[1.6] whitespace-pre-line">{`MDPI — Microorganisms\nVol. 7, Issue 8 · August 2019`}</p>
+                </div>
+                <div className="border border-gray-200 px-3 py-2 text-center flex-shrink-0">
+                  <p className="font-belleza text-[8px] uppercase tracking-widest text-gray-400">DOI</p>
+                  <p className="font-belleza text-[9px] text-gray-600 leading-[1.5] whitespace-pre-line">{`10.3390/microorganisms\n7080232`}</p>
+                </div>
+              </div>
+              <p className="font-belleza text-[15px] text-gray-900 mb-3">&ldquo;Skin fungi feed on cosmetic ingredients.&rdquo;</p>
+              <p className="text-[12px] text-gray-600 leading-[2]">
+                Malassezia, the fungus responsible for folliculitis and fungal acne, proliferates when fed fatty acids commonly found in skincare. La Théorie is the only brand that systematically removes these triggers from its entire product line.
+              </p>
+            </div>
           </div>
         </div>
       </section>
 
       {/* SALES ACHIEVEMENT */}
-      <section className="border-t border-gray-100 py-20 md:py-28 bg-white">
-        <div className="max-w-7xl mx-auto px-8 md:px-10">
-          <p className="font-belleza text-[11px] tracking-[0.2em] uppercase text-gray-400">Sales Achievement</p>
-          <h2 className="font-belleza text-[24px] md:text-[32px] leading-[1.3] tracking-wide text-gray-900 mt-4 max-w-2xl">We grew purely through word of mouth — no advertisements.</h2>
-
-          <div className="mt-12 max-w-3xl">
-            {salesData.map((row) => (
-              <div key={row.year} className="flex items-center gap-4 border-b border-gray-100 py-4">
-                <span className="font-belleza text-[11px] text-gray-400 w-12">{row.year}</span>
-                <div className="flex-1 h-[3px] bg-gray-100 relative">
-                  <div className="bg-gray-900 h-full" style={{ width: `${row.width}%` }}></div>
+      <section className="bg-[#f9f8f5] border-t border-gray-100 py-24 md:py-32">
+        <div className="max-w-7xl mx-auto px-8 md:px-16 lg:px-24 grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
+          <div>
+            <p className="font-belleza text-[11px] tracking-[0.2em] uppercase text-gray-400">Sales Achievement</p>
+            <h2 className="font-belleza text-[24px] md:text-[32px] leading-[1.3] tracking-wide text-gray-900 mt-4 whitespace-pre-line">
+              {`300,000+ units sold\nto 50,000+ patients.\nRepurchase was the engine.`}
+            </h2>
+            <p className="text-[13px] text-gray-600 leading-[2.2] mt-6">
+              Our hero cream alone has driven over 300,000 cumulative units sold as of 2025 — powered by repeat purchases from patients who experienced real results. Not by reach. By results.
+            </p>
+            <div className="mt-8 flex flex-col gap-3">
+              {noList.map((item) => (
+                <div key={item} className="flex items-center gap-3">
+                  <span className="block w-4 h-px bg-gray-300" />
+                  <span className="text-[12px] text-gray-500">{item}</span>
                 </div>
-                <span className="font-belleza text-[11px] text-gray-500 text-right w-24">{row.units}</span>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
 
-          <div className="text-center border border-gray-100 py-12 mt-10">
-            <p className="font-belleza text-[48px] text-gray-900 leading-none">300,000+</p>
-            <p className="font-belleza text-[10px] uppercase tracking-widest text-gray-400 mt-2">Cumulative units sold as of 2025</p>
+          <div>
+            <p className="font-belleza text-[10px] uppercase tracking-widest text-gray-400 mb-3">Cumulative units sold · Single SKU</p>
+            <div className="flex items-end gap-3 md:gap-5 h-[300px] md:h-[340px]">
+              {salesBars.map((bar) => (
+                <div key={bar.year} className="flex-1 flex flex-col items-center justify-end h-full">
+                  <span className={`font-belleza mb-2 text-center leading-tight ${bar.highlight ? "text-[18px] md:text-[22px] text-gray-900" : "text-[10px] text-gray-400"}`}>
+                    {bar.label}
+                  </span>
+                  <div
+                    className={`w-full ${bar.highlight ? "bg-gray-900" : "bg-gray-300"}`}
+                    style={{ height: `${(bar.value / 320) * 100}%` }}
+                  />
+                </div>
+              ))}
+            </div>
+            <div className="flex gap-3 md:gap-5 mt-3">
+              {salesBars.map((bar) => (
+                <span key={bar.year} className={`flex-1 font-belleza text-[10px] text-center ${bar.highlight ? "text-gray-900" : "text-gray-400"}`}>
+                  {bar.year}
+                </span>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
-      {/* DISTRIBUTION */}
-      <section className="border-t border-gray-100 py-20 md:py-28 bg-[#f9f8f5]">
-        <div className="max-w-7xl mx-auto px-8 md:px-10">
-          <p className="font-belleza text-[11px] tracking-[0.2em] uppercase text-gray-400">Distribution</p>
-          <h2 className="font-belleza text-[24px] md:text-[32px] leading-[1.3] tracking-wide text-gray-900 mt-4 max-w-3xl">
-            Now sold in over 20 dermatology clinics and aesthetic salons across Seoul and Busan.
-          </h2>
-          <p className="mt-6 text-[13px] text-gray-600 leading-[2.2] max-w-2xl">
-            La Théorie grew quietly — clinic by clinic, recommendation by recommendation. Our products were first adopted by dermatologists who trusted the science, then by patients who saw the results. For years, the medical channel was our only home, and it remains our foundation.
-            <br /><br />
-            Recently, we expanded into Chicor, one of Korea&rsquo;s leading premium beauty retailers. For the first time, La Théorie is reaching beyond the clinic — meeting customers who may have never heard of us, but whose skin has been waiting for exactly this.
-          </p>
+      {/* CLINIC FIRST */}
+      <section className="bg-white border-t border-gray-100 py-24 md:py-32">
+        <div className="max-w-7xl mx-auto px-8 md:px-16 lg:px-24 grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
+          <div className="md:order-2">
+            <p className="font-belleza text-[11px] tracking-[0.2em] uppercase text-gray-400">Clinic First</p>
+            <h2 className="font-belleza text-[24px] md:text-[32px] leading-[1.3] tracking-wide text-gray-900 mt-4 whitespace-pre-line">
+              {`We started where skin conditions\nare treated — not sold.`}
+            </h2>
+            <p className="text-[13px] text-gray-600 leading-[2.2] mt-6">
+              La Théorie grew exclusively through dermatology clinics. Over 200 clinics across Seoul and Busan have carried our products — recommended by physicians to real patients with real skin conditions.
+            </p>
+          </div>
 
-          <div className="mt-10 border-t border-gray-100">
-            {distRows.map((row) => (
-              <div key={row.region} className="flex justify-between py-4 border-b border-gray-100">
-                <span className="font-belleza text-[12px] tracking-widest uppercase text-gray-900">{row.region}</span>
-                <span className="text-[12px] text-gray-500 text-right">{row.desc}</span>
+          <div className="relative md:order-1">
+            <div className="absolute left-1/2 top-4 bottom-4 w-px bg-gray-200 -translate-x-1/2" />
+
+            {/* Step 1 — Dermatology Clinics */}
+            <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-6 relative">
+              <div className="text-right">
+                <p className="font-belleza text-[11px] uppercase tracking-widest text-gray-900 leading-[1.4] whitespace-pre-line">{`Dermatology\nClinics`}</p>
+                <p className="text-[11px] text-gray-500 leading-[1.6] mt-2 whitespace-pre-line">{`Core channel since 2020\nSeoul · Busan, physician-recommended`}</p>
               </div>
-            ))}
+              <div className="w-[44px] h-[44px] rounded-full bg-gray-900 flex items-center justify-center flex-shrink-0 z-10">
+                <span className="font-belleza text-[9px] text-white">200+</span>
+              </div>
+              <div />
+            </div>
+
+            <div className="flex justify-center py-3 relative z-10 bg-white">{arrow}</div>
+
+            {/* Step 2 — Aesthetic Salons */}
+            <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-6 relative">
+              <div />
+              <div className="w-[36px] h-[36px] rounded-full bg-white border border-gray-300 flex-shrink-0 z-10" />
+              <div>
+                <p className="font-belleza text-[11px] uppercase tracking-widest text-gray-900 leading-[1.4] whitespace-pre-line">{`Aesthetic\nSalons`}</p>
+                <p className="text-[11px] text-gray-500 leading-[1.6] mt-2 whitespace-pre-line">{`Secondary channel\nReferral-driven growth`}</p>
+              </div>
+            </div>
+
+            <div className="flex justify-center py-3 relative z-10 bg-white">{arrow}</div>
+
+            {/* Step 3 — Chicor */}
+            <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-6 relative">
+              <div className="text-right">
+                <p className="font-belleza text-[11px] uppercase tracking-widest text-gray-900 leading-[1.4]">Chicor</p>
+                <p className="text-[11px] text-gray-500 leading-[1.6] mt-2 whitespace-pre-line">{`Premium retail · Korea-wide\nLaunched 2025`}</p>
+              </div>
+              <div className="w-[36px] h-[36px] rounded-full bg-white border border-gray-300 flex items-center justify-center flex-shrink-0 z-10">
+                <span className="font-belleza text-[8px] text-gray-600">2025</span>
+              </div>
+              <div />
+            </div>
+
+            <div className="flex justify-center py-3 relative z-10 bg-white">{arrow}</div>
+
+            {/* Step 4 — Your Market */}
+            <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-6 relative">
+              <div />
+              <div className="w-[48px] h-[48px] rounded-full bg-gray-900 ring-2 ring-offset-2 ring-gray-900 flex items-center justify-center flex-shrink-0 z-10">
+                <span className="font-belleza text-[8px] text-white text-center leading-tight whitespace-pre-line">{`Your\nMarket`}</span>
+              </div>
+              <div>
+                <p className="font-belleza text-[12px] uppercase tracking-widest text-gray-900 leading-[1.4] whitespace-pre-line">{`Overseas\nPartner ★`}</p>
+                <p className="text-[11px] text-gray-500 leading-[1.6] mt-2 whitespace-pre-line">{`Next step\nNo partner yet — first opportunity open`}</p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* CTA */}
-      <section className="border-t border-gray-100 py-20 md:py-28 bg-white text-center">
-        <div className="max-w-7xl mx-auto px-8 md:px-10">
-          <h2 className="font-belleza text-[22px] md:text-[28px] tracking-wide text-gray-900 leading-[1.4] max-w-2xl mx-auto">
-            Your company can become La Théorie&rsquo;s first overseas partner.
+      <section className="bg-[#f9f8f5] border-t border-gray-100 py-24 md:py-32 text-center">
+        <div className="max-w-7xl mx-auto px-8 md:px-16 lg:px-24">
+          <h2 className="font-belleza text-[22px] md:text-[32px] tracking-wide text-gray-900 leading-[1.4] max-w-2xl mx-auto whitespace-pre-line">
+            {`Your company can become\nLa Théorie's overseas partner.`}
           </h2>
-          <p className="text-[13px] text-gray-500 mt-4 leading-relaxed max-w-xl mx-auto">
+          <p className="text-[13px] text-gray-500 mt-4 leading-relaxed">
             K-Beauty is everywhere, but La Théorie has yet to arrive in your market.
           </p>
-          <div className="mt-10 flex flex-col items-center gap-3 w-full max-w-xs mx-auto">
+          <div className="mt-10 flex flex-col items-center gap-3 max-w-xs mx-auto">
             <button
               onClick={() => setIsPartnerModalOpen(true)}
-              className="w-full border border-black bg-transparent text-black px-9 py-3.5 transition hover:bg-black hover:text-white uppercase tracking-widest font-belleza text-[12px]"
+              className="w-full border border-black bg-black text-white px-9 py-4 transition hover:bg-white hover:text-black font-belleza text-[12px] uppercase tracking-widest"
             >
               Become a Partner
             </button>
             <button
               onClick={() => setIsBrochureModalOpen(true)}
-              className="w-full border border-black bg-transparent text-black px-9 py-3.5 transition hover:bg-black hover:text-white uppercase tracking-widest font-belleza text-[12px]"
+              className="w-full border border-black bg-transparent text-black px-9 py-4 transition hover:bg-black hover:text-white font-belleza text-[12px] uppercase tracking-widest"
             >
               Download Brochure
             </button>
