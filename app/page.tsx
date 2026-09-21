@@ -744,6 +744,7 @@ export default function Home() {
           <div className="text-center md:text-left">
             <div className="font-belleza text-[24px] tracking-normal text-gray-950 mb-3.5">La Théorie</div>
             <div className="text-[11px] text-gray-400 leading-relaxed">Copyright &copy; La Théorie.<br/>All rights reserved.</div>
+            <div className="mt-4 flex justify-center md:justify-start gap-4 text-[11px] text-gray-500"><a href="/vn" lang="vi" className="hover:text-black transition-colors">Việt Nam</a><a href="/sg" className="hover:text-black transition-colors">Singapore</a></div>
           </div>
           <div className="flex flex-col text-[11px] text-gray-500 leading-[2.3] text-center md:text-right md:items-end">
             <span className="text-gray-900 font-medium mb-1.5">Company Info</span>
