@@ -124,9 +124,11 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
         </section>
 
         {a.references.length > 0 && (
-          <section aria-labelledby="ref-heading" className="mt-14">
-            <h2 id="ref-heading" className="mb-4 text-lg font-semibold text-gray-950">References</h2>
-            <ol className="space-y-2 text-sm text-gray-600">
+          <details className="group mt-14 border-t border-gray-200 pt-4">
+            <summary className="cursor-pointer list-none text-sm text-gray-500 hover:text-gray-900 [&::-webkit-details-marker]:hidden">
+              References ({a.references.length}) <span className="ml-1 inline-block transition-transform group-open:rotate-180">▾</span>
+            </summary>
+            <ol className="mt-3 space-y-2 text-sm text-gray-600">
               {a.references.map((r, i) => (
                 <li key={r.url}>
                   <span className="mr-2 text-gray-400">[{i + 1}]</span>
@@ -134,7 +136,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
                 </li>
               ))}
             </ol>
-          </section>
+          </details>
         )}
 
         <p className="mt-14 border-t border-gray-200 pt-6 text-[13px] leading-relaxed text-gray-500">
