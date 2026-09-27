@@ -117,8 +117,7 @@ export const article: Article = {
     'fungal acne safe moisturizer',
     'best moisturizer if you have fungal acne',
   ],
-  // 🔴 게시하는 날 날짜로 바꾼다
-  published: '2026-09-28',
+  published: '2026-09-27',
   faq: [
     { q: 'What moisturizer is safe for fungal acne?', a: 'One whose full ingredient list has no fatty acids, plant oils or butters, fatty-acid esters or polysorbates. Most fungal-acne-safe moisturizers are gels or gel-creams that hydrate with glycerin, hyaluronic acid or panthenol.' },
     { q: 'What is a good non-comedogenic moisturizer that is also safe for fungal acne?', a: 'Check the two separately: non-comedogenic is about pore-clogging, fungal-acne-safe is about fatty acids, and a product can pass one and fail the other. A light gel-cream with no oils, esters or polysorbates often passes both — confirm with the full ingredient list or a checker.' },

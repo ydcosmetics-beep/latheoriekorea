@@ -112,8 +112,7 @@ export const article: Article = {
     'can i put sunscreen on my fungal acne',
     'best physical sunscreen for fungal acne',
   ],
-  // 🔴 게시하는 날 날짜로 바꾼다
-  published: '2026-09-28',
+  published: '2026-09-27',
   faq: [
     { q: 'Can I put sunscreen on my fungal acne?', a: 'Yes. Fungal acne is not a reason to skip sun protection; choose a sunscreen whose whole formula has no fatty acids, oils, fatty-acid esters or polysorbates, and remove it at night with a gel or foam cleanser rather than an oil or balm.' },
     { q: 'What is the best physical sunscreen for fungal acne?', a: 'There is no single best one. Zinc oxide and titanium dioxide do not feed Malassezia, but they are often dispersed in esters or oils, so a mineral sunscreen is only fungal-acne-safe if its full ingredient list is.' },
