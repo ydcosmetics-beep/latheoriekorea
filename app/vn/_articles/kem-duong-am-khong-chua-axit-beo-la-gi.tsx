@@ -129,8 +129,7 @@ export const article: Article = {
     'kem dưỡng ẩm cho da mụn nấm',
     'kem dưỡng cho da viêm nang lông',
   ],
-  // 🔴 게시하는 날 날짜로 바꾼다
-  published: '2026-09-28',
+  published: '2026-09-27',
   faq: [
     { q: 'Kem dưỡng ẩm không chứa axit béo có tác dụng gì?', a: 'Nó cấp ẩm cho da mà không thêm axit béo — nguồn thức ăn của nấm men Malassezia. Vì vậy nó phù hợp với da dễ gặp mụn nấm và viêm nang lông do Malassezia. Nó không phải thuốc và không thay cho chẩn đoán của bác sĩ da liễu.' },
     { q: 'Kem dưỡng không chứa axit béo có khác non-comedogenic không?', a: 'Có. Non-comedogenic nói về khả năng gây bít tắc lỗ chân lông; không chứa axit béo nói về việc công thức có axit béo hay không. Một sản phẩm có thể đạt tiêu chí này mà không đạt tiêu chí kia.' },
