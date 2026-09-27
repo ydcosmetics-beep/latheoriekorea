@@ -15,4 +15,5 @@ export const SG_BASE = `${SITE_URL}/sg`;
 export const SHOPEE_SG_SHOP_ID = '1136015723';
 export const SG_PRODUCT_URL: Record<string, string> = {
   P002: `https://shopee.sg/product/${SHOPEE_SG_SHOP_ID}/18495751625`, // Hydrating Gel Cream 60ml (CREAM02)
+  P004: `https://shopee.sg/product/${SHOPEE_SG_SHOP_ID}/41802263097`, // Sunscreen 50ml — 브랜드.md 1절 SG 상품ID
 };
