@@ -23,7 +23,7 @@ export const SHOPEE_SHOP_ID = '1136700919';
  * 공식 매장·채널 — Organization `sameAs` 와 본문 「공식 매장」 텍스트가 여기서 나온다 (2026-09-28).
  * AI 답변이 SG 의 다른 매장(latheorie.sg · shopid 325139327)을 공식으로 안내한 일이 있어
  * 어느 쪽이 공식인지 기계가 읽게 적는다. 값은 브랜드.md 2·3절.
- * 🔴 TikTok 은 뺐다 — 핸들 기록이 둘로 갈려 있다(브랜드.md `@latheorie.vn` vs 발행 기록 `@la_theorie.vn`). 정해지면 한 줄 더한다.
+ * TikTok 은 `@la_theorie.vn` (2026-09-28 총괄 확인 — 옛 기록 `@latheorie.vn` 은 틀린 핸들).
  * 🔴 `la.theorie_sg` 인스타는 본사 운영(추론)이라 넣지 않는다.
  */
 export const SHOPEE_VN_STORE = 'shopee.vn/la_theoriepa.vn';
@@ -37,6 +37,7 @@ export const ORGANIZATION = {
     `https://${SHOPEE_VN_STORE}`,
     `https://${SHOPEE_SG_STORE}`,
     'https://www.instagram.com/la.theorie_vn/',
+    'https://www.tiktok.com/@la_theorie.vn',
     'https://www.facebook.com/profile.php?id=61593391030953',
   ],
 };
