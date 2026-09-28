@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { articles, STAGE_LABEL } from './_lib/articles';
 import { products, interviews } from './_lib/products';
-import { SITE_URL, VN_BASE, BRAND, BRIDGE_URL } from './_lib/site';
+import { SITE_URL, VN_BASE, BRAND, BRIDGE_URL, ORGANIZATION, SHOPEE_VN_STORE } from './_lib/site';
 import type { Stage } from './_lib/types';
 
 /**
@@ -48,7 +48,8 @@ export default function VnHubPage() {
   const jsonLd = {
     '@context': 'https://schema.org',
     '@graph': [
-      { '@type': 'CollectionPage', '@id': `${VN_BASE}#collection`, name: TITLE, description: DESCRIPTION, inLanguage: 'vi-VN',
+      ORGANIZATION,
+      { '@type': 'CollectionPage', '@id': `${VN_BASE}#collection`, name: TITLE, description: DESCRIPTION, inLanguage: 'vi-VN', publisher: { '@id': ORGANIZATION['@id'] },
         isPartOf: { '@type': 'WebSite', name: BRAND, url: SITE_URL },
         hasPart: articles.map((a) => ({ '@type': 'Article', headline: a.title, url: `${VN_BASE}/${a.slug}`, datePublished: a.published })) },
       { '@type': 'FAQPage', '@id': `${VN_BASE}#faq`, mainEntity: FAQ.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
@@ -118,7 +119,7 @@ export default function VnHubPage() {
           </ul>
           <p className="mt-8 text-center text-[12px] text-gray-500">
             Thành phần ghi dưới sản phẩm là thành phần đại diện in trên nhãn. Cửa hàng chính hãng:{' '}
-            <a href={`${BRIDGE_URL}/?s=seo&k=LATHWEB&cp=hub`} rel="noopener" className="underline underline-offset-4">La Théorie trên Shopee Việt Nam</a>
+            <a href={`${BRIDGE_URL}/?s=seo&k=LATHWEB&cp=hub`} rel="noopener" className="underline underline-offset-4">La Théorie trên Shopee Việt Nam</a> ({SHOPEE_VN_STORE})
           </p>
         </div>
       </section>

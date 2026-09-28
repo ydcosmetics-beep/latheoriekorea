@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { articles, STAGE_LABEL } from './_lib/articles';
 import { products, interviews } from './_lib/products';
-import { SITE_URL, SG_BASE, BRAND, SHOPEE_SG_SHOP_ID } from './_lib/site';
+import { SITE_URL, SG_BASE, BRAND, SHOPEE_SG_SHOP_ID, ORGANIZATION, SHOPEE_SG_STORE } from './_lib/site';
 import type { Stage } from '../vn/_lib/types';
 
 /** 허브 — 본사 홈 구성 (히어로 → 소개 → Best sellers → Interviews → 글 → FAQ). Media · Distribution · Exhibition 제외. */
@@ -42,7 +42,8 @@ export default function SgHubPage() {
   const jsonLd = {
     '@context': 'https://schema.org',
     '@graph': [
-      { '@type': 'CollectionPage', '@id': `${SG_BASE}#collection`, name: TITLE, description: DESCRIPTION, inLanguage: 'en-SG',
+      ORGANIZATION,
+      { '@type': 'CollectionPage', '@id': `${SG_BASE}#collection`, name: TITLE, description: DESCRIPTION, inLanguage: 'en-SG', publisher: { '@id': ORGANIZATION['@id'] },
         isPartOf: { '@type': 'WebSite', name: BRAND, url: SITE_URL },
         hasPart: articles.map((a) => ({ '@type': 'Article', headline: a.title, url: `${SG_BASE}/${a.slug}`, datePublished: a.published })) },
       { '@type': 'FAQPage', '@id': `${SG_BASE}#faq`, mainEntity: FAQ.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
@@ -112,7 +113,7 @@ export default function SgHubPage() {
           </ul>
           <p className="mt-8 text-center text-[12px] text-gray-500">
             Ingredients shown are the representative ingredients printed on the label. Official store:{' '}
-            <a href={`https://shopee.sg/shop/${SHOPEE_SG_SHOP_ID}`} rel="noopener" className="underline underline-offset-4">La Théorie on Shopee Singapore</a>
+            <a href={`https://shopee.sg/shop/${SHOPEE_SG_SHOP_ID}`} rel="noopener" className="underline underline-offset-4">La Théorie on Shopee Singapore</a> ({SHOPEE_SG_STORE})
           </p>
         </div>
       </section>

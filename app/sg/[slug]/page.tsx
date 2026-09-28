@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { articles, getArticle } from '../_lib/articles';
-import { SITE_URL, SG_BASE, BRAND } from '../_lib/site';
+import { SITE_URL, SG_BASE, BRAND, ORGANIZATION } from '../_lib/site';
 
 export const dynamicParams = false;
 
@@ -44,6 +44,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
   const jsonLd = {
     '@context': 'https://schema.org',
     '@graph': [
+      ORGANIZATION,
       {
         '@type': 'Article',
         '@id': `${url}#article`,
@@ -53,8 +54,8 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
         datePublished: a.published,
         dateModified: a.updated ?? a.published,
         mainEntityOfPage: { '@type': 'WebPage', '@id': url },
-        author: { '@type': 'Organization', name: BRAND, url: SITE_URL },
-        publisher: { '@type': 'Organization', name: BRAND, url: SITE_URL },
+        author: { '@id': ORGANIZATION['@id'] },
+        publisher: { '@id': ORGANIZATION['@id'] },
       },
       {
         '@type': 'FAQPage',

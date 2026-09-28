@@ -2,7 +2,7 @@
  * SG 섹션 공통 상수. 호스트는 VN 섹션과 같다 — 한 사이트 안의 두 시장 경로(/vn · /sg).
  * 어휘·쿼리·글 목록은 시장별로 별개다 (핸드오프 결정 28 · SG 키워드 클러스터.md).
  */
-export { SITE_URL, BRAND } from '../../vn/_lib/site';
+export { SITE_URL, BRAND, ORGANIZATION, SHOPEE_SG_STORE } from '../../vn/_lib/site';
 import { SITE_URL } from '../../vn/_lib/site';
 
 export const SG_BASE = `${SITE_URL}/sg`;
