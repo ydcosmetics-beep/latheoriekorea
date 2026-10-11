@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import type { Article } from '../_lib/types';
 import { BRIDGE_URL } from '../_lib/site';
 import { Cta, H2, H3, P, B, Table } from './_ui';
@@ -32,6 +33,8 @@ function Body() {
       <P>
         Khi lớp sừng thiếu nước, hàng rào bảo vệ da kém ổn định hơn, da dễ kích ứng hơn, và tuyến bã nhờn thường được mô tả là phản ứng bằng cách
         tiết thêm dầu. Đó là lý do “bỏ dưỡng ẩm để bớt dầu” hay cho kết quả ngược lại.
+        Dấu hiệu da mụn đang yếu hàng rào bảo vệ có trong bài{' '}
+        <Link href="/vn/da-mun-kho-cang-cham-chich-co-phai-hang-rao-bao-ve-da-yeu" className="font-medium text-gray-950 underline underline-offset-4 decoration-gray-400 hover:decoration-gray-900">Da mụn bị khô căng, châm chích có phải do hàng rào bảo vệ da yếu?</Link>
       </P>
 
       <H2 id="huong-dan-y-khoa">Hướng dẫn chuyên môn nói gì</H2>

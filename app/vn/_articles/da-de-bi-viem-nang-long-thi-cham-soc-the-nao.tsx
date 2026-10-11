@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import type { Article } from '../_lib/types';
 import { BRIDGE_URL } from '../_lib/site';
 import { Cta, H2, H3, P, B, Table } from './_ui';
@@ -81,6 +82,8 @@ function Body() {
       <H3>Sữa rửa mặt và sữa tắm</H3>
       <P>
         Dịu, pH thấp, không tạo bọt quá mạnh. Với vùng lưng, tắm ngay sau khi tập thể thao quan trọng hơn loại sữa tắm bạn dùng.
+        Chọn từng bước từ sữa rửa mặt đến kem chống nắng có trong bài{' '}
+        <Link href="/vn/da-bi-mun-nam-nen-dung-my-pham-gi" className="font-medium text-gray-950 underline underline-offset-4 decoration-gray-400 hover:decoration-gray-900">Da bị mụn nấm nên dùng mỹ phẩm gì?</Link>
       </P>
 
       <H2 id="khi-nao-di-kham">Khi nào nên đến khám</H2>
