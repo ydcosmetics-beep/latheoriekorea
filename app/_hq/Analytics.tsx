@@ -7,7 +7,7 @@ import Script from "next/script";
  * ID 는 공개값이라 코드에 둔다. 비어 있으면 아무것도 싣지 않는다.
  */
 const CLARITY_ID = "ywknhfzok7";
-const GA4_ID = "";
+const GA4_ID = "G-E2QWM6TKXN";
 
 export default function Analytics() {
   return (
