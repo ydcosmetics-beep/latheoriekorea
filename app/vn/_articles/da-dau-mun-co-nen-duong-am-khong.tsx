@@ -39,8 +39,9 @@ function Body() {
 
       <H2 id="huong-dan-y-khoa">Hướng dẫn chuyên môn nói gì</H2>
       <P>
-        Hướng dẫn chăm sóc mụn của Viện Da liễu Hoa Kỳ ghi nhận rằng các sản phẩm dưỡng ẩm không gây bít tắc có thể giúp da dễ chịu hơn khi dùng
-        cùng các hoạt chất làm khô da, và khuyến khích duy trì dưỡng ẩm như một phần của chăm sóc hằng ngày [2]. Một bài tổng quan năm 2014 về kem dưỡng ẩm
+        Phần lớn hướng dẫn chăm sóc mụn coi kem dưỡng ẩm không gây bít tắc là một phần của chăm sóc cơ bản, cùng sữa rửa mặt dịu nhẹ và chống nắng [3].
+        Hướng dẫn của Hội Da liễu Singapore (2019) khuyên dùng kem dưỡng ẩm song song để da dễ dung nạp các hoạt chất bôi hơn, và ghi nhận kem dưỡng ẩm dành cho da mụn
+        có thể dùng mà không tạo thêm nhân mụn [4]. Các hoạt chất hay dùng cho da mụn có thể gây khô và bong tróc [2]. Một bài tổng quan năm 2014 về kem dưỡng ẩm
         cho da mụn đi xa hơn: điều quan trọng không phải là <em>có</em> dưỡng ẩm hay không, mà là <B>thành phần của sản phẩm dưỡng ẩm đó</B> [1].
       </P>
 
@@ -83,7 +84,8 @@ function Body() {
       <P>
         Tổng quan năm 2014 trên <em>Journal of Clinical and Aesthetic Dermatology</em> mô tả các nhóm thành phần trong kem dưỡng ẩm cho da mụn —
         chất giữ ẩm, chất làm mềm, chất khoá ẩm — và lưu ý rằng lựa chọn thành phần quyết định sản phẩm có phù hợp với da mụn hay không [1].
-        Hướng dẫn của Viện Da liễu Hoa Kỳ (2016) coi dưỡng ẩm là một phần của chăm sóc da mụn hằng ngày [2].
+        Tổng quan StatPearls ghi nhận phần lớn hướng dẫn coi kem dưỡng ẩm không gây bít tắc là một phần của chăm sóc da mụn [3]; hướng dẫn của Hội Da liễu
+        Singapore (2019) khuyên dùng kem dưỡng ẩm song song với các hoạt chất bôi [4]. Hướng dẫn của Viện Da liễu Hoa Kỳ (2016) ghi nhận tình trạng khô da khi dùng các hoạt chất này [2].
       </P>
       <H3>2. Sản phẩm <span className="font-belleza font-normal">La&nbsp;Théorie</span> được xây dựng thế nào</H3>
       <P>
@@ -127,9 +129,12 @@ export const article: Article = {
     { q: 'Nên thoa kem dưỡng ẩm trước hay sau tinh chất?', a: 'Với dòng La Théorie, thứ tự là nước cân bằng → kem dưỡng → tinh chất, vì tinh chất là bước tăng cường (Enhancer), không phải bước bắt buộc. Với sản phẩm khác, hãy theo hướng dẫn của nhà sản xuất.' },
   ],
   // 2026-09-16 확인 — [1] Europe PMC (PMID 24847408 · PMC4025519) · [2] Crossref DOI
+  // 2026-10-14 정정 — AAD 2016([2]) 본문에 보습 권고가 없다(원문 'moistur' 0건 확인). 보습 문장 출처를 [3] StatPearls · [4] 싱가포르 피부과학회 2019 로 옮기고 [2]는 건조 부작용에만 쓴다.
   references: [
     { label: 'Chularojanamontri L. và cộng sự (2014). Moisturizers for Acne: What are their Constituents? Journal of Clinical and Aesthetic Dermatology 7(5):36–44.', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC4025519/' },
     { label: 'Zaenglein AL. và cộng sự (2016). Guidelines of care for the management of acne vulgaris. Journal of the American Academy of Dermatology 74(5):945–973.', url: 'https://doi.org/10.1016/j.jaad.2015.12.037' },
+    { label: 'Saleh HM, Masood S, Schlessinger J. Acne Vulgaris. StatPearls (cập nhật 2026).', url: 'https://www.ncbi.nlm.nih.gov/books/NBK459173/' },
+    { label: 'Oon HH. và cộng sự (2019). Acne Management Guidelines by the Dermatological Society of Singapore. Journal of Clinical and Aesthetic Dermatology 12(7):34–50.', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC6715335/' },
   ],
   Body,
 };

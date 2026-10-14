@@ -36,8 +36,9 @@ function Body() {
 
       <H2 id="guidelines">What the professional guidance says</H2>
       <P>
-        The American Academy of Dermatology’s acne guidelines note that non-comedogenic moisturisers can make skin more comfortable alongside drying actives,
-        and place moisturising within everyday acne care rather than outside it [2]. A 2014 review of moisturisers for acne goes one step further:
+        Most acne guidelines treat a non-comedogenic moisturiser as part of basic acne care, alongside a gentle cleanser and sun protection [3]. The Dermatological
+        Society of Singapore’s guidelines advise using a moisturiser alongside topical actives to make them easier to tolerate, and note that acne-specific moisturisers
+        can be used without inducing comedones [4]. A 2014 review of moisturisers for acne goes one step further:
         the question is not <em>whether</em> to moisturise, but <B>what the moisturiser is made of</B> [1].
       </P>
 
@@ -80,7 +81,7 @@ function Body() {
       <P>
         The 2014 review in the <em>Journal of Clinical and Aesthetic Dermatology</em> describes the ingredient groups in moisturisers for acne — humectants, emollients,
         occlusives — and notes that the choice of ingredients decides whether a moisturiser suits acne-prone skin [1]. The American Academy of Dermatology guidelines (2016)
-        count moisturising as part of everyday acne care [2].
+        note dryness and peeling with common acne actives [2]; StatPearls and the Dermatological Society of Singapore (2019) count a non-comedogenic moisturiser as part of acne care [3][4].
       </P>
       <H3>2. How <span className="font-belleza font-normal">La&nbsp;Théorie</span> is formulated</H3>
       <P>
@@ -124,9 +125,12 @@ export const article: Article = {
     { q: 'Do I apply moisturiser before or after essence?', a: 'With the La Théorie range, the order is toner → gel cream → essence, because the essence is an enhancer rather than a required step. For other brands, follow the maker’s instructions.' },
   ],
   // 2026-09-16 확인 — [1] Europe PMC (PMID 24847408 · PMC4025519) · [2] Crossref DOI
+  // 2026-10-14 correction — AAD 2016 ([2]) has no moisturiser recommendation (full text checked: 'moistur' 0). Moisturising sentences now cite [3] StatPearls · [4] Dermatological Society of Singapore 2019; [2] only for dryness.
   references: [
     { label: 'Chularojanamontri L. et al. (2014). Moisturizers for Acne: What are their Constituents? Journal of Clinical and Aesthetic Dermatology 7(5):36–44.', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC4025519/' },
     { label: 'Zaenglein AL. et al. (2016). Guidelines of care for the management of acne vulgaris. Journal of the American Academy of Dermatology 74(5):945–973.', url: 'https://doi.org/10.1016/j.jaad.2015.12.037' },
+    { label: 'Saleh HM, Masood S, Schlessinger J. Acne Vulgaris. StatPearls (updated 2026).', url: 'https://www.ncbi.nlm.nih.gov/books/NBK459173/' },
+    { label: 'Oon HH. et al. (2019). Acne Management Guidelines by the Dermatological Society of Singapore. Journal of Clinical and Aesthetic Dermatology 12(7):34–50.', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC6715335/' },
   ],
   Body,
 };

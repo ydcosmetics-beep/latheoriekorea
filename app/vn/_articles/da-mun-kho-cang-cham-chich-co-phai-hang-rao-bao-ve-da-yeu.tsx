@@ -73,7 +73,7 @@ function Body() {
       <ol className="my-6 space-y-4 text-[15px] md:text-base leading-[1.85] text-gray-700">
         <li className="flex gap-4"><span className="shrink-0 font-semibold text-gray-950">1.</span><span><B>Bớt trước, thêm sau.</B> Tạm ngừng tẩy tế bào chết và giảm số lớp sản phẩm. Nếu đang dùng hoạt chất theo hướng dẫn của bác sĩ, hỏi bác sĩ trước khi tự ngừng.</span></li>
         <li className="flex gap-4"><span className="shrink-0 font-semibold text-gray-950">2.</span><span><B>Rửa mặt dịu, không quá 2 lần/ngày.</B> Sữa rửa mặt pH thấp, không tạo bọt quá mạnh.</span></li>
-        <li className="flex gap-4"><span className="shrink-0 font-semibold text-gray-950">3.</span><span><B>Đừng bỏ dưỡng ẩm.</B> Hướng dẫn chăm sóc mụn coi dưỡng ẩm là một phần của chăm sóc hằng ngày, và sản phẩm dưỡng ẩm không gây bít tắc giúp da dễ chịu hơn khi dùng cùng hoạt chất làm khô da [2].</span></li>
+        <li className="flex gap-4"><span className="shrink-0 font-semibold text-gray-950">3.</span><span><B>Đừng bỏ dưỡng ẩm.</B> Phần lớn hướng dẫn chăm sóc mụn coi kem dưỡng ẩm không gây bít tắc là một phần của chăm sóc cơ bản [3], và hướng dẫn của Hội Da liễu Singapore khuyên dùng kem dưỡng ẩm song song để da dễ dung nạp hoạt chất bôi hơn [4].</span></li>
         <li className="flex gap-4"><span className="shrink-0 font-semibold text-gray-950">4.</span><span><B>Chọn đúng thành phần.</B> Chất giữ ẩm (glycerin, axit hyaluronic, panthenol) kéo nước vào lớp sừng; chất làm mềm như squalane giúp bề mặt da mềm hơn [1].</span></li>
         <li className="flex gap-4"><span className="shrink-0 font-semibold text-gray-950">5.</span><span><B>Chống nắng mỗi ngày</B> và <B>đổi từng sản phẩm một</B> để biết thay đổi nào có ích.</span></li>
       </ol>
@@ -97,7 +97,8 @@ function Body() {
       <P>
         Tổng quan năm 2014 trên <em>Journal of Clinical and Aesthetic Dermatology</em> mô tả các nhóm thành phần trong kem dưỡng ẩm cho da mụn — chất giữ ẩm,
         chất làm mềm, chất khoá ẩm — và lưu ý rằng lựa chọn thành phần quyết định sản phẩm có phù hợp với da mụn hay không [1].
-        Hướng dẫn của Viện Da liễu Hoa Kỳ (2016) ghi nhận tình trạng khô và kích ứng khi dùng các hoạt chất cho da mụn, và coi dưỡng ẩm là một phần của chăm sóc hằng ngày [2].
+        Hướng dẫn của Viện Da liễu Hoa Kỳ (2016) ghi nhận tình trạng khô và kích ứng khi dùng các hoạt chất cho da mụn [2]; tổng quan StatPearls và hướng dẫn của Hội Da liễu Singapore (2019)
+        coi kem dưỡng ẩm không gây bít tắc là một phần của chăm sóc da mụn [3][4].
       </P>
       <H3>2. Kem dưỡng ẩm <span className="font-belleza font-normal">La&nbsp;Théorie</span> được xây dựng thế nào</H3>
       <P>
@@ -146,9 +147,12 @@ export const article: Article = {
     { q: 'Khi nào da khô rát cần đi khám?', a: 'Khi đỏ rát lan rộng, sưng, chảy dịch, ngứa nhiều, hoặc không cải thiện sau khi đã giảm sản phẩm và dưỡng ẩm đều đặn.' },
   ],
   // VN C2 글과 같은 문헌 2편 재사용 — [1] PMC4025519 · [2] Crossref DOI
+  // 2026-10-14 정정 — AAD 2016([2]) 본문에 보습 권고가 없다(원문 'moistur' 0건 확인). 보습 문장 출처를 [3] StatPearls · [4] 싱가포르 피부과학회 2019 로 옮기고 [2]는 건조 부작용에만 쓴다.
   references: [
     { label: 'Chularojanamontri L. và cộng sự (2014). Moisturizers for Acne: What are their Constituents? Journal of Clinical and Aesthetic Dermatology 7(5):36–44.', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC4025519/' },
     { label: 'Zaenglein AL. và cộng sự (2016). Guidelines of care for the management of acne vulgaris. Journal of the American Academy of Dermatology 74(5):945–973.', url: 'https://doi.org/10.1016/j.jaad.2015.12.037' },
+    { label: 'Saleh HM, Masood S, Schlessinger J. Acne Vulgaris. StatPearls (cập nhật 2026).', url: 'https://www.ncbi.nlm.nih.gov/books/NBK459173/' },
+    { label: 'Oon HH. và cộng sự (2019). Acne Management Guidelines by the Dermatological Society of Singapore. Journal of Clinical and Aesthetic Dermatology 12(7):34–50.', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC6715335/' },
   ],
   Body,
 };
