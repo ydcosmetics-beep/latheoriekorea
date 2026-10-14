@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import type { Article } from '../_lib/types';
 import { BRIDGE_URL } from '../_lib/site';
-import { Cta, H2, H3, P, B, Table } from './_ui';
+import { Cta, H2, H3, P, B, Table, ReadMore } from './_ui';
 
 /**
  * C2 2편째 · 대표 키워드 `dưỡng ẩm cho da mụn` · H1 = AEO 질문 창고 PAA 2026-08-31 C2 원문(09-01 진단 글 목록 2순위 「제품 선택 질문 = 구매 직전」).
@@ -97,6 +97,15 @@ function Body() {
         Nếu bạn đang tìm một kem dưỡng nhẹ cho da dầu mụn thiếu nước, có thể tham khảo <B>Kem Dưỡng Ẩm La Théorie Hydrating Gel Cream 60ml</B> —
         gel-cream 0% axit béo với panthenol và phytosqualane.
       </Cta>
+
+      <ReadMore
+        links={[
+          ['/vn/da-dau-mun-co-nen-duong-am-khong', 'Da dầu mụn có nên dưỡng ẩm không?'],
+          ['/vn/kem-duong-am-khong-chua-axit-beo-la-gi', 'Kem dưỡng ẩm không chứa axit béo là gì? Ai nên dùng?'],
+          ['/vn/da-mun-khong-nen-dung-thanh-phan-gi', 'Da mụn không nên dùng thành phần gì?'],
+          ['/vn/da-de-bi-viem-nang-long-thi-cham-soc-the-nao', 'Da dễ bị viêm nang lông thì chăm sóc thế nào?'],
+        ]}
+      />
     </>
   );
 }

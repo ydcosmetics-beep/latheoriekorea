@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import type { Article } from '../_lib/types';
 import { BRIDGE_URL } from '../_lib/site';
-import { Cta, H2, H3, P, B, Table } from './_ui';
+import { Cta, H2, H3, P, B, Table, ReadMore } from './_ui';
 
 /** C2 · PAA 원문 `dưỡng ẩm cho da mụn` (2026-08-31) · 고정 쿼리 Q01·Q02 와 같은 질문. */
 const CTA_URL = `${BRIDGE_URL}/?s=seo&k=LATHWEB&cp=C2&p=P002`;
@@ -103,6 +103,14 @@ function Body() {
         Nếu bạn muốn xem một gel-cream được xây dựng theo hướng bỏ axit béo, có thể tham khảo <B>Kem Dưỡng Ẩm La Théorie Hydrating Gel Cream</B> —
         dành cho da dầu thiếu nước, da mụn và da dễ gặp viêm nang lông.
       </Cta>
+
+      <ReadMore
+        links={[
+          ['/vn/da-mun-nen-dung-kem-duong-am-nao', 'Da mụn nên dùng kem dưỡng ẩm nào?'],
+          ['/vn/kem-duong-am-khong-chua-axit-beo-la-gi', 'Kem dưỡng ẩm không chứa axit béo là gì? Ai nên dùng?'],
+          ['/vn/tai-sao-da-dau-lai-de-bi-mun', 'Tại sao da dầu lại dễ bị mụn?'],
+        ]}
+      />
     </>
   );
 }

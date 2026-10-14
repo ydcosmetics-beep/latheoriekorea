@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import type { Article } from '../_lib/types';
 import { BRIDGE_URL } from '../_lib/site';
-import { Cta, H2, H3, P, B, Table } from './_ui';
+import { Cta, H2, H3, P, B, Table, ReadMore } from './_ui';
 
 /**
  * C4 (1차 범위 C4 1편) · 대표 키워드 `hàng rào bảo vệ da` (VN 키워드 클러스터.md 1장) 를 증상 질문으로 연다 —
@@ -116,6 +116,14 @@ function Body() {
         Nếu bạn muốn một kem dưỡng giữ ẩm nhẹ cho da mụn đang khô căng, có thể tham khảo <B>Kem Dưỡng Ẩm La Théorie Hydrating Gel Cream</B> —
         gel-cream 0% axit béo với panthenol và sodium hyaluronate, dành cho da mụn, da dễ bị viêm nang lông và da nhạy cảm.
       </Cta>
+
+      <ReadMore
+        links={[
+          ['/vn/hang-rao-bao-ve-da-co-tu-phuc-hoi-duoc-khong', 'Hàng rào bảo vệ da có tự phục hồi được không?'],
+          ['/vn/da-mun-nen-dung-kem-duong-am-nao', 'Da mụn nên dùng kem dưỡng ẩm nào?'],
+          ['/vn/kem-duong-am-khong-chua-axit-beo-la-gi', 'Kem dưỡng ẩm không chứa axit béo là gì? Ai nên dùng?'],
+        ]}
+      />
     </>
   );
 }

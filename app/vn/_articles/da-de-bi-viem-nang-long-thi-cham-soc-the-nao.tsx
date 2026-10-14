@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import type { Article } from '../_lib/types';
 import { BRIDGE_URL } from '../_lib/site';
-import { Cta, H2, H3, P, B, Table } from './_ui';
+import { Cta, H2, H3, P, B, Table, ReadMore } from './_ui';
 
 /**
  * C6 · PAA 원문 「Làm sao để hết bị viêm nang lông?」(`viêm nang lông`, 2026-08-23) 은 결과 단정형이라
@@ -118,6 +118,14 @@ function Body() {
         Nếu bạn muốn xem một kem dưỡng ẩm được xây dựng theo hướng bỏ axit béo, có thể tham khảo <B>Kem Dưỡng Ẩm La Théorie Hydrating Gel Cream</B> —
         gel-cream không chứa axit béo, dành cho da mụn, viêm nang lông và da nhạy cảm.
       </Cta>
+
+      <ReadMore
+        links={[
+          ['/vn/da-bi-mun-nam-nen-dung-my-pham-gi', 'Da bị mụn nấm nên dùng mỹ phẩm gì?'],
+          ['/vn/kem-duong-am-khong-chua-axit-beo-la-gi', 'Kem dưỡng ẩm không chứa axit béo là gì? Ai nên dùng?'],
+          ['/vn/da-viem-nang-long-mun-nam-nen-dung-kem-chong-nang-nao', 'Da dễ bị viêm nang lông, mụn nấm nên dùng kem chống nắng nào?'],
+        ]}
+      />
     </>
   );
 }

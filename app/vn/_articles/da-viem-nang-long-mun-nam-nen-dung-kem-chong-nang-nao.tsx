@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import type { Article } from '../_lib/types';
 import { BRIDGE_URL } from '../_lib/site';
-import { Cta, H2, H3, P, B, Table } from './_ui';
+import { Cta, H2, H3, P, B, Table, ReadMore } from './_ui';
 
 /**
  * C6 (1차 범위 C6 3편째) · SG `/sg/what-sunscreens-are-safe-for-fungal-acne` (S1) 의 VN 대응판.
@@ -91,6 +91,14 @@ function Body() {
         Nếu bạn muốn một kem chống nắng thuộc dòng sản phẩm bỏ axit béo, có thể tham khảo <B>Kem Chống Nắng La Théorie Sunscreen 50ml</B> —
         kem chống nắng không axit béo cho da có vấn đề.
       </Cta>
+
+      <ReadMore
+        links={[
+          ['/vn/da-bi-mun-nam-nen-dung-my-pham-gi', 'Da bị mụn nấm nên dùng mỹ phẩm gì?'],
+          ['/vn/kem-duong-am-khong-chua-axit-beo-la-gi', 'Kem dưỡng ẩm không chứa axit béo là gì? Ai nên dùng?'],
+          ['/vn/da-de-bi-viem-nang-long-thi-cham-soc-the-nao', 'Da dễ bị viêm nang lông thì chăm sóc thế nào?'],
+        ]}
+      />
     </>
   );
 }

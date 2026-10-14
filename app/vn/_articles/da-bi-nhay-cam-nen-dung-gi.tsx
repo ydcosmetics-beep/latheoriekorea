@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import type { Article } from '../_lib/types';
 import { BRIDGE_URL } from '../_lib/site';
-import { Cta, H2, H3, P, B, Table } from './_ui';
+import { Cta, H2, H3, P, B, Table, ReadMore } from './_ui';
 
 /**
  * C5 첫 글 · 대표 키워드 `da nhạy cảm` (VN 키워드 클러스터.md 1장) · H1 = AEO 질문 창고 PAA 2026-08-31 C5 원문.
@@ -135,6 +135,14 @@ function Body() {
         Nếu bạn muốn bắt đầu chu trình bằng một bước đơn giản sau khi rửa mặt, có thể tham khảo <B>Nước Cân Bằng La Théorie Soothing Toner 210ml</B> —
         0% axit béo, với panthenol và glycerin, dành cho da mụn ẩn, viêm nang lông và da nhạy cảm.
       </Cta>
+
+      <ReadMore
+        links={[
+          ['/vn/hang-rao-bao-ve-da-co-tu-phuc-hoi-duoc-khong', 'Hàng rào bảo vệ da có tự phục hồi được không?'],
+          ['/vn/da-mun-khong-nen-dung-thanh-phan-gi', 'Da mụn không nên dùng thành phần gì?'],
+          ['/vn/da-mun-nen-dung-kem-duong-am-nao', 'Da mụn nên dùng kem dưỡng ẩm nào?'],
+        ]}
+      />
     </>
   );
 }

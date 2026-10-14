@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import type { Article } from '../_lib/types';
 import { BRIDGE_URL } from '../_lib/site';
-import { Cta, H2, H3, P, B, Table } from './_ui';
+import { Cta, H2, H3, P, B, Table, ReadMore } from './_ui';
 
 /**
  * C3 · 증상 질문 「Da bị mụn nấm nên dùng mỹ phẩm gì?」 — SG `/sg/what-skincare-is-safe-for-fungal-acne`
@@ -118,6 +118,14 @@ function Body() {
         Nếu bạn muốn bắt đầu từ bước dưỡng ẩm, có thể tham khảo <B>Kem Dưỡng Ẩm La Théorie Hydrating Gel Cream</B> —
         gel-cream 0% axit béo, dành cho da mụn, da dễ bị viêm nang lông và da nhạy cảm.
       </Cta>
+
+      <ReadMore
+        links={[
+          ['/vn/kem-duong-am-khong-chua-axit-beo-la-gi', 'Kem dưỡng ẩm không chứa axit béo là gì? Ai nên dùng?'],
+          ['/vn/da-de-bi-viem-nang-long-thi-cham-soc-the-nao', 'Da dễ bị viêm nang lông thì chăm sóc thế nào?'],
+          ['/vn/da-viem-nang-long-mun-nam-nen-dung-kem-chong-nang-nao', 'Da dễ bị viêm nang lông, mụn nấm nên dùng kem chống nắng nào?'],
+        ]}
+      />
     </>
   );
 }

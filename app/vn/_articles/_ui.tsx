@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 
 /**
  * 글 본문 공통 요소. VN·SG 글이 같이 쓴다 (`_articles` 는 private folder 라 라우트가 아니다).
@@ -70,5 +71,23 @@ export function Cta({
         </div>
       </div>
     </aside>
+  );
+}
+
+/** 글 끝 「Đọc thêm」 — 같은 주제 글 3~4편. 링크 문구는 각 글 H1 그대로 넘긴다. */
+export function ReadMore({ links }: { links: [href: string, title: string][] }) {
+  return (
+    <nav aria-labelledby="doc-them" className="mt-14 border-t border-gray-200 pt-6">
+      <p id="doc-them" className="mb-3 text-[11px] font-medium uppercase tracking-[0.08em] text-gray-500">Đọc thêm</p>
+      <ul className="space-y-2">
+        {links.map(([href, title]) => (
+          <li key={href}>
+            <Link href={href} className="text-[15px] font-medium text-gray-950 underline underline-offset-4 decoration-gray-400 hover:decoration-gray-900">
+              {title}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </nav>
   );
 }

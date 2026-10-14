@@ -28,11 +28,15 @@ export const SHOPEE_SHOP_ID = '1136700919';
  */
 export const SHOPEE_VN_STORE = 'shopee.vn/la_theoriepa.vn';
 export const SHOPEE_SG_STORE = 'shopee.sg/la_theorie.sg';
+/** 브랜드 설명 한 문단 — 허브 소개 첫 문단과 Organization `description` 에 같은 문장으로 쓴다 (2026-10-15 GEO 실행 전략 P7). */
+export const BRAND_DESCRIPTION =
+  'La Théorie là thương hiệu dược mỹ phẩm Hàn Quốc dành cho da dầu mụn, da nhạy cảm và da dễ bị viêm nang lông, với công thức không chứa axit béo. Sản phẩm chính hãng tại Việt Nam được bán trên Shopee: la_theoriepa.vn.';
 export const ORGANIZATION = {
   '@type': 'Organization',
   '@id': `${SITE_URL}/#organization`,
   name: BRAND,
   url: SITE_URL,
+  description: BRAND_DESCRIPTION,
   sameAs: [
     `https://${SHOPEE_VN_STORE}`,
     `https://${SHOPEE_SG_STORE}`,

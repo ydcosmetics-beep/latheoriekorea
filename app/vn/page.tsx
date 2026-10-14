@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { articles, STAGE_LABEL } from './_lib/articles';
 import { products, interviews } from './_lib/products';
-import { SITE_URL, VN_BASE, BRAND, BRIDGE_URL, ORGANIZATION, SHOPEE_VN_STORE } from './_lib/site';
+import { SITE_URL, VN_BASE, BRAND, BRAND_DESCRIPTION, BRIDGE_URL, ORGANIZATION, SHOPEE_VN_STORE } from './_lib/site';
 import type { Stage } from './_lib/types';
 
 /**
@@ -89,7 +89,8 @@ export default function VnHubPage() {
             <h2 id="gioi-thieu" className="font-belleza mt-4 text-3xl md:text-[40px] leading-[1.2] text-gray-950">Giải pháp bắt đầu từ việc<br />hiểu nguyên nhân</h2>
           </div>
           <div className="text-[15px] md:text-base leading-[1.9] text-gray-700">
-            <p>Chúng tôi phân tích hơn 1.000 loại vi sinh vật trên da, định nghĩa bằng toán học mối quan hệ giữa mỹ phẩm, các vấn đề về da và vi sinh vật. Phân tích được nguyên nhân, chúng tôi có thể thay đổi kết quả.</p>
+            <p>{BRAND_DESCRIPTION}</p>
+            <p className="mt-5">Chúng tôi phân tích hơn 1.000 loại vi sinh vật trên da, định nghĩa bằng toán học mối quan hệ giữa mỹ phẩm, các vấn đề về da và vi sinh vật. Phân tích được nguyên nhân, chúng tôi có thể thay đổi kết quả.</p>
             <p className="mt-5">Chúng tôi không thể hứa hẹn những thay đổi kỳ diệu cho làn da, nhưng sẽ nỗ lực mang lại cho bạn làn da dịu hơn hôm nay — bằng những thay đổi nhỏ nhưng không ngừng mỗi ngày.</p>
             <p className="mt-5">Toàn bộ dòng sản phẩm được xây dựng trên công thức <strong className="font-semibold text-gray-900">0% Fatty Acid</strong> — bỏ đi nhóm thành phần mà nấm men Malassezia trên da dùng làm thức ăn. Được sử dụng tại hơn 20 phòng khám da liễu và thẩm mỹ viện tại Hàn Quốc.</p>
             <a href={`${SITE_URL}/about`} className="mt-8 inline-block border border-gray-950 px-7 py-3 text-[12px] font-medium uppercase tracking-[0.18em] text-gray-950 hover:bg-gray-950 hover:text-white">About Us</a>

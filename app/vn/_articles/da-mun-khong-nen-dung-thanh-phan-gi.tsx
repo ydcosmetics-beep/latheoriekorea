@@ -1,6 +1,6 @@
 import type { Article } from '../_lib/types';
 import { BRIDGE_URL } from '../_lib/site';
-import { Cta, B } from './_ui';
+import { Cta, B, ReadMore } from './_ui';
 
 /**
  * 글 → Shopee 는 전부 브릿지를 거친다 (2026-09-07 결정 · 핸드오프 결정 29).
@@ -274,6 +274,14 @@ function Body() {
         Nếu bạn muốn xem một công thức được xây dựng theo hướng loại bỏ axit béo, có thể tham khảo <B>Kem Dưỡng Ẩm La Théorie Hydrating Gel Cream</B> —
         dạng gel-cream, không chứa axit béo, dành cho da mụn, viêm nang lông và da nhạy cảm.
       </Cta>
+
+      <ReadMore
+        links={[
+          ['/vn/kem-duong-am-khong-chua-axit-beo-la-gi', 'Kem dưỡng ẩm không chứa axit béo là gì? Ai nên dùng?'],
+          ['/vn/da-mun-nen-dung-kem-duong-am-nao', 'Da mụn nên dùng kem dưỡng ẩm nào?'],
+          ['/vn/da-bi-mun-nam-nen-dung-my-pham-gi', 'Da bị mụn nấm nên dùng mỹ phẩm gì?'],
+        ]}
+      />
     </>
   );
 }

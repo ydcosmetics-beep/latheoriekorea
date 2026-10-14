@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import type { Article } from '../_lib/types';
 import { BRIDGE_URL } from '../_lib/site';
-import { Cta, H2, H3, P, B, Table } from './_ui';
+import { Cta, H2, H3, P, B, Table, ReadMore } from './_ui';
 
 /**
  * C4 2편째 · 대표 키워드 `hàng rào bảo vệ da` · H1 = AEO 질문 창고 PAA 2026-08-31 C4 원문(제품컷 표준 C4 배정 질문).
@@ -108,6 +108,14 @@ function Body() {
         Nếu da bạn đang khô, bong tróc và có cảm giác căng, có thể tham khảo <B>Tinh Chất La Théorie Dual Effect Essence 40ml</B> — với madecassoside và squalane,
         dùng sau kem dưỡng ẩm.
       </Cta>
+
+      <ReadMore
+        links={[
+          ['/vn/da-mun-kho-cang-cham-chich-co-phai-hang-rao-bao-ve-da-yeu', 'Da mụn bị khô căng, châm chích có phải do hàng rào bảo vệ da yếu?'],
+          ['/vn/kem-duong-am-khong-chua-axit-beo-la-gi', 'Kem dưỡng ẩm không chứa axit béo là gì? Ai nên dùng?'],
+          ['/vn/da-mun-nen-dung-kem-duong-am-nao', 'Da mụn nên dùng kem dưỡng ẩm nào?'],
+        ]}
+      />
     </>
   );
 }

@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import type { Article } from '../_lib/types';
 import { BRIDGE_URL } from '../_lib/site';
-import { Cta, H2, H3, P, B, Table } from './_ui';
+import { Cta, H2, H3, P, B, Table, ReadMore } from './_ui';
 
 /**
  * C1 첫 글 · 대표 키워드 `da dầu mụn` (VN 키워드 클러스터.md 1장) · H1 = AEO 질문 창고 PAA 2026-08-31 C1 원문.
@@ -121,6 +121,14 @@ function Body() {
         Nếu bạn đang tìm một sữa rửa mặt dịu nhẹ cho da dầu mụn, có thể tham khảo <B>Gel Rửa Mặt La Théorie Clearing Gel 210ml</B> —
         chất làm sạch không chứa axit béo, pH thấp, không để lại cảm giác căng rít sau khi rửa.
       </Cta>
+
+      <ReadMore
+        links={[
+          ['/vn/da-dau-mun-co-nen-duong-am-khong', 'Da dầu mụn có nên dưỡng ẩm không?'],
+          ['/vn/da-mun-nen-dung-kem-duong-am-nao', 'Da mụn nên dùng kem dưỡng ẩm nào?'],
+          ['/vn/da-mun-khong-nen-dung-thanh-phan-gi', 'Da mụn không nên dùng thành phần gì?'],
+        ]}
+      />
     </>
   );
 }
