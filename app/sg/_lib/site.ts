@@ -2,8 +2,13 @@
  * SG 섹션 공통 상수. 호스트는 VN 섹션과 같다 — 한 사이트 안의 두 시장 경로(/vn · /sg).
  * 어휘·쿼리·글 목록은 시장별로 별개다 (핸드오프 결정 28 · SG 키워드 클러스터.md).
  */
-export { SITE_URL, BRAND, ORGANIZATION, SHOPEE_SG_STORE } from '../../vn/_lib/site';
-import { SITE_URL } from '../../vn/_lib/site';
+export { SITE_URL, BRAND, SHOPEE_SG_STORE } from '../../vn/_lib/site';
+import { SITE_URL, ORGANIZATION as ORGANIZATION_VN } from '../../vn/_lib/site';
+
+/** SG 용 브랜드 설명 — VN 의 베트남어 description 대신 영어 한 문단 (2026-10-15 S06). Organization 노드(@id)는 VN 과 같다. */
+export const BRAND_DESCRIPTION_SG =
+  'La Théorie is a Korean dermocosmetic brand for oily, acne-prone, sensitive and folliculitis-prone skin, formulated without fatty acids. The official store in Singapore is on Shopee: la_theorie.sg.';
+export const ORGANIZATION = { ...ORGANIZATION_VN, description: BRAND_DESCRIPTION_SG };
 
 export const SG_BASE = `${SITE_URL}/sg`;
 
