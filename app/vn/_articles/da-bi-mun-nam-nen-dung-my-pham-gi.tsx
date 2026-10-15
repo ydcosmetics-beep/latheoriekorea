@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import type { Article } from '../_lib/types';
-import { BRIDGE_URL } from '../_lib/site';
+import { BRIDGE_URL, SHOPEE_VN_STORE } from '../_lib/site';
 import { Cta, H2, H3, P, B, Table, ReadMore } from './_ui';
 
 /**
@@ -106,6 +106,12 @@ function Body() {
         Mọi sản phẩm trong dòng <span className="font-belleza">La&nbsp;Théorie</span> — sữa rửa mặt, nước cân bằng, gel-cream, tinh chất, kem chống nắng và kem BB —
         đều xây dựng trên công thức <B>0% Fatty Acid</B>, nên có thể dùng thành một quy trình trọn vẹn thay vì kiểm tra từng sản phẩm một.
         Được sử dụng tại hơn 20 phòng khám da liễu và thẩm mỹ viện tại Hàn Quốc.
+      </P>
+      <H3>Nhãn và gian hàng chính hãng ghi gì</H3>
+      <P>
+        Trên gian hàng chính hãng tại Việt Nam (Shopee: {SHOPEE_VN_STORE}), mỗi sản phẩm đều ghi <B>Không chứa axit béo</B> trong tên sản phẩm; ví dụ kem dưỡng ẩm được ghi là{' '}
+        <B>Kem dưỡng ẩm cho da mụn La Théorie Hydrating Gel Cream 60ml | Viêm nang lông &amp; da nhạy cảm | Không chứa axit béo</B> (thành phần nổi bật in trên nhãn: Phytosqualane, Panthenol).
+        Đây là thông tin nhà bán hàng công bố, không phải kết quả thử nghiệm.
       </P>
       <H3>3. Điều chưa được kiểm chứng</H3>
       <P>
