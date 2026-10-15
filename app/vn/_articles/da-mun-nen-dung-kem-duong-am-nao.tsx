@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import type { Article } from '../_lib/types';
-import { BRIDGE_URL } from '../_lib/site';
+import { BRIDGE_URL, SHOPEE_VN_STORE } from '../_lib/site';
 import { Cta, H2, H3, P, B, Table, ReadMore } from './_ui';
 
 /**
@@ -25,6 +25,13 @@ const CRITERIA: [string, string][] = [
   ['Dịu nhẹ', 'Ít thành phần dễ kích ứng — nhất là khi da đang khô, rát'],
 ];
 
+// [2][3] gel·fluid 가 가볍고 수성 · [4] 휴멕턴트는 밀폐제와 함께 · [3] 유성·면포 유발 제품 회피 · [5] 활성 성분의 건조 부작용
+const TEXTURES: [string, string, string, string][] = [
+  ['Gel / lỏng nhẹ (fluid)', 'Gốc nước, không nhờn, thấm nhanh [2][3]', 'Da dầu, da hỗn hợp, khí hậu nóng ẩm [3]', 'Da đang khô, bong tróc — chất hút ẩm dùng riêng có thể làm tăng mất nước qua da [4]'],
+  ['Gel-cream', 'Nhẹ như gel nhưng có thêm thành phần làm mềm', 'Da dầu thiếu nước, muốn nhẹ mặt mà vẫn giữ ẩm', 'Vẫn cần đọc bảng thành phần — tên gọi không bảo đảm không gây bít tắc'],
+  ['Lotion / cream', 'Có thêm thành phần khóa ẩm và làm mềm [4]', 'Da khô mụn, nhất là khi đang dùng hoạt chất bôi gây khô [3][5]', 'Da dầu thấy bí; tránh loại gốc dầu, dễ gây bít tắc [3]'],
+];
+
 function Body() {
   return (
     <>
@@ -32,6 +39,7 @@ function Body() {
         <B>Một kem dưỡng nhẹ, cấp đủ ẩm và không gây bít tắc.</B> Hướng dẫn của Hội Da liễu Singapore mô tả kem dưỡng ẩm cho da mụn là loại có kết cấu nhẹ,
         cấp đủ ẩm và không gây bít tắc lỗ chân lông [3]; hướng dẫn hiện hành của Bộ Y tế khuyên “sử dụng sản phẩm chăm sóc da phù hợp: sản phẩm rửa mặt,
         dưỡng ẩm kiềm dầu” [1]. Không có một loại kem chung cho mọi làn da mụn — chọn theo tiêu chí, rồi theo tình trạng da của bạn.
+        Bài này đưa tiêu chí chọn, bảng so sánh kết cấu, và nói rõ trường hợp nào <B>không</B> hợp với từng kết cấu.
       </P>
 
       <H2 id="co-nen-duong-am">Da mụn có cần dưỡng ẩm không</H2>
@@ -54,6 +62,26 @@ function Body() {
         Tổng quan năm 2014 về kem dưỡng ẩm cho da mụn lưu ý: chất hút ẩm dùng một mình có thể làm tăng lượng nước mất qua da, nên thường được kết hợp với
         thành phần khóa ẩm [4]. Và “non-comedogenic” là một nhãn ghi trên bao bì, không phải bảo đảm — đọc bảng thành phần vẫn cần thiết.
       </P>
+      <P>
+        “Non-comedogenic”, “oil-free” và “không chứa axit béo” là ba nhãn khác nhau, không thay thế cho nhau — nhãn thứ ba được giải thích trong bài{' '}
+        <Link href="/vn/kem-duong-am-khong-chua-axit-beo-la-gi" className={LINK}>Kem dưỡng ẩm không chứa axit béo là gì? Ai nên dùng?</Link>. Những thành phần
+        nên dò trên bảng thành phần có trong bài <Link href="/vn/da-mun-khong-nen-dung-thanh-phan-gi" className={LINK}>Da mụn không nên dùng thành phần gì?</Link>
+      </P>
+
+      <H2 id="so-sanh-ket-cau">So sánh kết cấu: gel – lotion – cream</H2>
+      <Table head={['Kết cấu', 'Cảm giác', 'Thường hợp với', 'Cân nhắc nếu']}>
+        {TEXTURES.map(([k, feel, fit, caution]) => (
+          <tr key={k} className="border-b border-gray-200 align-top">
+            <td className="py-3 pr-4 font-semibold text-gray-900 whitespace-nowrap">{k}</td>
+            <td className="py-3 pr-4 text-gray-700">{feel}</td>
+            <td className="py-3 pr-4 text-gray-700">{fit}</td>
+            <td className="py-3 text-gray-700">{caution}</td>
+          </tr>
+        ))}
+      </Table>
+      <P>
+        Kết cấu chỉ là điểm bắt đầu. Với mọi kết cấu, tiêu chí không gây bít tắc vẫn đứng trước [3]; bảng thành phần mới quyết định.
+      </P>
 
       <H2 id="da-kho-mun">Da khô mà vẫn bị mụn thì chọn thế nào</H2>
       <P>
@@ -67,6 +95,13 @@ function Body() {
         Da nam thường tiết nhiều bã nhờn hơn, vì bã nhờn chịu ảnh hưởng mạnh của hormone sinh dục [6]. Tổng quan năm 2018 về khác biệt da nam và nữ cũng nhắc
         đến việc cảm giác bết dính khiến nhiều người bỏ qua bước chăm sóc da [6]. Nhưng chưa có tài liệu nào đặt tiêu chí riêng cho kem dưỡng của nam giới —
         tiêu chí vẫn như trên: nhẹ, gốc nước, không nhờn, không gây bít tắc. Kết cấu gel thường dễ chấp nhận hơn với người ngại cảm giác bết.
+      </P>
+
+      <H2 id="khi-nao-nen-tranh">Khi nào nên tránh một kem dưỡng</H2>
+      <P>
+        Dừng và đổi sản phẩm nếu sau khi thoa, da thấy bí, nổi thêm nhân mụn, hoặc nổi những nốt nhỏ đều nhau và ngứa — dạng nốt này được bàn trong bài{' '}
+        <Link href="/vn/da-de-bi-viem-nang-long-thi-cham-soc-the-nao" className={LINK}>Da dễ bị viêm nang lông thì chăm sóc thế nào?</Link>. Tránh sản phẩm
+        gốc dầu hoặc dễ gây bít tắc, kể cả kem chống nắng [3]. Nếu đang dùng hoạt chất bôi theo hướng dẫn của bác sĩ, hỏi bác sĩ trước khi thêm bất kỳ sản phẩm nào.
       </P>
 
       <H2 id="khi-nao-di-kham">Khi nào nên đến khám</H2>
@@ -85,7 +120,18 @@ function Body() {
       <P>
         Kem Dưỡng Ẩm <span className="font-belleza">La&nbsp;Théorie</span> Hydrating Gel Cream 60ml là dạng gel-cream: bỏ axit béo và các loại dầu không cần thiết
         theo công thức <B>0% Fatty Acid</B>, cấp ẩm bằng panthenol và làm mềm bằng phytosqualane (squalane nguồn gốc thực vật). Dành cho da dầu thiếu nước —
-        nhẹ trên da mà vẫn giữ ẩm. Được sử dụng tại hơn 20 phòng khám da liễu và thẩm mỹ viện tại Hàn Quốc.
+        nhẹ trên da mà vẫn giữ ẩm. Được sử dụng tại hơn 20 phòng khám da liễu và thẩm mỹ viện tại Hàn Quốc (theo tài liệu của công ty).
+      </P>
+      <P>
+        <B>Có thể cân nhắc nếu:</B> da dầu hoặc hỗn hợp thấy bí với kem đặc; da từng nổi nốt nhỏ đều nhau sau khi dùng kem có dầu và muốn thử một công thức
+        không chứa axit béo. <B>Nên cân nhắc loại khác nếu:</B> da rất khô, bong tróc và cần lớp khóa ẩm dày hơn (xem mục “Da khô mà vẫn bị mụn”). Và “không chứa
+        axit béo” không có nghĩa là làm giảm mụn — đó là cách chọn thành phần, không phải tác dụng.
+      </P>
+      <H3>Nhãn và gian hàng chính hãng ghi gì</H3>
+      <P>
+        Trên gian hàng chính hãng tại Việt Nam (Shopee: {SHOPEE_VN_STORE}), sản phẩm được ghi là{' '}
+        <B>Kem dưỡng ẩm cho da mụn La Théorie Hydrating Gel Cream 60ml | Viêm nang lông &amp; da nhạy cảm | Không chứa axit béo</B>.
+        Thành phần nổi bật in trên nhãn: Phytosqualane, Panthenol. Dung tích 60 ml, kết cấu gel-cream. Đây là thông tin nhà bán hàng công bố, không phải kết quả thử nghiệm.
       </P>
       <H3>3. Điều chưa được kiểm chứng</H3>
       <P>
@@ -94,7 +140,7 @@ function Body() {
       </P>
 
       <Cta href={CTA_URL} label="Xem sản phẩm">
-        Nếu bạn đang tìm một kem dưỡng nhẹ cho da dầu mụn thiếu nước, có thể tham khảo <B>Kem Dưỡng Ẩm La Théorie Hydrating Gel Cream 60ml</B> —
+        Nếu da bạn thấy bí với kem đặc và bạn đang tìm một kem dưỡng nhẹ cho da dầu mụn thiếu nước, có thể tham khảo <B>Kem Dưỡng Ẩm La Théorie Hydrating Gel Cream 60ml</B> —
         gel-cream 0% axit béo với panthenol và phytosqualane.
       </Cta>
 
@@ -114,7 +160,7 @@ export const article: Article = {
   slug: 'da-mun-nen-dung-kem-duong-am-nao',
   title: 'Da mụn nên dùng kem dưỡng ẩm nào?',
   description:
-    'Tiêu chí chọn kem dưỡng ẩm cho da mụn theo hướng dẫn của Bộ Y tế (2023), Hội Da liễu Singapore và StatPearls: nhẹ, cấp đủ ẩm, không gây bít tắc — cho cả da khô mụn và nam giới.',
+    'Tiêu chí chọn kem dưỡng ẩm cho da mụn theo Bộ Y tế (2023), Hội Da liễu Singapore và StatPearls: nhẹ, cấp đủ ẩm, không gây bít tắc — kèm bảng so sánh gel, lotion, cream và khi nào nên tránh.',
   tldr: [
     'Chọn kem dưỡng nhẹ, cấp đủ ẩm, không gây bít tắc lỗ chân lông; Bộ Y tế (2023) khuyên dùng sản phẩm rửa mặt và dưỡng ẩm kiềm dầu phù hợp.',
     'Da khô mụn — nhất là khi đang dùng hoạt chất bôi — cần kem có cả chất hút ẩm và thành phần khóa ẩm, vẫn không gây bít tắc.',
@@ -127,13 +173,16 @@ export const article: Article = {
     'da khô mụn nên dùng kem dưỡng nào',
     'kem dưỡng ẩm nào tốt cho nam da dầu mụn',
     'tiêu chí chọn kem dưỡng ẩm cho da mụn',
+    'da dầu mụn nên dùng dưỡng ẩm gì',
   ],
   published: '2026-10-14',
+  updated: '2026-10-15',
   faq: [
     { q: 'Da mụn nên dùng kem dưỡng ẩm nào?', a: 'Loại có kết cấu nhẹ, cấp đủ ẩm và không gây bít tắc lỗ chân lông — thường là gel hoặc dạng lỏng nhẹ gốc nước. Hướng dẫn của Bộ Y tế (2023) khuyên dùng sản phẩm rửa mặt và dưỡng ẩm kiềm dầu phù hợp.' },
     { q: 'Da khô mụn nên dùng kem dưỡng nào?', a: 'Kem có cả chất hút ẩm (như glycerin, panthenol) và thành phần khóa ẩm, vẫn không gây bít tắc. Da mụn hay khô hơn khi đang dùng hoạt chất bôi; nếu đang dùng theo hướng dẫn của bác sĩ, hỏi bác sĩ trước khi thêm sản phẩm.' },
     { q: 'Kem dưỡng ẩm nào tốt cho nam da dầu mụn?', a: 'Tiêu chí giống nữ giới: nhẹ, gốc nước, không nhờn, không gây bít tắc. Da nam thường tiết nhiều bã nhờn hơn, nên kết cấu gel thường dễ dùng hơn.' },
     { q: 'Kem dưỡng ẩm có làm da mụn nổi thêm mụn không?', a: 'Hướng dẫn của Hội Da liễu Singapore ghi nhận kem dưỡng ẩm dành cho da mụn có thể dùng mà không tạo thêm nhân mụn. Sản phẩm gốc dầu hoặc dễ gây bít tắc thì nên tránh.' },
+    { q: 'Da dầu mụn nên dùng dưỡng ẩm gì?', a: 'Dạng gel hoặc lỏng nhẹ gốc nước, không nhờn, không gây bít tắc. Nếu da dầu nhưng đang khô, bong tróc thì chọn loại có thêm thành phần khóa ẩm, vẫn không gây bít tắc.' },
     { q: '“Non-comedogenic” có nghĩa là chắc chắn không gây mụn?', a: 'Không hẳn. Đó là nhãn ghi trên bao bì, không phải bảo đảm; vẫn nên đọc bảng thành phần và theo dõi da khi dùng sản phẩm mới.' },
   ],
   // 근거표 C2 · 2026-10-14 원문 확인 ([1] 2023판 tr.442 · [2]·[3] S06 세션 재확인)
