@@ -10,6 +10,8 @@ import { article as nhayCamNenDungGi } from '../_articles/da-bi-nhay-cam-nen-dun
 import { article as daDauDeBiMun } from '../_articles/tai-sao-da-dau-lai-de-bi-mun';
 import { article as hangRaoTuPhucHoi } from '../_articles/hang-rao-bao-ve-da-co-tu-phuc-hoi-duoc-khong';
 import { article as kemDuongAmNao } from '../_articles/da-mun-nen-dung-kem-duong-am-nao';
+import { article as nhayCamDeNoiMunKem } from '../_articles/da-nhay-cam-de-noi-mun-nen-dung-kem-duong-am-nao';
+import { article as suaRuaMatNhayCam } from '../_articles/sua-rua-mat-cho-da-nhay-cam-de-noi-mun';
 
 /**
  * 발행 대상 글 목록.
@@ -20,6 +22,8 @@ import { article as kemDuongAmNao } from '../_articles/da-mun-nen-dung-kem-duong
  * 2026-10-11 증상 질문 3편 추가 — C4 장벽(concept) · C3 mụn nấm 단계별(explore) · C6 선크림(compare).
  * 2026-10-14 클러스터별 일반 지식 근거표(1차 출처 원문 확인)로 고민 질문 글 4편 추가 — C1 첫 글(concept) · C4 2편째(explore) · C2 2편째(recommend) · C5 첫 글(recommend).
  *   근거표 `S06 윤준상 볼트\02_산출물\La Théorie <클러스터>(C#) 일반 지식 근거표.md` 6종. C3·C6 는 기존 글이 있어 이번엔 근거표만.
+ * 2026-10-18 대중 어휘 선택형 2편 추가(C5×C2 보습 · C5×C1 세안 · recommend) — 쇼피 리뷰 설문 「da nhạy cảm · da dễ nổi mụn」 어휘.
+ *   기획 `2026-10-17 VN 대중 어휘 진입 전략 — … (GEO 2판 보강).md` 4-B B1. 같은 날 C5·C1·C2 글 보강 + products.ts tagline(B2).
  */
 export const articles: Article[] = [
   daDauDeBiMun,
@@ -33,6 +37,8 @@ export const articles: Article[] = [
   khongChuaAxitBeo,
   kemChongNang,
   nhayCamNenDungGi,
+  nhayCamDeNoiMunKem,
+  suaRuaMatNhayCam,
 ];
 
 export function getArticle(slug: string): Article | undefined {
