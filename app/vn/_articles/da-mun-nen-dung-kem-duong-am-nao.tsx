@@ -7,7 +7,7 @@ import { Cta, H2, H3, P, B, Table, ReadMore } from './_ui';
  * C2 2편째 · 대표 키워드 `dưỡng ẩm cho da mụn` · H1 = AEO 질문 창고 PAA 2026-08-31 C2 원문(09-01 진단 글 목록 2순위 「제품 선택 질문 = 구매 직전」).
  * 근거는 `S06 윤준상 볼트\02_산출물\La Théorie 여드름 피부 보습(C2) 일반 지식 근거표.md` 문헌만 쓴다(2026-10-14 원문 확인).
  *   [1] Bộ Y tế QĐ 4416/QĐ-BYT 2023 「TRỨNG CÁ」 4. Phòng bệnh (S06 세션 직접 판독) · [2] StatPearls Acne Vulgaris · [3] Oon 2019 싱가포르 피부과학회 지침 ·
- *   [4] Chularojanamontri 2014 · [5] Zaenglein 2016 AAD(건조 부작용에만) · [6] Rahrovan 2018 남녀 피부
+ *   [4] Chularojanamontri 2014 · [5] Zaenglein 2016 AAD(건조 부작용에만) · [6] Rahrovan 2018 남녀 피부 · [7] Misery 2020 IFSI(C5 근거표 B · 2026-10-18 보강 — 「da nhạy cảm 이면」 조건 1문 + W-1 링크 + FAQ)
  * 🔴 근거표 3절: 「AAD 권고」 금지(AAD 2016 보습 언급 0) · 약 이름 금지 · 업계 자금 합의문(See 2026 · Goh 2016 · See 2018)은 인용하지 않는다 ·
  *    「보습제가 여드름을 줄인다」 금지 · non-comedogenic 을 우리 제품 문구로 쓰지 않는다 · 남성 전용 제품이 낫다 금지 ·
  *    싱가포르 지침 Table 5 「Avoid astringents and toners」(여드름 약 사용자) — 토너 권유 문장 없음.
@@ -66,6 +66,11 @@ function Body() {
         “Non-comedogenic”, “oil-free” và “không chứa axit béo” là ba nhãn khác nhau, không thay thế cho nhau — nhãn thứ ba được giải thích trong bài{' '}
         <Link href="/vn/kem-duong-am-khong-chua-axit-beo-la-gi" className={LINK}>Kem dưỡng ẩm không chứa axit béo là gì? Ai nên dùng?</Link>. Những thành phần
         nên dò trên bảng thành phần có trong bài <Link href="/vn/da-mun-khong-nen-dung-thanh-phan-gi" className={LINK}>Da mụn không nên dùng thành phần gì?</Link>
+      </P>
+      <P>
+        Nếu da bạn còn dễ châm chích, nóng rát với sản phẩm mới — da nhạy cảm — thì ngoài các tiêu chí trên, nhóm chuyên gia IFSI khuyên hạn chế bớt mỹ phẩm và chọn
+        sản phẩm không hương liệu, ít chất bảo quản, ít chất hoạt động bề mặt [7]. Cách ghép hai bộ tiêu chí có trong bài{' '}
+        <Link href="/vn/da-nhay-cam-de-noi-mun-nen-dung-kem-duong-am-nao" className={LINK}>Da nhạy cảm dễ nổi mụn nên dùng kem dưỡng ẩm nào?</Link>
       </P>
 
       <H2 id="so-sanh-ket-cau">So sánh kết cấu: gel – lotion – cream</H2>
@@ -147,6 +152,7 @@ function Body() {
       <ReadMore
         links={[
           ['/vn/da-dau-mun-co-nen-duong-am-khong', 'Da dầu mụn có nên dưỡng ẩm không?'],
+          ['/vn/da-nhay-cam-de-noi-mun-nen-dung-kem-duong-am-nao', 'Da nhạy cảm dễ nổi mụn nên dùng kem dưỡng ẩm nào?'],
           ['/vn/kem-duong-am-khong-chua-axit-beo-la-gi', 'Kem dưỡng ẩm không chứa axit béo là gì? Ai nên dùng?'],
           ['/vn/da-mun-khong-nen-dung-thanh-phan-gi', 'Da mụn không nên dùng thành phần gì?'],
           ['/vn/da-de-bi-viem-nang-long-thi-cham-soc-the-nao', 'Da dễ bị viêm nang lông thì chăm sóc thế nào?'],
@@ -176,7 +182,7 @@ export const article: Article = {
     'da dầu mụn nên dùng dưỡng ẩm gì',
   ],
   published: '2026-10-14',
-  updated: '2026-10-15',
+  updated: '2026-10-18',
   faq: [
     { q: 'Da mụn nên dùng kem dưỡng ẩm nào?', a: 'Loại có kết cấu nhẹ, cấp đủ ẩm và không gây bít tắc lỗ chân lông — thường là gel hoặc dạng lỏng nhẹ gốc nước. Hướng dẫn của Bộ Y tế (2023) khuyên dùng sản phẩm rửa mặt và dưỡng ẩm kiềm dầu phù hợp.' },
     { q: 'Da khô mụn nên dùng kem dưỡng nào?', a: 'Kem có cả chất hút ẩm (như glycerin, panthenol) và thành phần khóa ẩm, vẫn không gây bít tắc. Da mụn hay khô hơn khi đang dùng hoạt chất bôi; nếu đang dùng theo hướng dẫn của bác sĩ, hỏi bác sĩ trước khi thêm sản phẩm.' },
@@ -184,6 +190,7 @@ export const article: Article = {
     { q: 'Kem dưỡng ẩm có làm da mụn nổi thêm mụn không?', a: 'Hướng dẫn của Hội Da liễu Singapore ghi nhận kem dưỡng ẩm dành cho da mụn có thể dùng mà không tạo thêm nhân mụn. Sản phẩm gốc dầu hoặc dễ gây bít tắc thì nên tránh.' },
     { q: 'Da dầu mụn nên dùng dưỡng ẩm gì?', a: 'Dạng gel hoặc lỏng nhẹ gốc nước, không nhờn, không gây bít tắc. Nếu da dầu nhưng đang khô, bong tróc thì chọn loại có thêm thành phần khóa ẩm, vẫn không gây bít tắc.' },
     { q: '“Non-comedogenic” có nghĩa là chắc chắn không gây mụn?', a: 'Không hẳn. Đó là nhãn ghi trên bao bì, không phải bảo đảm; vẫn nên đọc bảng thành phần và theo dõi da khi dùng sản phẩm mới.' },
+    { q: 'Da nhạy cảm mà vẫn bị mụn thì chọn kem dưỡng ẩm nào?', a: 'Tiêu chí không đổi — nhẹ, gốc nước, không gây bít tắc — và thêm lời khuyên của nhóm chuyên gia IFSI cho da nhạy cảm: hạn chế bớt mỹ phẩm, chọn sản phẩm không hương liệu, ít chất bảo quản, ít chất hoạt động bề mặt; thêm từng sản phẩm một.' },
   ],
   // 근거표 C2 · 2026-10-14 원문 확인 ([1] 2023판 tr.442 · [2]·[3] S06 세션 재확인)
   references: [
@@ -193,6 +200,7 @@ export const article: Article = {
     { label: 'Chularojanamontri L. và cộng sự (2014). Moisturizers for Acne: What are their Constituents? Journal of Clinical and Aesthetic Dermatology 7(5):36–44.', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC4025519/' },
     { label: 'Zaenglein AL. và cộng sự (2016). Guidelines of care for the management of acne vulgaris. Journal of the American Academy of Dermatology 74(5):945–973.', url: 'https://doi.org/10.1016/j.jaad.2015.12.037' },
     { label: 'Rahrovan S. và cộng sự (2018). Male versus female skin: What dermatologists and cosmeticians should know. International Journal of Women’s Dermatology 4(3):122–130.', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC6116811/' },
+    { label: 'Misery L. và cộng sự (2020). Pathophysiology and management of sensitive skin: position paper from the special interest group on sensitive skin of the International Forum for the Study of Itch (IFSI). Journal of the European Academy of Dermatology and Venereology 34(2):222–229.', url: 'https://doi.org/10.1111/jdv.16000' },
   ],
   Body,
 };

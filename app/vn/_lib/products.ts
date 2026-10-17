@@ -3,6 +3,7 @@ import { BRIDGE_URL } from './site';
 /**
  * 허브 「Best sellers」 에 쓰는 값. 정본은 브랜드.md 1절(제품 마스터 스냅샷 2026-09-09)과
  * USP 정의서 4장(소개서 16~17p). 한 줄 문구(tagline)는 본사 홈 Best sellers 의 영문 문구를 옮긴 것이다 (2026-09-16 실측).
+ * 2026-10-18 P002·P001·P006 tagline 에 대중 어휘를 한 토막씩 더했다 — 10-15 상품명 문자열에 있는 말만(`2026-10-17 VN 대중 어휘 진입 전략` 4-B B2).
  * 핵심 성분은 용기 라벨의 대표 성분 — 전성분(INCI)이 아니다. 라벨에 성분이 없는 제품(P001 · P005)은 비운다.
  * 이미지는 /public/vn-sg/ (누끼 원본은 「AI 인스타용 게시물/…/라띠어리_제품이미지」).
  */
@@ -27,9 +28,9 @@ const img = (f: string) => `/vn-sg/${f}`;
 const link = (p: string) => `${BRIDGE_URL}/?s=seo&k=LATHWEB&cp=hub&p=${p}`;
 
 export const products: Product[] = [
-  { id: 'P002', label: 'Cream :: Hydrating Ingredients', name: 'Kem Dưỡng Ẩm Hydrating Gel Cream 60ml', tagline: 'Gel-cream 0% axit béo cho da viêm nang lông', badge: 'Best Seller', ingredients: ['Phytosqualane', 'Panthenol'], image: img('p002-cream.webp'), url: link('P002') },
-  { id: 'P001', label: 'Cleanser :: Clearing Gel', name: 'Gel Rửa Mặt Clearing Gel 210ml', tagline: 'Sữa rửa mặt dịu nhẹ, bảo vệ hàng rào da', badge: 'Steady Seller', ingredients: [], image: img('p001-cleanser.webp'), url: link('P001') },
-  { id: 'P006', label: 'Toner :: Soothing Treatment', name: 'Nước Cân Bằng Soothing Toner 210ml', tagline: 'Nước cân bằng hệ vi sinh cho da viêm nang lông', ingredients: ['Panthenol', 'Glycerin'], image: img('p006-toner.webp'), url: link('P006') },
+  { id: 'P002', label: 'Cream :: Hydrating Ingredients', name: 'Kem Dưỡng Ẩm Hydrating Gel Cream 60ml', tagline: 'Gel-cream 0% axit béo cho da dầu mụn nhạy cảm và viêm nang lông', badge: 'Best Seller', ingredients: ['Phytosqualane', 'Panthenol'], image: img('p002-cream.webp'), url: link('P002') },
+  { id: 'P001', label: 'Cleanser :: Clearing Gel', name: 'Gel Rửa Mặt Clearing Gel 210ml', tagline: 'Sữa rửa mặt dịu nhẹ cho da dầu mụn, bảo vệ hàng rào da', badge: 'Steady Seller', ingredients: [], image: img('p001-cleanser.webp'), url: link('P001') },
+  { id: 'P006', label: 'Toner :: Soothing Treatment', name: 'Nước Cân Bằng Soothing Toner 210ml', tagline: 'Nước cân bằng hệ vi sinh cho da nhạy cảm, mụn ẩn và viêm nang lông', ingredients: ['Panthenol', 'Glycerin'], image: img('p006-toner.webp'), url: link('P006') },
   { id: 'P003', label: 'Enhancer :: Dual Effect Essence', name: 'Tinh Chất Dual Effect Essence 40ml', tagline: 'Kem đậm đặc hỗ trợ phục hồi hàng rào da, làm dịu vết thâm', ingredients: ['Madecassoside', 'Squalane'], image: img('p003-essence.webp'), url: link('P003') },
   { id: 'P004', label: 'Sunscreen :: Protection Factor', name: 'Kem Chống Nắng Sunscreen 50ml', tagline: 'Kem chống nắng không axit béo cho da có vấn đề', ingredients: ['Niacinamide', 'Adenosine'], image: img('p004-sunscreen.webp'), url: link('P004') },
   { id: 'P005', label: 'BB Cream :: Blemish Balm', name: 'Kem BB Blemish Balm SPF25 20ml ×2', tagline: 'Kem BB chuyên biệt cho da có vấn đề', ingredients: [], image: img('p005-bb.webp'), url: link('P005') },

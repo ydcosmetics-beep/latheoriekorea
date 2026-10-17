@@ -12,6 +12,7 @@ import { Cta, H2, H3, P, B, Table, ReadMore } from './_ui';
  *    [3] 의 비율은 병원 방문자 자가 보고라고 조건을 붙인다.
  * 🔴 금지 표현(브랜드.md 7절): trị · điều trị · kê đơn · được chứng minh lâm sàng · 기간 단언 · 진단명 단정. 「giá trị」처럼 trị 가 든 낱말도 쓰지 않는다.
  * 제품 문장 근거: USP 정의서 4장 토너(점도 · 0% 지방산) · 라벨 대표 성분 Panthenol·Glycerin · VN PDP 상품명 「Dành cho da mụn ẩn, viêm nang lông và da nhạy cảm」.
+ * 2026-10-18 보강(대중 어휘 전략 4-B B2) — H2 「Da nhạy cảm dễ nổi mụn thì sao?」 + W-1·W-2 링크 · FAQ 1문(M2) · [4] Bộ Y tế 2023(C1·C2 근거표) · [5] NICE(C1 근거표) 추가.
  */
 const CTA_URL = `${BRIDGE_URL}/?s=seo&k=LATHWEB&cp=C5&p=P006`;
 const LINK = 'font-medium text-gray-950 underline underline-offset-4 decoration-gray-400 hover:decoration-gray-900';
@@ -106,6 +107,16 @@ function Body() {
         <Link href="/vn/da-mun-kho-cang-cham-chich-co-phai-hang-rao-bao-ve-da-yeu" className={LINK}>Da mụn bị khô căng, châm chích có phải do hàng rào bảo vệ da yếu?</Link>
       </P>
 
+      <H2 id="de-noi-mun">Da nhạy cảm dễ nổi mụn thì sao?</H2>
+      <P>
+        Da nhạy cảm và da mụn là hai tình trạng khác nhau: theo định nghĩa của IFSI, cảm giác khó chịu của da nhạy cảm <B>không</B> giải thích được bằng một bệnh da [1],
+        còn mụn trứng cá là một bệnh viêm mạn tính của nang lông tuyến bã theo hướng dẫn của Bộ Y tế (2023) [4]. Hai tình trạng có thể cùng có trên một làn da — và khi đó,
+        thứ tự ưu tiên ở trên không đổi: bớt sản phẩm, chọn loại dịu, thêm từng sản phẩm một. Riêng bước kem dưỡng ẩm, tiêu chí thường được nhắc cho da mụn là
+        không gốc dầu, không gây bít tắc lỗ chân lông [5]; cách ghép hai bộ tiêu chí, và những gì nhãn sản phẩm có thể và không thể nói, có trong bài{' '}
+        <Link href="/vn/da-nhay-cam-de-noi-mun-nen-dung-kem-duong-am-nao" className={LINK}>Da nhạy cảm dễ nổi mụn nên dùng kem dưỡng ẩm nào?</Link>. Với bước rửa mặt:{' '}
+        <Link href="/vn/sua-rua-mat-cho-da-nhay-cam-de-noi-mun" className={LINK}>Sữa rửa mặt cho da nhạy cảm dễ nổi mụn: chọn thế nào?</Link>
+      </P>
+
       <H2 id="khi-nao-di-kham">Khi nào nên đến khám</H2>
       <P>
         Theo định nghĩa, da nhạy cảm là khi cảm giác khó chịu <B>không</B> giải thích được bằng một bệnh da [1]. Vì vậy, nếu da đỏ lan rộng, sưng, bong vảy thành mảng,
@@ -138,6 +149,7 @@ function Body() {
 
       <ReadMore
         links={[
+          ['/vn/da-nhay-cam-de-noi-mun-nen-dung-kem-duong-am-nao', 'Da nhạy cảm dễ nổi mụn nên dùng kem dưỡng ẩm nào?'],
           ['/vn/hang-rao-bao-ve-da-co-tu-phuc-hoi-duoc-khong', 'Hàng rào bảo vệ da có tự phục hồi được không?'],
           ['/vn/da-mun-khong-nen-dung-thanh-phan-gi', 'Da mụn không nên dùng thành phần gì?'],
           ['/vn/da-mun-nen-dung-kem-duong-am-nao', 'Da mụn nên dùng kem dưỡng ẩm nào?'],
@@ -165,20 +177,25 @@ export const article: Article = {
     'da nhạy cảm có biểu hiện gì',
     'tại sao da bị nhạy cảm',
     'chu trình chăm sóc da nhạy cảm',
+    'da nhạy cảm dễ nổi mụn nên dùng gì',
   ],
   published: '2026-10-14',
+  updated: '2026-10-18',
   faq: [
     { q: 'Da nhạy cảm là gì?', a: 'Theo Diễn đàn Nghiên cứu Ngứa Quốc tế (IFSI), da nhạy cảm là hội chứng xuất hiện các cảm giác khó chịu như châm chích, nóng rát, đau, ngứa hoặc kiến bò khi gặp những kích thích thường không gây ra cảm giác đó, và không giải thích được bằng tổn thương của một bệnh da.' },
     { q: 'Da nhạy cảm có biểu hiện gì?', a: 'Chủ yếu là cảm giác: ngứa, châm chích, nóng rát; da có thể trông bình thường hoặc đỏ, hay gặp nhất ở mặt. Trong nghiên cứu tại Bệnh viện Da liễu Trung ương (2025), ngứa chiếm 70%, đỏ da 54,2% và châm chích 33,3% ở người tự nhận da nhạy cảm.' },
     { q: 'Tại sao da bị nhạy cảm?', a: 'Nguyên nhân chưa được hiểu rõ và có thể do nhiều yếu tố. Nhóm chuyên gia IFSI cho rằng da nhạy cảm liên quan đến thay đổi của hệ thần kinh ở da, không phải bệnh miễn dịch; hàng rào da yếu thường đi kèm nhưng chưa phải nguyên nhân trực tiếp.' },
     { q: 'Da nhạy cảm nên tránh thành phần gì?', a: 'IFSI nêu các chất có thể gây kích ứng trong mỹ phẩm: AHA, propylene glycol, cồn, hương liệu, chất bảo quản và chất hoạt động bề mặt, và khuyên chọn sản phẩm ít chất bảo quản, ít chất hoạt động bề mặt, không hương liệu.' },
     { q: 'Khi nào da nhạy cảm cần đi khám?', a: 'Khi da đỏ lan rộng, sưng, bong vảy thành mảng, nổi mụn nước, chảy dịch hoặc ngứa kéo dài — các bệnh như viêm da cơ địa, viêm da tiếp xúc hay trứng cá đỏ cần bác sĩ da liễu phân biệt.' },
+    { q: 'Da nhạy cảm dễ nổi mụn nên dùng gì?', a: 'Thứ tự ưu tiên không đổi: hạn chế bớt mỹ phẩm, chọn sản phẩm dịu — không hương liệu, ít chất bảo quản, ít chất hoạt động bề mặt — và thêm từng sản phẩm một (IFSI). Với kem dưỡng ẩm, chọn loại không gốc dầu, không gây bít tắc lỗ chân lông; với sữa rửa mặt, loại không kiềm, pH trung tính hoặc hơi axit (NICE).' },
   ],
-  // 근거표 1절 A·B·C — 2026-10-14 원문 확인
+  // 근거표 1절 A·B·C — 2026-10-14 원문 확인 · [4][5] 는 2026-10-18 보강(C1·C2 근거표)
   references: [
     { label: 'Misery L. và cộng sự (2017). Definition of Sensitive Skin: An Expert Position Paper from the Special Interest Group on Sensitive Skin of the International Forum for the Study of Itch. Acta Dermato-Venereologica 97(1):4–6.', url: 'https://doi.org/10.2340/00015555-2397' },
     { label: 'Misery L. và cộng sự (2020). Pathophysiology and management of sensitive skin: position paper from the special interest group on sensitive skin of the International Forum for the Study of Itch (IFSI). Journal of the European Academy of Dermatology and Venereology 34(2):222–229.', url: 'https://doi.org/10.1111/jdv.16000' },
     { label: 'Nguyễn Thị Hồng Nhung, Nguyễn Thị Hà Vinh, Vũ Nguyệt Minh (2025). Mức độ phổ biến và các yếu tố liên quan của hội chứng da nhạy cảm tự nhận định. Tạp chí Y học Việt Nam 554(3):302–306.', url: 'https://vnras.com/muc-do-pho-bien-va-cac-yeu-to-lien-quan-cua-hoi-chung-da-nhay-cam-tu-nhan-dinh/' },
+    { label: 'Bộ Y tế (2023). Quyết định 4416/QĐ-BYT — Tài liệu chuyên môn về các bệnh da liễu, chương Trứng cá (tr. 433–442).', url: 'https://benhvienhatrung.vn/wp-content/uploads/2024/02/quyet-dinh-4416-qd-byt-2023-huong-dan-chan-doan-va-dieu-tri-cac-benh-da-lieu.pdf' },
+    { label: 'NICE (2021, cập nhật 2026). Acne vulgaris: management (NG198).', url: 'https://www.nice.org.uk/guidance/ng198' },
   ],
   Body,
 };

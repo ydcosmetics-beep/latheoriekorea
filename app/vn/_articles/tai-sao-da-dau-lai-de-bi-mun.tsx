@@ -12,6 +12,7 @@ import { Cta, H2, H3, P, B, Table, ReadMore } from './_ui';
  *    출처 표기는 「Bộ Y tế (QĐ 4416/QĐ-BYT, 2023)」까지 — 문서 제목에 금지어가 있다. 2023판 「Phòng bệnh」의 식단(đường, sữa) 문장은 쓰지 않는다.
  * 🔴 금지 표현(브랜드.md 7절): trị · điều trị · kê đơn · được chứng minh lâm sàng · 기간 단언 · 진단명 단정. 「giá trị」처럼 trị 가 든 낱말도 쓰지 않는다.
  * 제품 문장 근거: USP 정의서 4장 클렌저(지방산 배제 계면활성제 · 저pH · 세안 후 당김 없음) · products.ts P001 이름.
+ * 2026-10-18 보강(대중 어휘 전략 4-B B2) — W-2 「Sữa rửa mặt cho da nhạy cảm dễ nổi mụn」 링크(본문 1문 + Đọc thêm).
  */
 const CTA_URL = `${BRIDGE_URL}/?s=seo&k=LATHWEB&cp=C1&p=P001`;
 const LINK = 'font-medium text-gray-950 underline underline-offset-4 decoration-gray-400 hover:decoration-gray-900';
@@ -90,6 +91,10 @@ function Body() {
         dưỡng ẩm kiềm dầu” [1].
       </P>
       <P>
+        Nếu da bạn vừa dầu mụn vừa dễ châm chích, nóng rát với sản phẩm mới, cách chọn sữa rửa mặt cho làn da đó được bàn riêng trong bài{' '}
+        <Link href="/vn/sua-rua-mat-cho-da-nhay-cam-de-noi-mun" className={LINK}>Sữa rửa mặt cho da nhạy cảm dễ nổi mụn: chọn thế nào?</Link>
+      </P>
+      <P>
         Da dầu vẫn cần dưỡng ẩm — xem{' '}
         <Link href="/vn/da-dau-mun-co-nen-duong-am-khong" className={LINK}>Da dầu mụn có nên dưỡng ẩm không?</Link>
       </P>
@@ -124,6 +129,7 @@ function Body() {
 
       <ReadMore
         links={[
+          ['/vn/sua-rua-mat-cho-da-nhay-cam-de-noi-mun', 'Sữa rửa mặt cho da nhạy cảm dễ nổi mụn: chọn thế nào?'],
           ['/vn/da-dau-mun-co-nen-duong-am-khong', 'Da dầu mụn có nên dưỡng ẩm không?'],
           ['/vn/da-mun-nen-dung-kem-duong-am-nao', 'Da mụn nên dùng kem dưỡng ẩm nào?'],
           ['/vn/da-mun-khong-nen-dung-thanh-phan-gi', 'Da mụn không nên dùng thành phần gì?'],
@@ -153,6 +159,7 @@ export const article: Article = {
     'nguyên nhân gây mụn ở da dầu',
   ],
   published: '2026-10-14',
+  updated: '2026-10-18',
   faq: [
     { q: 'Tại sao da dầu lại dễ bị mụn?', a: 'Vì tăng bài tiết bã nhờn là một trong bốn cơ chế chính gây mụn, cùng với dày sừng cổ nang lông, vi khuẩn C. acnes và các chất trung gian viêm (hướng dẫn của Bộ Y tế, 2023). Khi cổ nang lông bị bít, bã nhờn ứ lại thành nhân mụn.' },
     { q: 'Da dầu mụn là da như thế nào?', a: 'Da bóng nhờn, lỗ chân lông to hơn, có mụn đầu đen, đầu trắng, và khi viêm có thể có sẩn viêm, sẩn mủ, cục, nang; thường ở vùng nhiều tuyến bã như mặt, cổ, ngực, lưng trên.' },
