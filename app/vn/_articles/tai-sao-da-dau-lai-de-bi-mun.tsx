@@ -159,6 +159,8 @@ export const article: Article = {
     'nguyên nhân gây mụn ở da dầu',
   ],
   published: '2026-10-14',
+  reviewer: 'jeon-ji-seung',
+  reviewedOn: '2026-10-19',
   updated: '2026-10-18',
   faq: [
     { q: 'Tại sao da dầu lại dễ bị mụn?', a: 'Vì tăng bài tiết bã nhờn là một trong bốn cơ chế chính gây mụn, cùng với dày sừng cổ nang lông, vi khuẩn C. acnes và các chất trung gian viêm (hướng dẫn của Bộ Y tế, 2023). Khi cổ nang lông bị bít, bã nhờn ứ lại thành nhân mụn.' },

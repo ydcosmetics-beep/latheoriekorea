@@ -2,6 +2,7 @@ import type { MetadataRoute } from 'next';
 import { SITE_URL } from './vn/_lib/site';
 import { articles as vnArticles } from './vn/_lib/articles';
 import { articles as sgArticles } from './sg/_lib/articles';
+import { REVIEWERS } from './vn/_articles/_ui-tham-van';
 
 /**
  * sitemap.xml — 현재 사이트에는 이 파일이 아예 없다(404, 2026-09-15 재확인).
@@ -16,6 +17,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${SITE_URL}/vn`, changeFrequency: 'weekly', priority: 0.8 },
     { url: `${SITE_URL}/vn/ve-la-theorie`, lastModified: '2026-10-19', changeFrequency: 'monthly', priority: 0.6 },
     { url: `${SITE_URL}/vn/thanh-phan`, lastModified: '2026-10-19', changeFrequency: 'monthly', priority: 0.6 },
+    ...REVIEWERS.filter((r) => r.consentConfirmed).map((r) => ({ url: `${SITE_URL}/vn/bac-si/${r.slug}`, lastModified: '2026-10-19', changeFrequency: 'monthly' as const, priority: 0.5 })),
     { url: `${SITE_URL}/sg`, changeFrequency: 'weekly', priority: 0.8 },
   ];
 

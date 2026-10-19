@@ -144,6 +144,8 @@ export const article: Article = {
   stage: 'explore',
   targetQueries: ['da dễ bị viêm nang lông thì chăm sóc thế nào', 'viêm nang lông chăm sóc tại nhà', 'viêm nang lông và mụn nấm khác nhau thế nào', 'kem dưỡng cho da viêm nang lông'],
   published: '2026-09-16',
+  reviewer: 'jeon-ji-seung',
+  reviewedOn: '2026-10-19',
   faq: [
     { q: 'Viêm nang lông và mụn trứng cá khác nhau thế nào?', a: 'Mụn trứng cá liên quan tới bã nhờn, tế bào chết và vi khuẩn trong lỗ chân lông, với nhân mụn và kích thước không đều. Viêm nang lông là nang lông bị viêm, do vi khuẩn hoặc nấm men; dạng do Malassezia có nốt nhỏ đều nhau, mọc thành cụm và hay ngứa. Bác sĩ da liễu mới phân biệt chắc chắn được.' },
     { q: 'Da bị viêm nang lông có nên dưỡng ẩm không?', a: 'Có, nhưng bằng kết cấu nhẹ (gel, gel-cream) và thành phần không giàu axit béo. Bỏ dưỡng ẩm làm hàng rào da yếu đi, và da yếu thì dễ viêm hơn.' },

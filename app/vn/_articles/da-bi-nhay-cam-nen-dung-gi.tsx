@@ -180,6 +180,8 @@ export const article: Article = {
     'da nhạy cảm dễ nổi mụn nên dùng gì',
   ],
   published: '2026-10-14',
+  reviewer: 'jeon-ji-seung',
+  reviewedOn: '2026-10-19',
   updated: '2026-10-18',
   faq: [
     { q: 'Da nhạy cảm là gì?', a: 'Theo Diễn đàn Nghiên cứu Ngứa Quốc tế (IFSI), da nhạy cảm là hội chứng xuất hiện các cảm giác khó chịu như châm chích, nóng rát, đau, ngứa hoặc kiến bò khi gặp những kích thích thường không gây ra cảm giác đó, và không giải thích được bằng tổn thương của một bệnh da.' },

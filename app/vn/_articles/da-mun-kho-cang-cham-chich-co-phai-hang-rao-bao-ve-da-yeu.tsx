@@ -147,6 +147,8 @@ export const article: Article = {
     'hàng rào bảo vệ da yếu nên làm gì',
   ],
   published: '2026-10-11',
+  reviewer: 'jeon-ji-seung',
+  reviewedOn: '2026-10-19',
   faq: [
     { q: 'Làm sao biết hàng rào bảo vệ da đang yếu?', a: 'Dấu hiệu hay gặp là khô căng sau khi rửa mặt, châm chích khi thoa sản phẩm, vừa bóng dầu vừa bong tróc, và đỏ hoặc dễ kích ứng hơn trước. Đây là gợi ý để quan sát, không phải chẩn đoán — chỉ bác sĩ da liễu mới xác định được.' },
     { q: 'Da dầu mụn có bị yếu hàng rào bảo vệ da không?', a: 'Có thể. Lượng dầu và lượng nước trong lớp sừng là hai chuyện khác nhau; da có thể nhiều dầu mà vẫn thiếu nước, nhất là khi rửa mặt quá mạnh hoặc dùng hoạt chất làm khô da.' },

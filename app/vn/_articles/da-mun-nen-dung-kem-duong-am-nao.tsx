@@ -182,6 +182,8 @@ export const article: Article = {
     'da dầu mụn nên dùng dưỡng ẩm gì',
   ],
   published: '2026-10-14',
+  reviewer: 'jeon-ji-seung',
+  reviewedOn: '2026-10-19',
   updated: '2026-10-18',
   faq: [
     { q: 'Da mụn nên dùng kem dưỡng ẩm nào?', a: 'Loại có kết cấu nhẹ, cấp đủ ẩm và không gây bít tắc lỗ chân lông — thường là gel hoặc dạng lỏng nhẹ gốc nước. Hướng dẫn của Bộ Y tế (2023) khuyên dùng sản phẩm rửa mặt và dưỡng ẩm kiềm dầu phù hợp.' },

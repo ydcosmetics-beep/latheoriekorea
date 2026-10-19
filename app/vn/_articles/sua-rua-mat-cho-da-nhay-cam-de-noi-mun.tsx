@@ -185,6 +185,8 @@ export const article: Article = {
     'sản phẩm skincare cho da dầu mụn nhạy cảm',
   ],
   published: '2026-10-18',
+  reviewer: 'jeon-ji-seung',
+  reviewedOn: '2026-10-19',
   updated: '2026-10-19',
   faq: [
     { q: 'Sữa rửa mặt cho da nhạy cảm dễ nổi mụn: chọn thế nào?', a: 'Chọn loại dịu nhẹ, không kiềm (pH trung tính hoặc hơi axit), ít chất hoạt động bề mặt, không hương liệu, và dùng 2 lần mỗi ngày, không chà xát. NICE khuyên sản phẩm làm sạch không kiềm cho da mụn; nhóm chuyên gia IFSI khuyên sản phẩm ít chất hoạt động bề mặt, không hương liệu cho da nhạy cảm.' },

@@ -189,6 +189,8 @@ export const article: Article = {
     'kem dưỡng nào phù hợp cho da dầu mụn nhạy cảm',
   ],
   published: '2026-10-18',
+  reviewer: 'jeon-ji-seung',
+  reviewedOn: '2026-10-19',
   updated: '2026-10-19',
   faq: [
     { q: 'Da nhạy cảm dễ nổi mụn nên dùng kem dưỡng ẩm nào?', a: 'Kem có kết cấu nhẹ (gel hoặc gel-cream), không gốc dầu, không gây bít tắc lỗ chân lông — và với da nhạy cảm thì thêm: không hương liệu, ít chất bảo quản, ít chất hoạt động bề mặt, theo hướng dẫn của Hội Da liễu Singapore, NICE và nhóm chuyên gia IFSI. Thêm từng sản phẩm một và đọc bảng thành phần.' },

@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { articles, getArticle } from '../_lib/articles';
 import { SITE_URL, VN_BASE, BRAND, ORGANIZATION } from '../_lib/site';
+import { Byline, getReviewer, personJsonLd } from '../_articles/_ui-tham-van';
 
 export const dynamicParams = false;
 
@@ -41,6 +42,9 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
   if (!a) notFound();
 
   const url = `${VN_BASE}/${a.slug}`;
+  // 검토자 — 동의 + 이 글의 reviewedOn 이 있을 때만 Person 과 reviewedBy 가 나간다 (2026-10-19)
+  const reviewer = getReviewer(a.reviewer);
+  const person = reviewer && a.reviewedOn ? personJsonLd(reviewer) : null;
 
   /**
    * JSON-LD. 현재 사이트에는 구조화 데이터가 0건이다(2026-09-03 실측).
@@ -50,6 +54,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
     '@context': 'https://schema.org',
     '@graph': [
       ORGANIZATION,
+      ...(person ? [person] : []),
       {
         '@type': 'Article',
         '@id': `${url}#article`,
@@ -61,6 +66,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
         mainEntityOfPage: { '@type': 'WebPage', '@id': url },
         author: { '@id': ORGANIZATION['@id'] },
         publisher: { '@id': ORGANIZATION['@id'] },
+        ...(person ? { reviewedBy: { '@id': person['@id'] } } : {}),
       },
       {
         '@type': 'FAQPage',
@@ -102,6 +108,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
           <span className="mx-2 text-gray-300">·</span>
           <span className="font-belleza normal-case tracking-normal text-sm">{BRAND}</span>
         </p>
+        <Byline reviewer={reviewer} reviewedOn={a.reviewedOn} checkedOn={a.updated ?? a.published} />
 
         <div className="mt-10 border-y border-gray-900 py-6">
           <p className="mb-3 text-[11px] font-medium uppercase tracking-[0.08em] text-gray-500">Tóm tắt</p>

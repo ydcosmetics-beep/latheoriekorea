@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { SITE_URL, VN_BASE, BRAND, BRAND_DESCRIPTION, BRIDGE_URL, ORGANIZATION, SHOPEE_VN_STORE, SHOPEE_SG_STORE } from '../_lib/site';
 import { H2, P, B } from '../_articles/_ui';
+import { getReviewer, reviewerPath, personJsonLd } from '../_articles/_ui-tham-van';
 
 /**
  * 브랜드 신뢰 페이지 `/vn/ve-la-theorie` — 2026-10-19 (초안 10-18 → 본사 회신 반영).
@@ -78,7 +79,9 @@ export const metadata: Metadata = {
 };
 
 export default function VeLaTheoriePage() {
-  const person = {
+  // Person 은 프로필 페이지와 같은 @id 를 쓴다(2026-10-19 검토 회신 뒤) — 동의가 꺼지면 이 페이지 전용 노드로 돌아간다
+  const reviewer = getReviewer('jeon-ji-seung');
+  const person = (reviewer && personJsonLd(reviewer)) ?? {
     '@type': 'Person',
     '@id': `${PAGE_URL}#founder`,
     name: DOCTOR.name,
@@ -148,6 +151,12 @@ export default function VeLaTheoriePage() {
           Giám đốc phòng khám {DOCTOR.clinic} tại {DOCTOR.city} — thay vì thêm những thành phần nghe có vẻ tốt, thương hiệu chọn bỏ đi nhóm thành phần
           có thể gây vấn đề cho da.
         </P>
+        {reviewer?.consentConfirmed && (
+          <P>
+            Bác sĩ {reviewer.name} tham vấn chuyên môn cho các bài viết trong chuyên mục này — xem{' '}
+            <Link href={reviewerPath(reviewer)} className={LINK}>hồ sơ và danh sách bài viết đã xem xét</Link>.
+          </P>
+        )}
         <P>
           Trải nghiệm của bác sĩ da liễu và chuyên gia chăm sóc da tại Hàn Quốc:{' '}
           <Link href="/vn#interviews" className={LINK}>xem phần Interviews</Link>.

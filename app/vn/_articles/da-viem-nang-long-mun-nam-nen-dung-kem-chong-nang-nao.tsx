@@ -122,6 +122,8 @@ export const article: Article = {
     'da mụn nấm có nên dùng kem chống nắng không',
   ],
   published: '2026-10-11',
+  reviewer: 'jeon-ji-seung',
+  reviewedOn: '2026-10-19',
   faq: [
     { q: 'Da bị mụn nấm có nên dùng kem chống nắng không?', a: 'Có. Mụn nấm không phải lý do để bỏ chống nắng; hãy chọn kem mà toàn bộ công thức không có axit béo, dầu, este của axit béo hay polysorbate, và buổi tối rửa sạch bằng sữa rửa mặt dạng gel hoặc bọt thay vì dầu tẩy trang.' },
     { q: 'Kem chống nắng vật lý có an toàn cho da mụn nấm hơn không?', a: 'Không nhất thiết. Zinc oxide và titanium dioxide không làm thức ăn cho Malassezia, nhưng thường được phân tán trong este hoặc dầu, nên kem chống nắng vật lý chỉ an toàn khi bảng thành phần đầy đủ cũng an toàn.' },

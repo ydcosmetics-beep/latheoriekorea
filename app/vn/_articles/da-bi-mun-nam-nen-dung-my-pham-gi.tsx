@@ -156,6 +156,8 @@ export const article: Article = {
     'thành phần an toàn cho da viêm nang lông',
   ],
   published: '2026-10-11',
+  reviewer: 'jeon-ji-seung',
+  reviewedOn: '2026-10-19',
   faq: [
     { q: 'Da bị mụn nấm nên dùng kem dưỡng ẩm như thế nào?', a: 'Chọn gel hoặc gel-cream cấp ẩm bằng chất giữ ẩm (glycerin, axit hyaluronic, panthenol) và không chứa axit béo, dầu thực vật, este của axit béo hay polysorbate. Squalane và silicone thường ổn vì không chứa axit béo.' },
     { q: 'Mỹ phẩm non-comedogenic có an toàn cho da mụn nấm không?', a: 'Không nhất thiết. Non-comedogenic nói về khả năng gây bít tắc lỗ chân lông; an toàn cho da mụn nấm nói về axit béo. Một sản phẩm có thể đạt tiêu chí này mà không đạt tiêu chí kia, nên cần kiểm tra cả hai.' },

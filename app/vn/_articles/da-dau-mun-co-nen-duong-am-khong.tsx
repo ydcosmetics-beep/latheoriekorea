@@ -129,6 +129,8 @@ export const article: Article = {
   stage: 'explore',
   targetQueries: ['da dầu mụn có nên dưỡng ẩm không', 'dưỡng ẩm cho da mụn', 'da mụn có nên dùng kem dưỡng không', 'gel hay kem dưỡng cho da dầu'],
   published: '2026-09-16',
+  reviewer: 'jeon-ji-seung',
+  reviewedOn: '2026-10-19',
   updated: '2026-10-19',
   faq: [
     { q: 'Da dầu có cần kem dưỡng ẩm không?', a: 'Có. Da dầu vẫn có thể thiếu nước ở lớp sừng, và khi thiếu nước, hàng rào bảo vệ da kém ổn định và da dễ kích ứng hơn. Nên chọn kết cấu nhẹ như gel hoặc gel-cream.' },

@@ -139,6 +139,8 @@ export const article: Article = {
     'kem nào giúp phục hồi hàng rào bảo vệ da',
   ],
   published: '2026-10-14',
+  reviewer: 'jeon-ji-seung',
+  reviewedOn: '2026-10-19',
   faq: [
     { q: 'Hàng rào bảo vệ da có tự phục hồi được không?', a: 'Có. Khi nước thoát qua da tăng, lớp sừng giải phóng lipid dự trữ và tăng tổng hợp lipid mới để tái lập hàng rào. Nhưng nếu tác động gây hại lặp lại, kéo dài hoặc cộng dồn, quá trình này có thể không theo kịp.' },
     { q: 'Có bao nhiêu hàng rào bảo vệ da?', a: 'Không có một con số cố định. Tài liệu da liễu thường mô tả da là hàng rào vật lý, hóa học và miễn dịch; một số tổng quan tính thêm hàng rào vi sinh vật.' },

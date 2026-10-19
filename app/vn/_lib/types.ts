@@ -27,6 +27,10 @@ export interface Article {
   targetQueries: string[];
   published: string;
   updated?: string;
+  /** 검토자 slug (`_articles/_ui-tham-van.tsx` REVIEWERS). 검토한 글에만 둔다 — 바이라인 2행 · Article `reviewedBy` 가 켜진다 */
+  reviewer?: string;
+  /** 검토 회신 날짜 YYYY-MM-DD */
+  reviewedOn?: string;
   /** JSON-LD FAQPage 용. 본문 FAQ 절과 같은 내용이어야 한다. */
   faq: Faq[];
   /**

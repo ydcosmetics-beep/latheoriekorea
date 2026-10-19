@@ -310,6 +310,8 @@ export const article: Article = {
     'non-comedogenic là gì',
   ],
   published: '2026-09-03',
+  reviewer: 'jeon-ji-seung',
+  reviewedOn: '2026-10-19',
   updated: '2026-10-19',
   faq: [
     {
