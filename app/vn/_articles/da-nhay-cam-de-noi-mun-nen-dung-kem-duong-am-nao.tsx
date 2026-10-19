@@ -33,6 +33,8 @@ const LABEL: [string, string][] = [
   ['Kết cấu', 'Gel-cream — nhẹ trên da, dành cho da dầu thiếu nước'],
   ['Dầu và axit béo', 'Bỏ axit béo và các loại dầu không cần thiết theo công thức 0% Fatty Acid (không chứa axit béo)'],
   ['Thành phần nổi bật trên nhãn', 'Panthenol (cấp ẩm), Phytosqualane (làm mềm — squalane nguồn gốc thực vật)'],
+  ['Hương liệu', 'Không có hương liệu (Parfum/Fragrance) trong bảng thành phần do công ty cung cấp'],
+  ['Cồn (ethanol)', 'Không có Alcohol / Alcohol Denat. trong bảng thành phần'],
   ['Dành cho (theo gian hàng)', 'Da mụn, viêm nang lông và da nhạy cảm'],
 ];
 
@@ -96,8 +98,8 @@ function Body() {
         ))}
       </Table>
       <P>
-        Những tiêu chí còn lại trong bảng đầu — hương liệu, cồn, pH, nhãn non-comedogenic — không có trong thông tin nhà bán hàng công bố, nên bài này không nói tới;
-        hãy xem bảng thành phần in trên bao bì. Và cần nói rõ cả hai chiều: <B>“không chứa axit béo” không đồng nghĩa với “non-comedogenic”</B>, và non-comedogenic
+        Theo bảng thành phần do công ty cung cấp (xem <Link href="/vn/thanh-phan" className={LINK}>bảng thành phần đầy đủ của 6 sản phẩm</Link>), kem này không có hương liệu (Parfum) và không có cồn ethanol;
+        pH và nhãn non-comedogenic chưa được công bố, nên bài này không nói tới. Và cần nói rõ cả hai chiều: <B>“không chứa axit béo” không đồng nghĩa với “non-comedogenic”</B>, và non-comedogenic
         cũng không cho biết sản phẩm có chứa axit béo hay không — đó là hai tiêu chí độc lập, trả lời hai câu hỏi khác nhau. “Không chứa axit béo” cũng không có nghĩa
         là làm giảm mụn — đó là cách chọn thành phần, không phải tác dụng.
       </P>
@@ -106,7 +108,7 @@ function Body() {
       <P>
         <B>Có thể cân nhắc nếu:</B> da dầu hoặc hỗn hợp thấy bí với kem đặc; da từng nổi nốt nhỏ đều nhau sau khi dùng kem có dầu và muốn thử một công thức
         không chứa axit béo; bạn đang muốn giữ chu trình ít bước. <B>Nên cân nhắc loại khác nếu:</B> da rất khô, bong tróc và cần lớp khóa ẩm dày hơn [7];
-        bạn cần một sản phẩm công bố rõ không hương liệu, không cồn — thông tin này chưa có với sản phẩm trên.
+        bạn cần một sản phẩm có nhãn non-comedogenic hoặc kết quả thử nghiệm trên da nhạy cảm — hai thông tin này chưa có với sản phẩm trên.
       </P>
       <P>
         <B>Dừng và đổi sản phẩm</B> nếu sau khi thoa, da châm chích, nóng rát hoặc đỏ lên [1]; da thấy bí, nổi thêm nhân mụn; hoặc nổi những nốt nhỏ đều nhau và ngứa —
@@ -140,7 +142,7 @@ function Body() {
       <P>
         Trên gian hàng chính hãng tại Việt Nam (Shopee: {SHOPEE_VN_STORE}), sản phẩm được ghi là{' '}
         <B>Kem dưỡng ẩm cho da mụn La Théorie Hydrating Gel Cream 60ml | Viêm nang lông &amp; da nhạy cảm | Không chứa axit béo</B>.
-        Thành phần nổi bật in trên nhãn: Phytosqualane, Panthenol. Dung tích 60 ml, kết cấu gel-cream. Đây là thông tin nhà bán hàng công bố, không phải kết quả thử nghiệm.
+        Thành phần nổi bật in trên nhãn: Phytosqualane, Panthenol. Dung tích 60 ml, kết cấu gel-cream. Đây là thông tin nhà bán hàng công bố, không phải kết quả thử nghiệm. Bảng thành phần đầy đủ: <Link href="/vn/thanh-phan" className={LINK}>bảng thành phần đầy đủ của 6 sản phẩm</Link>.
       </P>
       <H3>3. Điều chưa được kiểm chứng</H3>
       <P>
@@ -175,7 +177,7 @@ export const article: Article = {
   tldr: [
     'Ghép hai bộ tiêu chí: cho da mụn — kết cấu nhẹ, không gốc dầu, không gây bít tắc (Hội Da liễu Singapore, NICE); cho da nhạy cảm — ít sản phẩm hơn, không hương liệu, ít chất bảo quản và chất hoạt động bề mặt (IFSI).',
     'Da nhạy cảm, da mụn và viêm nang lông là ba tình trạng khác nhau, có thể cùng có trên một làn da — tiêu chí đến từ từng tình trạng, không từ một nhãn chung.',
-    'Với Kem dưỡng ẩm La Théorie Hydrating Gel Cream, điều nhãn nói được là: gel-cream, không chứa axit béo, panthenol và phytosqualane; hương liệu, cồn, pH chưa công bố — bài không khẳng định.',
+    'Với Kem dưỡng ẩm La Théorie Hydrating Gel Cream, điều nhãn nói được là: gel-cream, không chứa axit béo, panthenol và phytosqualane; không có hương liệu và không có cồn ethanol theo bảng thành phần; pH chưa công bố.',
   ],
   cluster: 'C5',
   stage: 'recommend',
@@ -187,6 +189,7 @@ export const article: Article = {
     'kem dưỡng nào phù hợp cho da dầu mụn nhạy cảm',
   ],
   published: '2026-10-18',
+  updated: '2026-10-19',
   faq: [
     { q: 'Da nhạy cảm dễ nổi mụn nên dùng kem dưỡng ẩm nào?', a: 'Kem có kết cấu nhẹ (gel hoặc gel-cream), không gốc dầu, không gây bít tắc lỗ chân lông — và với da nhạy cảm thì thêm: không hương liệu, ít chất bảo quản, ít chất hoạt động bề mặt, theo hướng dẫn của Hội Da liễu Singapore, NICE và nhóm chuyên gia IFSI. Thêm từng sản phẩm một và đọc bảng thành phần.' },
     { q: 'Kem dưỡng ẩm cho da dầu mụn nhạy cảm?', a: 'Dạng gel hoặc gel-cream gốc nước, không nhờn, không gây bít tắc; ưu tiên loại không hương liệu. Nếu da dầu nhưng đang khô, bong tróc thì chọn loại có thêm thành phần khóa ẩm, vẫn không gây bít tắc.' },

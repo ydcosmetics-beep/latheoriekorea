@@ -33,6 +33,8 @@ const LABEL: [string, string][] = [
   ['Dạng sản phẩm', 'Gel rửa mặt, 210 ml'],
   ['Chất hoạt động bề mặt', 'Chất hoạt động bề mặt không chứa axit béo (0% Fatty Acid)'],
   ['pH', 'pH thấp — theo tài liệu của công ty — để da không bị căng rít sau khi rửa'],
+  ['Hương liệu', 'Không có hương liệu (Parfum/Fragrance) trong bảng thành phần do công ty cung cấp'],
+  ['Cồn (ethanol) · paraben', 'Không có Alcohol / Alcohol Denat., không có paraben trong bảng thành phần'],
   ['Dành cho (theo gian hàng)', 'Da dầu mụn và hàng rào bảo vệ da'],
 ];
 
@@ -95,7 +97,8 @@ function Body() {
         ))}
       </Table>
       <P>
-        Hương liệu và chất bảo quản không có trong thông tin nhà bán hàng công bố, nên bài này không nói tới — hãy xem bảng thành phần in trên bao bì. Bài viết không
+        Theo bảng thành phần do công ty cung cấp (xem <Link href="/vn/thanh-phan" className={LINK}>bảng thành phần đầy đủ của 6 sản phẩm</Link>), gel rửa mặt này không có hương liệu (Parfum), không có cồn ethanol
+        và không có paraben. Bài viết không
         khẳng định sản phẩm đáp ứng tiêu chí của NICE hay IFSI; “pH thấp” là thông tin của nhà sản xuất, không phải kết quả kiểm nghiệm độc lập. Và “không chứa
         axit béo” là cách chọn thành phần, không phải tác dụng: nó không có nghĩa là làm giảm mụn.
       </P>
@@ -103,7 +106,7 @@ function Body() {
       <H2 id="khi-nao-nen-tranh">Khi nào nên tránh</H2>
       <P>
         <B>Có thể cân nhắc nếu:</B> da bạn thấy căng rít, “sạch kin kít” sau khi rửa với sữa rửa mặt hiện tại; bạn muốn giữ chu trình ít bước.{' '}
-        <B>Nên cân nhắc loại khác nếu:</B> bạn cần một sản phẩm công bố rõ không hương liệu, không chất bảo quản — thông tin này chưa có với sản phẩm trên;
+        <B>Nên cân nhắc loại khác nếu:</B> bạn cần một sản phẩm công bố pH cụ thể hoặc kết quả thử nghiệm trên da nhạy cảm — hai thông tin này chưa có với sản phẩm trên;
         hoặc bác sĩ đã chỉ định cho bạn một loại sữa rửa mặt khác.
       </P>
       <P>
@@ -135,7 +138,7 @@ function Body() {
       <P>
         Trên gian hàng chính hãng tại Việt Nam (Shopee: {SHOPEE_VN_STORE}), sản phẩm được ghi là{' '}
         <B>Sữa rửa mặt dạng gel La Théorie Clearing Gel 210ml | Cho da dầu mụn &amp; hàng rào bảo vệ da | Không chứa axit béo</B>.
-        Dung tích 210 ml, dạng gel. Đây là thông tin nhà bán hàng công bố, không phải kết quả thử nghiệm.
+        Dung tích 210 ml, dạng gel. Đây là thông tin nhà bán hàng công bố, không phải kết quả thử nghiệm. Bảng thành phần đầy đủ: <Link href="/vn/thanh-phan" className={LINK}>bảng thành phần đầy đủ của 6 sản phẩm</Link>.
       </P>
       <H3>3. Điều chưa được kiểm chứng</H3>
       <P>
@@ -170,7 +173,7 @@ export const article: Article = {
   tldr: [
     'Chọn sữa rửa mặt dịu nhẹ, không kiềm (pH trung tính hoặc hơi axit), ít chất hoạt động bề mặt, không hương liệu; rửa 2 lần mỗi ngày, không chà xát (NICE, IFSI).',
     'Xà phòng và chất tẩy rửa nằm trong nhóm yếu tố liên quan chặt nhất với da nhạy cảm ở nghiên cứu tại Bệnh viện Da liễu Trung ương (2025); rửa quá mạnh tay có thể làm da kích ứng và khô hơn.',
-    'Với Gel rửa mặt La Théorie Clearing Gel, điều nhãn nói được là: chất hoạt động bề mặt không chứa axit béo, pH thấp (theo nhà sản xuất); hương liệu, chất bảo quản chưa công bố — bài không khẳng định.',
+    'Với Gel rửa mặt La Théorie Clearing Gel, điều nhãn nói được là: chất hoạt động bề mặt không chứa axit béo, pH thấp (theo nhà sản xuất); không có hương liệu, không có cồn ethanol và không có paraben theo bảng thành phần; pH cụ thể chưa công bố.',
   ],
   cluster: 'C5',
   stage: 'recommend',
@@ -182,6 +185,7 @@ export const article: Article = {
     'sản phẩm skincare cho da dầu mụn nhạy cảm',
   ],
   published: '2026-10-18',
+  updated: '2026-10-19',
   faq: [
     { q: 'Sữa rửa mặt cho da nhạy cảm dễ nổi mụn: chọn thế nào?', a: 'Chọn loại dịu nhẹ, không kiềm (pH trung tính hoặc hơi axit), ít chất hoạt động bề mặt, không hương liệu, và dùng 2 lần mỗi ngày, không chà xát. NICE khuyên sản phẩm làm sạch không kiềm cho da mụn; nhóm chuyên gia IFSI khuyên sản phẩm ít chất hoạt động bề mặt, không hương liệu cho da nhạy cảm.' },
     { q: 'Sữa rửa mặt cho da dầu mụn nhạy cảm?', a: 'Tiêu chí như trên: dịu nhẹ, không kiềm, ít chất hoạt động bề mặt, không hương liệu. Da dầu cũng không cần sản phẩm tẩy rửa mạnh — rửa quá mạnh tay có thể làm da kích ứng và khô hơn.' },
