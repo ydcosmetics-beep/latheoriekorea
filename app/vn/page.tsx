@@ -23,7 +23,7 @@ const FAQ: { q: string; a: string }[] = [
   { q: 'Vì sao da mụn vẫn cần dưỡng ẩm?', a: 'Vì da dầu và da thiếu nước là hai chuyện khác nhau. Da có thể bóng dầu mà vẫn thiếu nước ở lớp dưới, và khi thiếu nước, da tiết dầu nhiều hơn. Dưỡng ẩm đúng cách giúp hàng rào bảo vệ da ổn định hơn.' },
   { q: 'Non-comedogenic là gì?', a: 'Là nhãn cho biết sản phẩm được đánh giá là ít gây bít tắc lỗ chân lông. Nhãn này không cho biết sản phẩm có chứa axit béo — nguồn thức ăn của nấm men Malassezia — hay không. Đó là hai tiêu chí độc lập.' },
   { q: 'Da mụn nên dùng kem dưỡng dạng nào?', a: 'Với da dầu mụn, dạng gel hoặc gel-cream thường phù hợp hơn kem đặc: đủ ẩm mà không nặng, không bí trong khí hậu nóng ẩm. Với da dễ gặp mụn nấm hoặc viêm nang lông, nên kiểm tra thêm xem công thức có chứa axit béo hay không.' },
-  { q: 'Thành phần nên tránh cho da mụn?', a: 'Dầu khoáng, dầu dừa, dầu ô liu, dầu bơ, lanolin, cồn khô và hương liệu tổng hợp là những nhóm hay được nhắc tới. Điểm chung ít được nói tới của phần lớn các loại dầu đó là hàm lượng axit béo cao — chi tiết trong bài “Da mụn không nên dùng thành phần gì?”.' },
+  { q: 'Thành phần nên tránh cho da mụn?', a: 'Dầu dừa, dầu ô liu, dầu bơ, lanolin, cồn khô và hương liệu tổng hợp là những nhóm hay được nhắc tới; điểm chung ít được nói tới của các loại dầu đó là hàm lượng axit béo cao. Dầu khoáng và silicone thường bị xếp chung vào danh sách tránh, nhưng chúng không chứa axit béo — chi tiết trong bài “Da mụn không nên dùng thành phần gì?”.' },
 ];
 
 export const metadata: Metadata = {

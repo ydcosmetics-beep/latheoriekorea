@@ -9,10 +9,8 @@ import { Cta, B, ReadMore } from './_ui';
 const CTA_URL = `${BRIDGE_URL}/?s=seo&k=LATHWEB&cp=C3&p=P002`;
 
 const AVOID = [
-  ['Dầu khoáng', 'Tạo lớp màng kín trên da, dễ gây bít tắc lỗ chân lông', 'Mineral Oil, Petrolatum, Paraffinum Liquidum'],
   ['Dầu dừa', 'Chỉ số gây bít tắc rất cao dù được xem là “lành tính”', 'Coconut Oil, Cocos Nucifera Oil'],
   ['Dầu ô liu · dầu bơ', 'Dầu thực vật nặng, ở nồng độ cao dễ gây bít tắc', 'Olea Europaea Oil, Persea Gratissima Oil'],
-  ['Silicone', 'Tạo cảm giác mịn tức thì nhưng cản trở da thoát ẩm', 'Dimethicone, Cyclomethicone, Cyclopentasiloxane'],
   ['Cồn khô', 'Làm khô bề mặt, khiến da tiết dầu bù lại nhiều hơn', 'Alcohol Denat., SD Alcohol, Isopropyl Alcohol'],
   ['Hương liệu tổng hợp', 'Không cải thiện gì cho da mụn, dễ gây kích ứng', 'Fragrance, Parfum'],
   ['Lanolin', 'Chiết xuất từ mỡ cừu, chỉ số gây bít tắc cao', 'Lanolin, Acetylated Lanolin'],
@@ -126,6 +124,13 @@ function Body() {
       <P>
         <strong className="font-semibold text-gray-900">Cồn không phải lúc nào cũng là cồn khô.</strong> Cetyl Alcohol hay
         Cetearyl Alcohol là cồn béo, dùng để làm đặc kết cấu, không có tác dụng làm khô như Alcohol Denat.
+      </P>
+      <P>
+        <strong className="font-semibold text-gray-900">Dầu khoáng và silicone hay bị đưa vào danh sách tránh — nhưng chúng không chứa axit béo.</strong>{' '}
+        Dầu khoáng, petrolatum (gốc hydrocarbon) và silicone (dimethicone, cyclopentasiloxane) không phải nguồn thức ăn của nấm men Malassezia:
+        trong nghiên cứu nuôi cấy, Malassezia không phát triển trên paraffin hay silicone [5]. Tiếng xấu “gây bít tắc” của chúng phần lớn đến từ
+        các bảng xếp hạng cũ, lập bằng cách thử nguyên liệu thô trên tai thỏ; một thành phần bị xếp là gây bít tắc không có nghĩa sản phẩm chứa nó
+        cũng gây bít tắc — nồng độ và công thức đều ảnh hưởng [6]. Nếu một sản phẩm đặc làm da bạn thấy bí, hãy xem toàn bộ công thức, không chỉ một cái tên.
       </P>
 
       <H2 id="diem-chung">Điểm chung của những loại dầu đó là gì?</H2>
@@ -250,7 +255,7 @@ function Body() {
       <ol className="my-6 space-y-4 text-[15px] md:text-base leading-[1.85] text-gray-700">
         <li className="flex gap-4">
           <span className="shrink-0 font-semibold text-gray-950">1.</span>
-          <span><strong className="font-semibold text-gray-900">Đọc từ trên xuống, chỉ cần 5–7 dòng đầu.</strong> Bảng thành phần được sắp theo hàm lượng giảm dần. Nếu dầu khoáng hay dầu dừa nằm trong nhóm đầu, hàm lượng của chúng không nhỏ.</span>
+          <span><strong className="font-semibold text-gray-900">Đọc từ trên xuống, chỉ cần 5–7 dòng đầu.</strong> Bảng thành phần được sắp theo hàm lượng giảm dần. Nếu dầu dừa hay dầu ô liu nằm trong nhóm đầu, hàm lượng của chúng không nhỏ.</span>
         </li>
         <li className="flex gap-4">
           <span className="shrink-0 font-semibold text-gray-950">2.</span>
@@ -292,7 +297,7 @@ export const article: Article = {
   description:
     'Danh sách thành phần da mụn nên tránh, và điểm chung ít được nói tới giữa chúng: axit béo — nguồn thức ăn của nấm men Malassezia.',
   tldr: [
-    'Dầu khoáng, dầu dừa, dầu ô liu, lanolin và silicone là những nhóm da mụn nên hạn chế.',
+    'Dầu dừa, dầu ô liu, dầu bơ, lanolin và cồn khô là những nhóm da mụn nên hạn chế; dầu khoáng và silicone hay bị xếp chung nhưng không chứa axit béo.',
     'Điểm chung của phần lớn các loại dầu đó là hàm lượng axit béo cao.',
     'Nhãn “non-comedogenic” không cho biết sản phẩm có chứa axit béo hay không — đó là câu hỏi thứ hai.',
   ],
@@ -305,7 +310,7 @@ export const article: Article = {
     'non-comedogenic là gì',
   ],
   published: '2026-09-03',
-  updated: '2026-09-15',
+  updated: '2026-10-19',
   faq: [
     {
       q: 'Da dầu mụn có cần dưỡng ẩm không?',
@@ -327,8 +332,13 @@ export const article: Article = {
       q: 'Làm sao biết mình bị mụn nấm hay mụn thường?',
       a: 'Mụn nấm thường là những nốt sẩn nhỏ đều nhau về kích thước, mọc thành cụm, hay kèm ngứa nhẹ, xuất hiện nhiều ở trán, hai bên má, ngực và lưng. Để xác định chắc chắn, bạn nên đến khám tại cơ sở da liễu.',
     },
+    {
+      q: 'Da mụn có cần tránh dầu khoáng và silicone không?',
+      a: 'Không nhất thiết. Dầu khoáng, petrolatum và silicone không chứa axit béo nên không phải nguồn thức ăn của nấm men Malassezia; trong nghiên cứu nuôi cấy, Malassezia không phát triển trên paraffin hay silicone. Tiếng xấu “gây bít tắc” của chúng đến từ các bảng xếp hạng cũ thử nguyên liệu thô trên tai thỏ; sản phẩm chứa chúng không nhất thiết gây bít tắc — nồng độ và công thức mới quyết định.',
+    },
   ],
   // 2026-09-03 확인 4건 + 2026-09-07 정정 1(Dobler 2019) 추가. 2026-09-15 Crossref 로 5건 전부 재확인.
+  // 2026-10-19 [6] Draelos 2006 추가 — dầu khoáng·silicone 행을 AVOID 에서 빼고 「hiểu nhầm」 문단으로(C3 근거표 #4·#8 · 본사 전성분 회신으로 드러난 충돌 정정 · 준상 승인).
   references: [
     {
       label:
@@ -354,6 +364,11 @@ export const article: Article = {
       label:
         'Dobler D. và cộng sự (2019). Impact of Selected Cosmetic Ingredients on Common Microorganisms of Healthy Human Skin. Cosmetics 6(3):45.',
       url: 'https://doi.org/10.3390/cosmetics6030045',
+    },
+    {
+      label:
+        'Draelos ZD, DiNardo JC (2006). A re-evaluation of the comedogenicity concept. Journal of the American Academy of Dermatology 54(3):507–512.',
+      url: 'https://doi.org/10.1016/j.jaad.2005.11.1058',
     },
   ],
   Body,

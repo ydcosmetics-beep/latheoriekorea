@@ -129,11 +129,12 @@ export const article: Article = {
   stage: 'explore',
   targetQueries: ['da dầu mụn có nên dưỡng ẩm không', 'dưỡng ẩm cho da mụn', 'da mụn có nên dùng kem dưỡng không', 'gel hay kem dưỡng cho da dầu'],
   published: '2026-09-16',
+  updated: '2026-10-19',
   faq: [
     { q: 'Da dầu có cần kem dưỡng ẩm không?', a: 'Có. Da dầu vẫn có thể thiếu nước ở lớp sừng, và khi thiếu nước, hàng rào bảo vệ da kém ổn định và da dễ kích ứng hơn. Nên chọn kết cấu nhẹ như gel hoặc gel-cream.' },
     { q: 'Bỏ dưỡng ẩm có làm da bớt dầu không?', a: 'Thường là không. Khi da bị làm khô, tuyến bã nhờn thường được mô tả là tiết thêm dầu để bù lại. Bỏ dưỡng ẩm hay cho kết quả ngược lại: da vừa bóng dầu vừa bong tróc.' },
     { q: 'Gel hay kem dưỡng tốt hơn cho da dầu mụn?', a: 'Với da dầu mụn trong khí hậu nóng ẩm, gel hoặc gel-cream thường phù hợp hơn kem đặc vì cấp nước mà không phủ lớp dầu nặng. Da khô nhiều có thể cần kết cấu giàu ẩm hơn.' },
-    { q: 'Kem dưỡng ẩm có gây mụn không?', a: 'Tuỳ thành phần, không tuỳ kết cấu. Dầu khoáng, dầu dừa, dầu ô liu và lanolin là những nhóm hay gây bít tắc; với da dễ gặp mụn nấm, cần kiểm tra thêm nhóm axit béo.' },
+    { q: 'Kem dưỡng ẩm có gây mụn không?', a: 'Tuỳ thành phần, không tuỳ kết cấu. Dầu dừa, dầu ô liu, dầu bơ và lanolin là những nhóm hay gây bít tắc và giàu axit béo; dầu khoáng và silicone không chứa axit béo. Với da dễ gặp mụn nấm, cần kiểm tra thêm nhóm axit béo.' },
     { q: 'Nên thoa kem dưỡng ẩm trước hay sau tinh chất?', a: 'Với dòng La Théorie, thứ tự là nước cân bằng → kem dưỡng → tinh chất, vì tinh chất là bước tăng cường (Enhancer), không phải bước bắt buộc. Với sản phẩm khác, hãy theo hướng dẫn của nhà sản xuất.' },
   ],
   // 2026-09-16 확인 — [1] Europe PMC (PMID 24847408 · PMC4025519) · [2] Crossref DOI
