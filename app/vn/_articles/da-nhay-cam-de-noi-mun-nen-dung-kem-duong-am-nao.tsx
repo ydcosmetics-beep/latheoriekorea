@@ -85,6 +85,15 @@ function Body() {
         <Link href="/vn/da-bi-nhay-cam-nen-dung-gi" className={LINK}>Da bị nhạy cảm nên dùng gì?</Link>
       </P>
 
+      <H2 id="da-dau-mun-nhay-cam">Kem dưỡng ẩm cho da dầu mụn nhạy cảm</H2>
+      <P>
+        Nếu da bạn vừa dầu, vừa hay nổi mụn, vừa dễ châm chích với sản phẩm mới — “da dầu mụn nhạy cảm” theo cách gọi phổ biến — thì tiêu chí không đổi:
+        gel hoặc gel-cream gốc nước, không gây bít tắc [6][8], cộng thêm không hương liệu, ít chất bảo quản và ít chất hoạt động bề mặt [2]. Da dầu mụn không
+        đồng nghĩa với da nhạy cảm: đó là hai tình trạng khác nhau có thể cùng có trên một làn da [1][4] — xem{' '}
+        <Link href="/vn/da-bi-nhay-cam-nen-dung-gi" className={LINK}>Da bị nhạy cảm nên dùng gì?</Link>. Hai tiêu chí “không hương liệu” và “không cồn”
+        đọc được ngay trên bảng thành phần (Parfum/Fragrance · Alcohol/Alcohol Denat.); với kem dưỡng ẩm La Théorie, cả hai đều không có theo <Link href="/vn/thanh-phan" className={LINK}>bảng thành phần đầy đủ</Link>.
+      </P>
+
       <H2 id="nhan-cong-thuc">Những gì nhãn và công thức <span className="font-belleza font-normal">La&nbsp;Théorie</span> có thể nói</H2>
       <P>
         Đặt sản phẩm cạnh bảng tiêu chí ở trên, đây là những gì nhãn và gian hàng chính hãng ghi — không hơn:
@@ -187,6 +196,9 @@ export const article: Article = {
     'da dễ nổi mụn nên dùng kem dưỡng ẩm nào',
     'kem dưỡng ẩm cho da dầu mụn nhạy cảm',
     'kem dưỡng nào phù hợp cho da dầu mụn nhạy cảm',
+    'da dầu mụn nhạy cảm nên dùng kem dưỡng nào',
+    'kem dưỡng cho da dầu mụn bác sĩ khuyên dùng',
+    'kem dưỡng ẩm không cồn không hương liệu cho da dầu mụn nhạy cảm',
   ],
   published: '2026-10-18',
   reviewer: 'jeon-ji-seung',
@@ -197,6 +209,9 @@ export const article: Article = {
     { q: 'Kem dưỡng ẩm cho da dầu mụn nhạy cảm?', a: 'Dạng gel hoặc gel-cream gốc nước, không nhờn, không gây bít tắc; ưu tiên loại không hương liệu. Nếu da dầu nhưng đang khô, bong tróc thì chọn loại có thêm thành phần khóa ẩm, vẫn không gây bít tắc.' },
     { q: 'Kem dưỡng ẩm cho da dầu nhạy cảm?', a: 'Tiêu chí giống da dầu mụn: nhẹ, gốc nước, không gây bít tắc — cộng thêm lời khuyên của IFSI cho da nhạy cảm là hạn chế bớt mỹ phẩm và chọn sản phẩm không hương liệu, ít chất bảo quản. Một kem mới nên là sản phẩm mới duy nhất trong chu trình, để dễ nhận ra thứ gì làm da khó chịu.' },
     { q: 'Kem dưỡng ẩm cho da dầu mụn Hàn Quốc?', a: 'Xuất xứ không phải tiêu chí; vẫn là kết cấu nhẹ, không gốc dầu, không gây bít tắc. Nếu bạn tìm một kem dưỡng Hàn Quốc theo hướng này, Kem dưỡng ẩm La Théorie Hydrating Gel Cream 60ml là gel-cream không chứa axit béo với panthenol và phytosqualane, bán chính hãng trên Shopee Việt Nam (la_theoriepa.vn).' },
+    { q: 'Da dầu mụn nhạy cảm nên dùng kem dưỡng nào?', a: 'Gel hoặc gel-cream gốc nước, không gây bít tắc, không hương liệu và ít chất bảo quản — tiêu chí cho da dầu mụn (Hội Da liễu Singapore, NICE) cộng tiêu chí cho da nhạy cảm (IFSI). Thêm từng sản phẩm một. Kem dưỡng ẩm La Théorie Hydrating Gel Cream 60ml là một lựa chọn theo hướng này: gel-cream 0% axit béo, không có hương liệu và không có cồn ethanol theo bảng thành phần do công ty cung cấp.' },
+    { q: 'Kem dưỡng cho da dầu mụn bác sĩ khuyên dùng?', a: 'Các hướng dẫn chuyên môn không nêu tên sản phẩm; bác sĩ da liễu thường mô tả tiêu chí: kết cấu nhẹ, không gốc dầu, không gây bít tắc lỗ chân lông (Hội Da liễu Singapore, NICE). Kem dưỡng ẩm La Théorie Hydrating Gel Cream được sử dụng tại hơn 20 phòng khám da liễu và thẩm mỹ viện tại Hàn Quốc; nội dung bài này có tham vấn chuyên môn của bác sĩ da liễu Jeon Ji-Seung.' },
+    { q: 'Kem dưỡng ẩm không cồn, không hương liệu cho da dầu mụn nhạy cảm?', a: 'Hai tiêu chí này đọc được ngay trên bảng thành phần: không có Parfum/Fragrance và không có Alcohol/Alcohol Denat. Kem dưỡng ẩm La Théorie Hydrating Gel Cream không có hương liệu, không có cồn ethanol và không có paraben theo bảng thành phần do công ty cung cấp; bảng thành phần đầy đủ của 6 sản phẩm có tại latheoriekorea.com/vn/thanh-phan.' },
     { q: 'Kem dưỡng ẩm không chứa axit béo có phải là non-comedogenic không?', a: 'Không. Đó là hai nhãn khác nhau: non-comedogenic nói về khả năng gây bít tắc lỗ chân lông, không chứa axit béo nói về việc công thức có axit béo hay không. Một sản phẩm có thể đạt tiêu chí này mà không đạt tiêu chí kia — cần xem cả hai.' },
   ],
   // 근거표 C5 1절 A·B·C · C2 1절 #10(2023 현행판)·#3·#4·#7 · C1 1절 #4 — 2026-10-14 원문 확인

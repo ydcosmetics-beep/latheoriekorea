@@ -84,6 +84,14 @@ function Body() {
         <Link href="/vn/da-mun-kho-cang-cham-chich-co-phai-hang-rao-bao-ve-da-yeu" className={LINK}>Da mụn bị khô căng, châm chích có phải do hàng rào bảo vệ da yếu?</Link>
       </P>
 
+      <H2 id="da-dau-mun-nhay-cam">Sữa rửa mặt cho da dầu mụn nhạy cảm</H2>
+      <P>
+        Với làn da vừa dầu, vừa hay nổi mụn, vừa dễ châm chích — “da dầu mụn nhạy cảm” theo cách gọi phổ biến — tiêu chí ở bước rửa mặt không đổi:
+        sản phẩm dịu nhẹ, không kiềm, 2 lần mỗi ngày, không chà xát [5]; ít chất hoạt động bề mặt, không hương liệu, ít chất bảo quản [2]. Da dầu không cần
+        sản phẩm tẩy rửa mạnh hơn — rửa quá mạnh tay làm da khô và kích ứng hơn [4][5]. “Không hương liệu”, “không cồn” và “không paraben” đọc được ngay trên
+        bảng thành phần; với gel rửa mặt La Théorie, cả ba đều không có theo <Link href="/vn/thanh-phan" className={LINK}>bảng thành phần đầy đủ</Link>.
+      </P>
+
       <H2 id="nhan-cong-thuc">Những gì nhãn và công thức <span className="font-belleza font-normal">La&nbsp;Théorie</span> có thể nói</H2>
       <P>
         Đặt sản phẩm cạnh bảng tiêu chí ở trên, đây là những gì nhãn và gian hàng chính hãng ghi — không hơn:
@@ -183,6 +191,8 @@ export const article: Article = {
     'da nhạy cảm dễ nổi mụn nên rửa mặt thế nào',
     'sữa rửa mặt không kiềm cho da mụn',
     'sản phẩm skincare cho da dầu mụn nhạy cảm',
+    'da dầu mụn nhạy cảm nên dùng sữa rửa mặt nào',
+    'sữa rửa mặt cho da dầu mụn nhạy cảm',
   ],
   published: '2026-10-18',
   reviewer: 'jeon-ji-seung',
@@ -193,6 +203,7 @@ export const article: Article = {
     { q: 'Sữa rửa mặt cho da dầu mụn nhạy cảm?', a: 'Tiêu chí như trên: dịu nhẹ, không kiềm, ít chất hoạt động bề mặt, không hương liệu. Da dầu cũng không cần sản phẩm tẩy rửa mạnh — rửa quá mạnh tay có thể làm da kích ứng và khô hơn.' },
     { q: 'Da nhạy cảm dễ nổi mụn nên rửa mặt mấy lần một ngày?', a: 'Hướng dẫn NICE khuyên rửa mặt 2 lần mỗi ngày bằng sản phẩm không kiềm. Rửa nhiều hơn không có bằng chứng giúp giảm mụn, và rửa quá mạnh tay có thể làm da kích ứng và khô hơn.' },
     { q: 'Sữa rửa mặt pH bao nhiêu là phù hợp cho da nhạy cảm dễ nổi mụn?', a: 'NICE khuyên sản phẩm làm sạch không kiềm — pH trung tính hoặc hơi axit. Nếu bao bì không ghi pH, hãy theo dõi cảm giác da sau khi rửa: châm chích, nóng rát hay căng rít là tín hiệu nên đổi sản phẩm.' },
+    { q: 'Da dầu mụn nhạy cảm nên dùng sữa rửa mặt nào?', a: 'Loại dịu nhẹ, không kiềm (pH trung tính hoặc hơi axit), ít chất hoạt động bề mặt, không hương liệu — theo NICE cho da mụn và IFSI cho da nhạy cảm — dùng 2 lần mỗi ngày, không chà xát. Gel rửa mặt La Théorie Clearing Gel 210ml không có hương liệu, không có cồn ethanol và không có paraben theo bảng thành phần do công ty cung cấp; pH thấp theo tài liệu của công ty.' },
     { q: 'Sản phẩm skincare cho da dầu mụn nhạy cảm?', a: 'Ba bước cơ bản theo StatPearls: sữa rửa mặt dịu nhẹ, kem dưỡng ẩm không gây bít tắc và chống nắng phù hợp. Với da nhạy cảm, nhóm chuyên gia IFSI khuyên hạn chế bớt mỹ phẩm và thêm từng sản phẩm một.' },
   ],
   // 근거표 C5 1절 A·B·C · C1 1절 #7·#4·#1(2023 현행판) — 2026-10-14 원문 확인
