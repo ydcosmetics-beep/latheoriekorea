@@ -2,8 +2,8 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { BRAND, SHOPEE_VN_STORE } from '../_lib/site';
-import { OFFER, offerActive, SHOP_URL, gridProducts, pickProduct } from './_offer';
-import { MetaPixel, CopyCode, ShopeeLink } from './OfferActions';
+import { SHOP_URL, gridProducts, pickProduct, pickCode, codeActive } from './_offer';
+import { MetaPixel, CopyCode, ShopeeLink, BridgeLog, type Track } from './OfferActions';
 
 /**
  * /vn/uu-dai — 메타 광고 랜딩. 허브(/vn)와 같은 본사 디자인을 쓰고, 첫 화면에 혜택(할인·기한·코드)을 숫자로 둔다.
@@ -20,15 +20,24 @@ export const metadata: Metadata = {
 
 const Brand = () => <span translate="no">{BRAND}</span>;
 
-export default async function OfferPage({ searchParams }: { searchParams: Promise<{ p?: string | string[] }> }) {
-  const product = pickProduct((await searchParams).p);
-  const active = offerActive();
-  const code = active ? OFFER.code : undefined;
+type Q = { p?: string | string[]; k?: string | string[]; s?: string | string[]; cp?: string | string[]; c?: string | string[]; v?: string | string[]; id?: string | string[] };
+const one = (x?: string | string[]) => (Array.isArray(x) ? x[0] : x ?? '').trim();
+
+export default async function OfferPage({ searchParams }: { searchParams: Promise<Q> }) {
+  const q = await searchParams;
+  const product = pickProduct(q.p);
+  const entry = pickCode(one(q.k));
+  const active = codeActive(entry);
+  const code = active ? entry.code : undefined;
+  const src = one(q.s);
+  /* 브릿지클릭 로그 열 — 옛 브릿지 latheorie-vn.pages.dev 와 같다. 픽셀은 광고 출처(s 없음 · meta · fb)만 — 인스타·웹 유입이 Lead 집계에 섞이지 않게 */
+  const track: Track = { s: src, c: one(q.cp) || one(q.c), v: one(q.v), id: one(q.id), k: code ?? '', p: product?.id ?? '', t: product?.href ?? SHOP_URL, pixel: src === '' || src === 'meta' || src === 'fb' };
   const others = gridProducts.filter((p) => p.id !== product?.id);
 
   return (
     <main lang="vi" className="bg-white pt-[70px] md:pt-[80px]">
-      <MetaPixel />
+      <MetaPixel enabled={track.pixel} />
+      <BridgeLog track={track} />
 
       {/* 1. 첫 화면 — 제품 · 혜택 · CTA */}
       <section className="mx-auto max-w-xl px-6 pt-8 pb-14 md:pt-14 text-center">
@@ -53,20 +62,20 @@ export default async function OfferPage({ searchParams }: { searchParams: Promis
         {active ? (
           <div className="mt-8 flex items-center justify-between gap-4 border border-gray-950 px-5 py-5 text-left">
             <div>
-              <p className="text-[34px] md:text-[40px] font-semibold leading-none text-gray-950">{OFFER.headline}</p>
-              <p className="mt-2 text-[12px] text-gray-500">Áp dụng đến hết {OFFER.untilLabel}</p>
+              <p className="text-[34px] md:text-[40px] font-semibold leading-none text-gray-950">{entry.headline ?? 'Nhận voucher'}</p>
+              {entry.untilLabel && <p className="mt-2 text-[12px] text-gray-500">Áp dụng đến hết {entry.untilLabel}</p>}
             </div>
             <div className="flex flex-col items-end gap-2">
               <span className="text-[10px] uppercase tracking-[0.16em] text-gray-500">Mã giảm giá</span>
-              <span className="font-mono text-lg font-semibold tracking-[0.12em] text-gray-950">{OFFER.code}</span>
-              <CopyCode code={OFFER.code} />
+              <span className="font-mono text-lg font-semibold tracking-[0.12em] text-gray-950">{entry.code}</span>
+              <CopyCode code={entry.code} />
             </div>
           </div>
         ) : (
           <p className="mt-8 border border-gray-200 px-5 py-4 text-[13px] text-gray-600">Chương trình ưu đãi đã kết thúc. Bạn vẫn có thể mua tại gian hàng chính hãng.</p>
         )}
 
-        <ShopeeLink href={product?.href ?? SHOP_URL} productId={product?.id} code={code}
+        <ShopeeLink href={product?.href ?? SHOP_URL} productId={product?.id} code={code} track={track}
           className="mt-4 block w-full bg-gray-950 px-7 py-4 text-[12px] font-medium uppercase tracking-[0.18em] text-white hover:bg-gray-800">
           {active ? 'Sao chép mã & mua trên Shopee' : 'Mua ngay trên Shopee'}
         </ShopeeLink>
@@ -83,7 +92,7 @@ export default async function OfferPage({ searchParams }: { searchParams: Promis
             <h2 className="text-center text-[13px] font-medium uppercase tracking-[0.22em] text-gray-950">Dùng mã trong 3 bước</h2>
             <ol className="mt-8 space-y-5">
               {[
-                ['Sao chép mã', <>Bấm nút phía trên — mã <b className="font-mono font-semibold text-gray-950">{OFFER.code}</b> được lưu vào bộ nhớ tạm.</>],
+                ['Sao chép mã', <>Bấm nút phía trên — mã <b className="font-mono font-semibold text-gray-950">{entry.code}</b> được lưu vào bộ nhớ tạm.</>],
                 ['Chọn sản phẩm trên Shopee', 'Thêm sản phẩm vào giỏ hàng tại gian hàng chính hãng.'],
                 ['Nhập mã khi thanh toán', 'Ở mục “Voucher của Shop”, dán mã và bấm Áp dụng.'],
               ].map(([t, d], i) => (
@@ -116,7 +125,7 @@ export default async function OfferPage({ searchParams }: { searchParams: Promis
           <ul className="mt-10 grid grid-cols-2 gap-x-4 gap-y-8 md:grid-cols-3 md:gap-8">
             {others.map((p) => (
               <li key={p.id}>
-                <ShopeeLink href={p.href} productId={p.id} code={code} className="group block">
+                <ShopeeLink href={p.href} productId={p.id} code={code} track={track} className="group block">
                   <div className="relative aspect-square overflow-hidden bg-white">
                     <Image src={p.image} alt={`${BRAND} ${p.name}`} fill sizes="(min-width: 768px) 300px, 50vw" className="object-contain p-5 transition-transform duration-300 group-hover:scale-[1.03]" />
                   </div>
