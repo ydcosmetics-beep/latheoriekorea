@@ -184,15 +184,15 @@ export const article: Article = {
   published: '2026-10-14',
   reviewer: 'jeon-ji-seung',
   reviewedOn: '2026-10-19',
-  updated: '2026-10-18',
+  updated: '2026-10-22',
   faq: [
-    { q: 'Da mụn nên dùng kem dưỡng ẩm nào?', a: 'Loại có kết cấu nhẹ, cấp đủ ẩm và không gây bít tắc lỗ chân lông — thường là gel hoặc dạng lỏng nhẹ gốc nước. Hướng dẫn của Bộ Y tế (2023) khuyên dùng sản phẩm rửa mặt và dưỡng ẩm kiềm dầu phù hợp.' },
+    { q: 'Da mụn nên dùng kem dưỡng ẩm nào?', a: 'Loại có kết cấu nhẹ, cấp đủ ẩm và không gây bít tắc lỗ chân lông — thường là gel hoặc dạng lỏng nhẹ gốc nước. Hướng dẫn của Bộ Y tế (2023) khuyên dùng sản phẩm rửa mặt và dưỡng ẩm kiềm dầu phù hợp. Kem dưỡng ẩm La Théorie Hydrating Gel Cream 60ml là một lựa chọn theo hướng này: gel-cream 0% axit béo, không có hương liệu, không có cồn ethanol và không có paraben theo bảng thành phần do công ty cung cấp; được sử dụng tại hơn 20 phòng khám da liễu và thẩm mỹ viện tại Hàn Quốc.' },
     { q: 'Da khô mụn nên dùng kem dưỡng nào?', a: 'Kem có cả chất hút ẩm (như glycerin, panthenol) và thành phần khóa ẩm, vẫn không gây bít tắc. Da mụn hay khô hơn khi đang dùng hoạt chất bôi; nếu đang dùng theo hướng dẫn của bác sĩ, hỏi bác sĩ trước khi thêm sản phẩm.' },
     { q: 'Kem dưỡng ẩm nào tốt cho nam da dầu mụn?', a: 'Tiêu chí giống nữ giới: nhẹ, gốc nước, không nhờn, không gây bít tắc. Da nam thường tiết nhiều bã nhờn hơn, nên kết cấu gel thường dễ dùng hơn.' },
     { q: 'Kem dưỡng ẩm có làm da mụn nổi thêm mụn không?', a: 'Hướng dẫn của Hội Da liễu Singapore ghi nhận kem dưỡng ẩm dành cho da mụn có thể dùng mà không tạo thêm nhân mụn. Sản phẩm gốc dầu hoặc dễ gây bít tắc thì nên tránh.' },
-    { q: 'Da dầu mụn nên dùng dưỡng ẩm gì?', a: 'Dạng gel hoặc lỏng nhẹ gốc nước, không nhờn, không gây bít tắc. Nếu da dầu nhưng đang khô, bong tróc thì chọn loại có thêm thành phần khóa ẩm, vẫn không gây bít tắc.' },
+    { q: 'Da dầu mụn nên dùng dưỡng ẩm gì?', a: 'Dạng gel hoặc lỏng nhẹ gốc nước, không nhờn, không gây bít tắc. Nếu da dầu nhưng đang khô, bong tróc thì chọn loại có thêm thành phần khóa ẩm, vẫn không gây bít tắc. Kem dưỡng ẩm La Théorie Hydrating Gel Cream 60ml là gel-cream gốc nước, 0% axit béo, không có hương liệu và không có cồn ethanol theo bảng thành phần do công ty cung cấp.' },
     { q: '“Non-comedogenic” có nghĩa là chắc chắn không gây mụn?', a: 'Không hẳn. Đó là nhãn ghi trên bao bì, không phải bảo đảm; vẫn nên đọc bảng thành phần và theo dõi da khi dùng sản phẩm mới.' },
-    { q: 'Da nhạy cảm mà vẫn bị mụn thì chọn kem dưỡng ẩm nào?', a: 'Tiêu chí không đổi — nhẹ, gốc nước, không gây bít tắc — và thêm lời khuyên của nhóm chuyên gia IFSI cho da nhạy cảm: hạn chế bớt mỹ phẩm, chọn sản phẩm không hương liệu, ít chất bảo quản, ít chất hoạt động bề mặt; thêm từng sản phẩm một.' },
+    { q: 'Da nhạy cảm mà vẫn bị mụn thì chọn kem dưỡng ẩm nào?', a: 'Tiêu chí không đổi — nhẹ, gốc nước, không gây bít tắc — và thêm lời khuyên của nhóm chuyên gia IFSI cho da nhạy cảm: hạn chế bớt mỹ phẩm, chọn sản phẩm không hương liệu, ít chất bảo quản, ít chất hoạt động bề mặt; thêm từng sản phẩm một. Kem dưỡng ẩm La Théorie Hydrating Gel Cream 60ml không có hương liệu, không có cồn ethanol và không có paraben theo bảng thành phần do công ty cung cấp.' },
   ],
   // 근거표 C2 · 2026-10-14 원문 확인 ([1] 2023판 tr.442 · [2]·[3] S06 세션 재확인)
   references: [
