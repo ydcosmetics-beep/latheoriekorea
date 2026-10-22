@@ -14,7 +14,8 @@ export const BRAND = 'La Théorie';
  * 링크 형태: `${BRIDGE_URL}/?s=seo&k=LATHWEB&cp=<클러스터>&p=<제품ID>`
  * 코드는 기존 LATHWEB 재사용 · 출처는 s=seo 로 s=web 과 가른다 · cp= 에 클러스터(C1~C6).
  */
-export const BRIDGE_URL = 'https://latheorie-vn.pages.dev';
+/** 쇼피 랜딩 — 2026-10-22 결정 29 개정: 옛 상시 브릿지 latheorie-vn.pages.dev 대신 본사 /vn/uu-dai (같은 파라미터 s·k·cp·p · 같은 브릿지클릭 로그) */
+export const BRIDGE_URL = 'https://www.latheoriekorea.com/vn/uu-dai';
 
 /** Shopee 매장(정품). 직접 링크가 꼭 필요한 자리에만 쓴다 — 본문 CTA 는 BRIDGE_URL 이다. */
 export const SHOPEE_SHOP_ID = '1136700919';
