@@ -16,7 +16,7 @@ import { Cta, H2, H3, P, B, Table, ReadMore } from './_ui';
  * 🔴 금지 표현(브랜드.md 7절): trị · điều trị · chữa · kê đơn · được chứng minh lâm sàng · ngăn ngừa · 기간 단언 · hết mụn. 「giá trị」·「đặc trị」도 쓰지 않는다.
  * 제품 문장 근거: USP 정의서 4장 클렌저(지방산 배제 계면활성제 · 저pH)만 · 상품명 문자열은 `2026-10-15 쇼피 VN 상품명 9종 정정 — 오늘 반영 진행안` 1장 3행 그대로(4-B B4).
  */
-const CTA_URL = `${BRIDGE_URL}/?s=seo&k=LATHWEB&cp=C5&p=P001`;
+const CTA_URL = `${BRIDGE_URL}?s=seo&k=LATHWEB&cp=C5&p=P001`;
 const LINK = 'font-medium text-gray-950 underline underline-offset-4 decoration-gray-400 hover:decoration-gray-900';
 
 // 세안 단계의 기준 — 뜻과 출처는 근거표 문장만 (C1 Q3·Q4 · C5 Q1 보강 · C5 Q4)

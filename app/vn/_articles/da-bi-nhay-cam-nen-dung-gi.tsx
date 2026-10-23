@@ -14,7 +14,7 @@ import { Cta, H2, H3, P, B, Table, ReadMore } from './_ui';
  * 제품 문장 근거: USP 정의서 4장 토너(점도 · 0% 지방산) · 라벨 대표 성분 Panthenol·Glycerin · VN PDP 상품명 「Dành cho da mụn ẩn, viêm nang lông và da nhạy cảm」.
  * 2026-10-18 보강(대중 어휘 전략 4-B B2) — H2 「Da nhạy cảm dễ nổi mụn thì sao?」 + W-1·W-2 링크 · FAQ 1문(M2) · [4] Bộ Y tế 2023(C1·C2 근거표) · [5] NICE(C1 근거표) 추가.
  */
-const CTA_URL = `${BRIDGE_URL}/?s=seo&k=LATHWEB&cp=C5&p=P006`;
+const CTA_URL = `${BRIDGE_URL}?s=seo&k=LATHWEB&cp=C5&p=P006`;
 const LINK = 'font-medium text-gray-950 underline underline-offset-4 decoration-gray-400 hover:decoration-gray-900';
 
 // [3] 표 4 — 자가 인식 민감 피부군 n=120

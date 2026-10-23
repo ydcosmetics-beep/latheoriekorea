@@ -10,7 +10,7 @@ import { Cta, H2, H3, P, B, Table, ReadMore } from './_ui';
  * 실행판 `2026-09-27 증상 질문 AI 노출 — 11월 초 달성 실행 계획 (W40~W45).md` 5-2 ②.
  * 🔴 금지 표현(브랜드.md 7절): trị · điều trị · kê đơn · được chứng minh lâm sàng · 기간 단언 · 진단명 단정. 「giá trị」처럼 trị 가 든 낱말도 쓰지 않는다.
  */
-const CTA_URL = `${BRIDGE_URL}/?s=seo&k=LATHWEB&cp=C6&p=P002`;
+const CTA_URL = `${BRIDGE_URL}?s=seo&k=LATHWEB&cp=C6&p=P002`;
 const LINK = 'font-medium text-gray-950 underline underline-offset-4 decoration-gray-400 hover:decoration-gray-900';
 
 const LABEL: [string, string, string][] = [

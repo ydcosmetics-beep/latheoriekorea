@@ -10,7 +10,7 @@ import { Cta, H2, H3, P, B, Table, ReadMore } from './_ui';
  * 문헌은 VN C2 글과 같은 2편만 쓴다 — 장벽 기전 수치 · 새 문헌을 지어 넣지 않는다.
  * 🔴 금지 표현(브랜드.md 7절): trị · điều trị · kê đơn · được chứng minh lâm sàng · 기간 단언 · 진단명 단정. 「giá trị」처럼 trị 가 든 낱말도 쓰지 않는다.
  */
-const CTA_URL = `${BRIDGE_URL}/?s=seo&k=LATHWEB&cp=C4&p=P002`;
+const CTA_URL = `${BRIDGE_URL}?s=seo&k=LATHWEB&cp=C4&p=P002`;
 const LINK = 'font-medium text-gray-950 underline underline-offset-4 decoration-gray-400 hover:decoration-gray-900';
 
 const SIGNS: [string, string][] = [

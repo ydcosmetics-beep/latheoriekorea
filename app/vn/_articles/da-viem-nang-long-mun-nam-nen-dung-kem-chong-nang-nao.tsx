@@ -10,7 +10,7 @@ import { Cta, H2, H3, P, B, Table, ReadMore } from './_ui';
  * 🔴 SPF · PA 는 우리 자료에 값이 없다 — 실물 · 본사 확인 전에는 쓰지 않는다 (실행판 7장 3).
  * 🔴 금지 표현(브랜드.md 7절): trị · điều trị · kê đơn · được chứng minh lâm sàng · 기간 단언 · 진단명 단정. 「giá trị」처럼 trị 가 든 낱말도 쓰지 않는다.
  */
-const CTA_URL = `${BRIDGE_URL}/?s=seo&k=LATHWEB&cp=C6&p=P004`;
+const CTA_URL = `${BRIDGE_URL}?s=seo&k=LATHWEB&cp=C6&p=P004`;
 const LINK = 'font-medium text-gray-950 underline underline-offset-4 decoration-gray-400 hover:decoration-gray-900';
 
 const SCAN: [string, string, string][] = [

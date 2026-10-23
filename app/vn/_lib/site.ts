@@ -11,7 +11,7 @@ export const BRAND = 'La Théorie';
 
 /**
  * 글 → Shopee 는 전부 브릿지를 거친다 (2026-09-07 결정 · 핸드오프 결정 29).
- * 링크 형태: `${BRIDGE_URL}/?s=seo&k=LATHWEB&cp=<클러스터>&p=<제품ID>`
+ * 링크 형태: `${BRIDGE_URL}?s=seo&k=LATHWEB&cp=<클러스터>&p=<제품ID>` (슬래시 없음 — /vn/uu-dai/ 는 308 로 한 번 더 돈다)
  * 코드는 기존 LATHWEB 재사용 · 출처는 s=seo 로 s=web 과 가른다 · cp= 에 클러스터(C1~C6).
  */
 /** 쇼피 랜딩 — 2026-10-22 결정 29 개정: 옛 상시 브릿지 latheorie-vn.pages.dev 대신 본사 /vn/uu-dai (같은 파라미터 s·k·cp·p · 같은 브릿지클릭 로그) */

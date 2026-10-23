@@ -213,7 +213,7 @@ export default function VeLaTheoriePage() {
         <H2 id="mua-chinh-hang">Mua hàng chính hãng ở đâu</H2>
         <P>
           Tại Việt Nam, sản phẩm chính hãng được bán trên Shopee: <B>{SHOPEE_VN_STORE}</B>.{' '}
-          <a href={`${BRIDGE_URL}/?s=seo&k=LATHWEB&cp=hub`} rel="noopener" className={LINK}>Xem cửa hàng</a>. Tại Singapore: {SHOPEE_SG_STORE}.
+          <a href={`${BRIDGE_URL}?s=seo&k=LATHWEB&cp=hub`} rel="noopener" className={LINK}>Xem cửa hàng</a>. Tại Singapore: {SHOPEE_SG_STORE}.
         </P>
 
         {/* 7. FAQ 3 */}

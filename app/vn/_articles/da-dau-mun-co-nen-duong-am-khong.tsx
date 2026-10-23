@@ -4,7 +4,7 @@ import { BRIDGE_URL } from '../_lib/site';
 import { Cta, H2, H3, P, B, Table, ReadMore } from './_ui';
 
 /** C2 · PAA 원문 `dưỡng ẩm cho da mụn` (2026-08-31) · 고정 쿼리 Q01·Q02 와 같은 질문. */
-const CTA_URL = `${BRIDGE_URL}/?s=seo&k=LATHWEB&cp=C2&p=P002`;
+const CTA_URL = `${BRIDGE_URL}?s=seo&k=LATHWEB&cp=C2&p=P002`;
 
 const TEXTURE: [string, string, string][] = [
   ['Gel', 'Chủ yếu là nước và chất giữ ẩm (humectant). Không hoặc gần như không có dầu', 'Da dầu, da mụn, khí hậu nóng ẩm'],

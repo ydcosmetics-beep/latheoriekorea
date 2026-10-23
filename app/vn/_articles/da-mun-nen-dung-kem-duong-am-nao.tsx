@@ -14,7 +14,7 @@ import { Cta, H2, H3, P, B, Table, ReadMore } from './_ui';
  * 🔴 금지 표현(브랜드.md 7절): trị · điều trị · kê đơn · được chứng minh lâm sàng · 기간 단언 · 진단명 단정. 「giá trị」·「đặc trị」도 쓰지 않는다.
  * 제품 문장 근거: USP 정의서 4장 P002(지방산·불필요한 오일 뺀 젤 타입 · 수분부족지성) · 라벨 대표 성분 Phytosqualane·Panthenol · 기존 /vn C4 글의 P002 서술.
  */
-const CTA_URL = `${BRIDGE_URL}/?s=seo&k=LATHWEB&cp=C2&p=P002`;
+const CTA_URL = `${BRIDGE_URL}?s=seo&k=LATHWEB&cp=C2&p=P002`;
 const LINK = 'font-medium text-gray-950 underline underline-offset-4 decoration-gray-400 hover:decoration-gray-900';
 
 // [3] Table 12 · [2] · [4]

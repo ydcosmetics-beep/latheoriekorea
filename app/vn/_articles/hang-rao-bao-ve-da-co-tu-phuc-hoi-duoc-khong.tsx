@@ -13,7 +13,7 @@ import { Cta, H2, H3, P, B, Table, ReadMore } from './_ui';
  * 🔴 금지 표현(브랜드.md 7절): trị · điều trị · kê đơn · được chứng minh lâm sàng · 기간 단언 · 진단명 단정. 「giá trị」처럼 trị 가 든 낱말도 쓰지 않는다.
  * 제품 문장 근거: USP 정의서 4장 P003(대표 성분 Madecassoside·Squalane · 건조·각질·당김 피부) · products.ts P003 이름 · 사용 순서(토너 → 수분크림 → 크림에센스).
  */
-const CTA_URL = `${BRIDGE_URL}/?s=seo&k=LATHWEB&cp=C4&p=P003`;
+const CTA_URL = `${BRIDGE_URL}?s=seo&k=LATHWEB&cp=C4&p=P003`;
 const LINK = 'font-medium text-gray-950 underline underline-offset-4 decoration-gray-400 hover:decoration-gray-900';
 
 // [1] 「practices to avoid」 · [3] · [4]

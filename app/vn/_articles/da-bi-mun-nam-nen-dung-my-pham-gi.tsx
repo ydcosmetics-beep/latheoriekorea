@@ -11,7 +11,7 @@ import { Cta, H2, H3, P, B, Table, ReadMore } from './_ui';
  * 진입 어휘는 `viêm nang lông` 을 본문 첫 문단에 같이 둔다 (VN 키워드 클러스터.md 2장 — mụn nấm 단독 앵커 금지).
  * 🔴 금지 표현(브랜드.md 7절): trị · điều trị · kê đơn · được chứng minh lâm sàng · 기간 단언 · 진단명 단정. 「giá trị」처럼 trị 가 든 낱말도 쓰지 않는다.
  */
-const CTA_URL = `${BRIDGE_URL}/?s=seo&k=LATHWEB&cp=C3&p=P002`;
+const CTA_URL = `${BRIDGE_URL}?s=seo&k=LATHWEB&cp=C3&p=P002`;
 const LINK = 'font-medium text-gray-950 underline underline-offset-4 decoration-gray-400 hover:decoration-gray-900';
 
 const BY_STEP: [string, string, string][] = [

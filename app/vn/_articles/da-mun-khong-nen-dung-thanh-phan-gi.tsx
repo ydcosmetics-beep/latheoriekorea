@@ -6,7 +6,7 @@ import { Cta, B, ReadMore } from './_ui';
  * 글 → Shopee 는 전부 브릿지를 거친다 (2026-09-07 결정 · 핸드오프 결정 29).
  * 코드는 기존 LATHWEB 재사용, 출처는 s=seo 로 s=web 과 가르고, cp= 에 클러스터를 적는다.
  */
-const CTA_URL = `${BRIDGE_URL}/?s=seo&k=LATHWEB&cp=C3&p=P002`;
+const CTA_URL = `${BRIDGE_URL}?s=seo&k=LATHWEB&cp=C3&p=P002`;
 
 const AVOID = [
   ['Dầu dừa', 'Chỉ số gây bít tắc rất cao dù được xem là “lành tính”', 'Coconut Oil, Cocos Nucifera Oil'],

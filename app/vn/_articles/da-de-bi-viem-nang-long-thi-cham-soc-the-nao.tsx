@@ -8,7 +8,7 @@ import { Cta, H2, H3, P, B, Table, ReadMore } from './_ui';
  * 질문 창고의 전환문 「Da dễ bị viêm nang lông thì chăm sóc thế nào?」 를 H1 으로 쓴다.
  * 진입 어휘는 `viêm nang lông`, `mụn nấm` · Malassezia 는 본문 중반 (VN 키워드 클러스터.md 2장).
  */
-const CTA_URL = `${BRIDGE_URL}/?s=seo&k=LATHWEB&cp=C6&p=P002`;
+const CTA_URL = `${BRIDGE_URL}?s=seo&k=LATHWEB&cp=C6&p=P002`;
 
 const HABITS: [string, string][] = [
   ['Tắm hoặc lau khô ngay sau khi đổ mồ hôi', 'Mồ hôi đọng lại trong nang lông là môi trường ẩm — nóng mà nấm men và vi khuẩn đều ưa thích'],

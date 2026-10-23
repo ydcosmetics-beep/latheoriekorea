@@ -14,7 +14,7 @@ import { Cta, H2, H3, P, B, Table, ReadMore } from './_ui';
  * 제품 문장 근거: USP 정의서 4장 클렌저(지방산 배제 계면활성제 · 저pH · 세안 후 당김 없음) · products.ts P001 이름.
  * 2026-10-18 보강(대중 어휘 전략 4-B B2) — W-2 「Sữa rửa mặt cho da nhạy cảm dễ nổi mụn」 링크(본문 1문 + Đọc thêm).
  */
-const CTA_URL = `${BRIDGE_URL}/?s=seo&k=LATHWEB&cp=C1&p=P001`;
+const CTA_URL = `${BRIDGE_URL}?s=seo&k=LATHWEB&cp=C1&p=P001`;
 const LINK = 'font-medium text-gray-950 underline underline-offset-4 decoration-gray-400 hover:decoration-gray-900';
 
 // [1] 2023 §1.3 — 네 기전 (설명 칸은 [4] StatPearls Pathophysiology)

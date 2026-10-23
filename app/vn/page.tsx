@@ -120,7 +120,7 @@ export default function VnHubPage() {
           </ul>
           <p className="mt-8 text-center text-[12px] text-gray-500">
             Thành phần ghi dưới sản phẩm là thành phần đại diện in trên nhãn — <Link href="/vn/thanh-phan" className="underline underline-offset-4">bảng thành phần đầy đủ của 6 sản phẩm</Link>. Cửa hàng chính hãng:{' '}
-            <a href={`${BRIDGE_URL}/?s=seo&k=LATHWEB&cp=hub`} rel="noopener" className="underline underline-offset-4">La Théorie trên Shopee Việt Nam</a> ({SHOPEE_VN_STORE})
+            <a href={`${BRIDGE_URL}?s=seo&k=LATHWEB&cp=hub`} rel="noopener" className="underline underline-offset-4">La Théorie trên Shopee Việt Nam</a> ({SHOPEE_VN_STORE})
           </p>
         </div>
       </section>
