@@ -25,7 +25,7 @@ export interface Product {
 
 const img = (f: string) => `/vn-sg/${f}`;
 /** 브릿지는 `p=` 로 제품 페이지에 착지한다 (2026-09-16 브릿지 개편). 코드는 LATHWEB, 출처 s=seo, cp=hub. */
-const link = (p: string) => `${BRIDGE_URL}/?s=seo&k=LATHWEB&cp=hub&p=${p}`;
+const link = (p: string) => `${BRIDGE_URL}?s=seo&k=LATHWEB&cp=hub&p=${p}`;
 
 export const products: Product[] = [
   { id: 'P002', label: 'Cream :: Hydrating Ingredients', name: 'Kem Dưỡng Ẩm Hydrating Gel Cream 60ml', tagline: 'Gel-cream 0% axit béo cho da dầu mụn nhạy cảm và viêm nang lông', badge: 'Best Seller', ingredients: ['Phytosqualane', 'Panthenol'], image: img('p002-cream.webp'), url: link('P002') },
