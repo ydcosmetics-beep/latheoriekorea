@@ -9,8 +9,8 @@ import { SHOPEE_SHOP_ID } from '../_lib/site';
  *   k=  바우처 코드. 아래 CODES 에 있는 코드만 보여 준다(모르는 코드는 기본 코드로 — 아무 문자열이나 코드처럼 보이지 않게)
  *   s=  출처(ig · seo · fb …) · cp=(또는 c=) 캠페인 · v= 영상ID · id= 서포터즈ID → 브릿지클릭 로그 열 그대로
  *
- * 🔴 코드·할인·기간의 정본은 셀러센터다. 값은 준상이 확인해 준다. headline 이 없으면 화면 큰 글씨에 코드만 보이고
- *    할인율은 쓰지 않는다(숫자를 지어내지 않는다). until 이 null 이면 만료 처리를 하지 않는다(기한 확인 전).
+ * 🔴 코드·할인·기간의 정본은 셀러센터다(Marketing Centre › Vouchers · 코드 검색). 값이 바뀌면 여기 한 곳만 고친다.
+ *    headline 이 없으면 화면 큰 글씨에 코드만 보이고 할인율은 쓰지 않는다. until 이 null 이면 만료 처리를 하지 않는다.
  *    until 이 지나면 페이지가 코드 블록을 숨기고 「매장 바로 가기」만 남긴다 — 만료된 코드를 광고하지 않는다.
  */
 export interface OfferCode {
@@ -22,12 +22,12 @@ export interface OfferCode {
 }
 
 export const CODES: Record<string, OfferCode> = {
-  /** 메타 광고 (2026-10-12) */
-  LATHMETA: { code: 'LATHMETA', headline: 'Giảm 5%', until: '2026-10-31T23:59:59+07:00', untilLabel: '31/10/2026' },
-  /** 인스타 링크트리 상시 바우처 — 🔴 할인·기간은 셀러센터 확인 뒤 채운다 */
-  LATHIG99: { code: 'LATHIG99', until: null },
-  /** 본사 글 CTA 바우처 — 🔴 할인·기간은 셀러센터 확인 뒤 채운다 */
-  LATHWEB: { code: 'LATHWEB', until: null },
+  /** 메타 광고 — 셀러센터 2026-10-23 확인: 5% · 전 상품 · 수량 200 · 16/09 18:06 ~ 31/10/2026 23:06(셀러센터 표시 시각 · KST) */
+  LATHMETA: { code: 'LATHMETA', headline: 'Giảm 5%', until: '2026-10-31T23:06:00+09:00', untilLabel: '31/10/2026' },
+  /** 인스타 링크트리 「인스타용 바우처」 — 셀러센터 2026-10-23 확인: 5% · 전 상품 · 수량 2000 · 08/09 ~ 01/12/2026 23:59 */
+  LATHIG99: { code: 'LATHIG99', headline: 'Giảm 5%', until: '2026-12-01T23:59:00+09:00', untilLabel: '01/12/2026' },
+  /** 본사 글 CTA 「웹사이트용 바우처」 — 셀러센터 2026-10-23 확인: 5% · 전 상품 · 수량 2000 · 08/09 ~ 01/12/2026 23:59 */
+  LATHWEB: { code: 'LATHWEB', headline: 'Giảm 5%', until: '2026-12-01T23:59:00+09:00', untilLabel: '01/12/2026' },
 };
 
 /** k= 가 없거나 모르는 코드면 이 코드 — 옛 메타 광고 링크(?p= 만)가 그대로 살게 */
